@@ -8383,5 +8383,121 @@ The important thing here is that for a fixed size
 set of predictors we should choose!
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Chapter 7: Moving Beyond Linearity
+\end_layout
+
+\begin_layout Standard
+Up until Chapter 6, we have discussed linear models and variants of them.
+ From the basic simple linear model, multiple regression, logistic regression,
+ to shrunkage methods such as Ridge regression, LASSO, PCR & PLS, we have
+ learned a rich set of modeling techniques.
+ However, we are still fitting linear models, which can only be improved
+ so far! In this chapter, we relax the linearity assumption while still
+ attempting to maintain as much as interpretability as possible.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can view this chapter as a transitional chapter from linear models to
+ non-linear models (like trees in Chapter 8).
+ Here are the list of techniques we will study:
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Polynomial Regression
+\shape default
+: It extends the linear model by adding extra predictors, obtained by raising
+ each of the original predictors to a power.
+ For example, a cubic regression uses three variables, 
+\begin_inset Formula $X,\: X^{2},\: X^{3}$
+\end_inset
+
+, as predictors.
+ This approach provides a simple way to provide a nonlinear fit to data.
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Step Functions
+\shape default
+: It cuts the range of the variable into 
+\begin_inset Formula $K$
+\end_inset
+
+ distinct regions in order to produce a qualitative (factor) variable.
+ This has the effect of fitting a piecewise constant function.
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Regression Splines
+\shape default
+: These are more flexible than polynomials and step functions, and in fact
+ are an extension of the two.
+ They involve dividing the range of 
+\begin_inset Formula $X$
+\end_inset
+
+ into 
+\begin_inset Formula $K$
+\end_inset
+
+ regions.
+ Within each region, a polynomial function is fit to the data.
+ However, these piecewise polynomials are constrained so that they join
+ smoothly at the region boundaries, or Knots.
+ Provided that the interval is divided into enough regions, this can produce
+ an extremely flexible fit.
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Smoothing Splines
+\shape default
+: These are similar to regression splines, but arise in a slightly different
+ formulation.
+ Smoothing splines result from minimizing a residual sum of squares of the
+ fit subject to a smoothness penalty.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Local Regression
+\shape default
+: similar to splines, but differs in an important way that the regions are
+ allowed to overlap, and indeed they do so in a very smooth way.
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Generalized Additive Model (GAM)
+\shape default
+: It allows us to extend the methods above methods (mostly used for single
+ predictor) to deal with multiple predictors!
+\end_layout
+
 \end_body
 \end_document
