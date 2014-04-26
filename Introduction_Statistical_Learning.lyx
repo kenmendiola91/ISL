@@ -808,14 +808,14 @@ We often prefer a simpler model involving fewer variables over a black-box
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-03-30 at 10.03.38 AM.png
+	filename graphs/flexibility_interpretability.png
 	scale 50
 	rotateOrigin center
 
@@ -1116,14 +1116,14 @@ Typically, as the flexibility of
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-03-30 at 10.31.05 AM.png
+	filename graphs/bias_variance_tradeoff_decomp.png
 	scale 40
 	rotateOrigin center
 
@@ -2302,18 +2302,14 @@ are useful graphical tool for identifying non-linearity.
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-05 at 11.18.45 AM.png
+	filename graphs/non_linearity_in_fit.png
 	scale 30
 	rotateOrigin center
 
@@ -2450,14 +2446,14 @@ The solution is to transform the response
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-05 at 11.32.48 AM.png
+	filename graphs/non_constant_variance.png
 	scale 30
 	rotateOrigin center
 
@@ -2972,7 +2968,7 @@ This is very similar to the
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -2981,7 +2977,7 @@ status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-05 at 3.51.59 PM.png
+	filename graphs/regression_confounding.png
 	scale 40
 	rotateOrigin center
 
@@ -3163,14 +3159,14 @@ When the underlying
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-05 at 3.09.03 PM.png
+	filename graphs/LR_KNN_comparison_1.png
 	scale 40
 	rotateOrigin center
 
@@ -3225,14 +3221,14 @@ When the underlying
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-05 at 3.11.14 PM.png
+	filename graphs/LR_KNN_comparison_2.png
 	scale 40
 	rotateOrigin center
 
@@ -3282,14 +3278,14 @@ curse of dimensionality
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-05 at 3.12.35 PM.png
+	filename graphs/LR_KNN_comparison_3.png
 	scale 40
 	rotateOrigin center
 
@@ -3342,14 +3338,14 @@ Textbook pg.153
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-06 at 11.54.46 AM.png
+	filename graphs/classification_comparison.png
 	scale 40
 	rotateOrigin center
 
@@ -3523,14 +3519,14 @@ Notice here we plot both model against their
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-20 at 11.40.39 AM.png
+	filename graphs/ridge_lasso_comparison_1.png
 	scale 40
 	rotateOrigin center
 
@@ -3564,18 +3560,14 @@ A comparison of Ridge & LASSO based on a simulated data set where only 2
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-20 at 11.42.47 AM.png
+	filename graphs/ridge_lasso_comparison_2.png
 	scale 40
 	rotateOrigin center
 
@@ -4506,14 +4498,14 @@ This modeling approach is almost always wrong in approximating the underlying
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-06 at 11.32.55 AM.png
+	filename graphs/different_form_discriminant_analysis.png
 	scale 40
 	rotateOrigin center
 
@@ -4615,14 +4607,14 @@ I also thought this chart is neat, because for the longest time I cannot
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-05 at 4.51.15 PM.png
+	filename graphs/classification_metric_1.png
 	scale 40
 	rotateOrigin center
 
@@ -4649,7 +4641,7 @@ status collapsed
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
@@ -4752,14 +4744,14 @@ t variance, the suggestion is 5:1
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-06 at 10.40.35 AM.png
+	filename graphs/unbalanced_data_set_on_predictor_variance.png
 	scale 40
 	rotateOrigin center
 
@@ -4873,14 +4865,14 @@ The test error is the average error that result from using a statistical
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-11 at 9.35.16 AM.png
+	filename graphs/bias_variance_tradeoff_curve.png
 	scale 30
 	rotateOrigin center
 
@@ -4967,14 +4959,14 @@ In the validation approach, only a subset of the observations—those that
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/Screen Shot 2014-04-11 at 9.40.35 AM.png
+	filename graphs/validation_curve_high_variance.png
 	scale 50
 	rotateOrigin center
 
@@ -5331,7 +5323,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-13 at 10.14.15 AM.png
+	filename graphs/LOOCV_kfold_cv_curve.png
 	scale 35
 	rotateOrigin center
 
@@ -5703,18 +5695,14 @@ with replacement
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-13 at 11.21.32 AM.png
+	filename graphs/bootstrap.png
 	scale 50
 	rotateOrigin center
 
@@ -6063,18 +6051,14 @@ It's important to remember that we have limited data.
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-13 at 2.50.25 PM.png
+	filename graphs/training_validation_tradeoff_caltech.png
 	scale 50
 	rotateOrigin center
 
@@ -6133,18 +6117,14 @@ The following chain of reasoning really pin down the bias-variance trade-off
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-13 at 2.59.01 PM.png
+	filename graphs/dilemma_of_k_caltech.png
 	scale 50
 	rotateOrigin center
 
@@ -6488,14 +6468,14 @@ This can be considered as a brute force approach, where we consider all
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-19 at 3.18.49 PM.png
+	filename graphs/best_subset_selection.png
 	scale 40
 	rotateOrigin center
 
@@ -6658,18 +6638,14 @@ Instead of searching through
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-19 at 3.42.09 PM.png
+	filename graphs/forward_stepwise_regression.png
 	scale 40
 	rotateOrigin center
 
@@ -6778,18 +6754,14 @@ The backward stepwise regression is very similar to forward stepwise procedure,
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-19 at 3.59.17 PM.png
+	filename graphs/backward_stepwise_regression.png
 	scale 50
 	rotateOrigin center
 
@@ -7651,18 +7623,14 @@ Why is it that the LASSO, unlike ridge regression, results in coefficient
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename Screen Shot 2014-04-20 at 11.29.53 AM.png
+	filename graphs/variable_selection_property_of_LASSO.png
 	scale 40
 	rotateOrigin center
 
