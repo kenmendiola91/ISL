@@ -1,0 +1,8387 @@
+#LyX 1.6.4.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\rhead{ISL}
+\chead{}
+\lhead{Knowledge Vault}
+
+
+\usepackage{fancyvrb}
+\end_preamble
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\float_placement H
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\leftmargin 2cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 1.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip 1sp
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\series bold
+Introduction to Statistical Learning
+\end_layout
+
+\begin_layout Author
+Robert Chang
+\end_layout
+
+\begin_layout Abstract
+This document aims to summarize all the insights & new discoveries that
+ I otherwise would not have found on my own, throughtout the course of reading
+ ISL and taking the Stanford online course along with Professor Trevor Hastie
+ and Professor Robert Tibshirani (Our own professors from Stanford Statistics!)
+\end_layout
+
+\begin_layout Section*
+Introduction
+\end_layout
+
+\begin_layout Standard
+In the past six months or so (From September 2013 to March 2014), I have
+ been quite dedicated, over the weekends, to push myself to learn new materials
+ in order to deepen my technical knowledge in the area of statistics and
+ computer science.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Coursera | Data Analysis | Jeff Leek, Coursera | Python: Learn to program,
+ Machine Learning for Hackers, Coursera | Scala, Learning from Data | Caltech
+ | Edx, and more ...
+ etc
+\end_layout
+
+\end_inset
+
+ During this time, I have completed quite a few Coursera and Edx courses.
+ As satisfying as they were, there are occasions where I feel I did not
+ quite internalize the learnings, and as a result, applying them to my daily
+ work, despite the various efforts I put in during the time of learning.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I raised this issue to myself in the 2013 Yearly review, but I never really
+ take measures to iterate and experiment on combating this shortfall.
+ In the midst of transition to the Coursera Data Science Specialization
+ Track that will start on 4/7/2014, I decided to use this two week gap to
+ experiment new ways of 'securing my learning results'.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The most obvious and immediate experiment I could try, is to load my knowledge
+ into the knowledge vault.
+ The purpose is to systematically document the insights, so if I were ever
+ to come back and re-study the materials, I would have a much easier time
+ to refresh and catch up.
+ I have done this successfully for Linear Algebra (using materials from
+ Gilbert String's MIT Linear Algebra + Stanford Math 104 course notes).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To summarize, the challenge here is not to write a knowledge vault document,
+ but to assess whether a knowledge vault document is an efficient way for
+ upholding the things that I have learned!
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Therefore, don't rush yourself to finish all the chapter summaries, because
+ that defeats the purpose of knowledge vault documentation.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+The Course
+\end_layout
+
+\begin_layout Standard
+The course 
+\color blue
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Introduction to Statistical Learning with R"
+target "https://class.stanford.edu/courses/HumanitiesScience/StatLearning/Winter2014/info"
+
+\end_inset
+
+
+\color inherit
+ (ISLR) is offered by Stanford online, using the Stanford Edx platform.
+ This course attracts me immediately! First of all, it is taught by the
+ two authors who wrote ELS, and I have personally taken classes from them.
+ They are truly the experts.
+ Second, the 
+\color blue
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Textbook ISLR"
+target "http://www-bcf.usc.edu/~gareth/ISL/"
+
+\end_inset
+
+
+\color inherit
+ is superb, it hides away the mathematical details, and gives a very good
+ introduction to all the major topics.
+ It also has done a great job in talking about the trade-offs between models
+ (under what conditions should you use what), and there are labs in the
+ end of each chapter for readers to practice.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are toal of 10 chapters, and my studying format was the following:
+\end_layout
+
+\begin_layout Itemize
+In each week, go through the segment videos, including the R labs
+\end_layout
+
+\begin_layout Itemize
+Immediately after each segment, summarize the learnings in word, and put
+ them under Google Calendar
+\end_layout
+
+\begin_layout Itemize
+Go through the R labs, and try to follow each of the steps as much as I
+ can
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color black
+Not a bad approach.
+ But the reality is, since this is an introductory course, I am already
+ somewhat familiar with the major concepts.
+ As a result, the deliberate practice and its gain is not going to be learning
+ this new algorithm, but much deeper.
+ The real gain is going to be where I internalize:
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+New ways of looking at and understanding the stories of algorithms that
+ I already know
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Learning new models (Generalized Additive Models, LDA, QDA ...
+ etc)
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+For a given situation, which model is going to be more appropriate and why?
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+What are the practical concerns when using the model? Tuning? Scaling? ...
+ etc
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+Other new insights
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+These are new insights, so they need to be pointed out OVER and OVER again
+ before I 
+\series bold
+internalize
+\series default
+ them, before they become something I can cite without effort, and use them
+ in practice.
+\end_layout
+
+\begin_layout Section*
+The Contents
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+See slide 24/29 of Introduction PDF for 
+\begin_inset Quotes eld
+\end_inset
+
+Philosophy
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are 10 chapters, which covers the topics below:
+\end_layout
+
+\begin_layout Enumerate
+Introduction
+\end_layout
+
+\begin_layout Enumerate
+Statistical Learning
+\end_layout
+
+\begin_layout Enumerate
+Linear regression
+\end_layout
+
+\begin_layout Enumerate
+Classification
+\end_layout
+
+\begin_layout Enumerate
+Resampling Methods
+\end_layout
+
+\begin_layout Enumerate
+Linear Model Selection and Regularization
+\end_layout
+
+\begin_layout Enumerate
+Moving Beyond Linearity
+\end_layout
+
+\begin_layout Enumerate
+Tree-Based Methods
+\end_layout
+
+\begin_layout Enumerate
+Support Vector Machine
+\end_layout
+
+\begin_layout Enumerate
+Unsupervised Learning
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+ISLR is based on the following four premises (more details can be found
+ in textbook page 8):
+\end_layout
+
+\begin_layout Itemize
+Many statistical learning methods are relevant and useful in a wide range
+ of academic and non-academic disciplines, beyond just the statistical sciences
+ -- 
+\color blue
+Learn new methods that are widely applicable, internalized the story on
+ models you already know
+\end_layout
+
+\begin_layout Itemize
+Statistical learning should not be viewed as a series of black boxes: 
+\begin_inset Quotes eld
+\end_inset
+
+Without understanding all of the cogs inside the box, or the interaction
+ between those cogs, it is impossible to select the best box.
+ Hence, we have attempted to carefully describe the model, intuition, assumption
+s, and trade-offs behind each of the methods that we consider
+\begin_inset Quotes erd
+\end_inset
+
+ -- 
+\color blue
+Know the trade-offs between different models in different situation
+\end_layout
+
+\begin_layout Itemize
+While is is important know what job is performed by each cog, it is not
+ necessary to have the skills to construct the machine inside the box! --
+ 
+\color blue
+You don't need to know the mathematical details, but know the main story
+ each algorithm presents
+\end_layout
+
+\begin_layout Itemize
+We presume that the reader is interested in applying statistical learning
+ methods to real-world problems -- 
+\color blue
+Learn the in practical know-hows
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Chapter 2: Statistical Learning
+\end_layout
+
+\begin_layout Standard
+Typically, we have some response variable 
+\begin_inset Formula $Y$
+\end_inset
+
+ and some predictors 
+\begin_inset Formula $X's$
+\end_inset
+
+, our goal is to:
+\end_layout
+
+\begin_layout Itemize
+Make prediction of 
+\begin_inset Formula $Y$
+\end_inset
+
+ at a new point 
+\begin_inset Formula $X=x$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+We can understand which components of 
+\begin_inset Formula $X=(X_{1},X_{2},\dots,X_{p})$
+\end_inset
+
+ are important in explaining 
+\begin_inset Formula $Y$
+\end_inset
+
+, and which are irrelevant
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+e.g.
+ Do statistical inference on the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ coefficients of a linear model to test if the null hypothesis 
+\begin_inset Formula $\beta=0$
+\end_inset
+
+ is correct 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Depending on the complexity of 
+\begin_inset Formula $f$
+\end_inset
+
+, we may be able to understand how each component 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+ of 
+\begin_inset Formula $X$
+\end_inset
+
+ affects 
+\begin_inset Formula $Y$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+e.g.
+ Look at the magnitude of the coefficients: for a one unit increase in 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+, how does 
+\begin_inset Formula $Y$
+\end_inset
+
+ change?
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Building a model 
+\begin_inset Formula $f(X)$
+\end_inset
+
+ to study 
+\begin_inset Formula $Y$
+\end_inset
+
+ would help us answer the above questions!
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Is there an ideal 
+\begin_inset Formula $f(X)$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+A good choice is to pick 
+\begin_inset Formula $f(x)=E(Y|X=x)$
+\end_inset
+
+, which is called the 
+\series bold
+regression function
+\series default
+.
+ It has the nice property that it is the function 
+\begin_inset Formula $g$
+\end_inset
+
+ such that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\min_{g}E[(Y-g(X))^{2}|X=x]\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In other word, it is the function that minimize the square error against
+ the response variable 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Prediction
+\end_layout
+
+\begin_layout Standard
+In the context of prediction, the reality is, 
+\end_layout
+
+\begin_layout Itemize
+we do not know 
+\begin_inset Formula $f(x)=E[Y|X=x]$
+\end_inset
+
+, so we have use 
+\begin_inset Formula $\hat{f}(x)$
+\end_inset
+
+ to estimate 
+\begin_inset Formula $f(x)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Even if we can do a perfect job in estimating 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ using 
+\begin_inset Formula $\hat{f}(x)$
+\end_inset
+
+, we still cannot perfectly predict 
+\begin_inset Formula $Y$
+\end_inset
+
+, since 
+\begin_inset Formula $Y=f(x)+\epsilon$
+\end_inset
+
+, i.e.
+ at each 
+\begin_inset Formula $X=x$
+\end_inset
+
+ there is typically a distribution of possible 
+\begin_inset Formula $Y$
+\end_inset
+
+ values.
+ The 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ is called the irreducible error
+\end_layout
+
+\begin_layout Standard
+In fact, looking at 
+\begin_inset Formula $E[(Y-\hat{f}(X))^{2}|X=x]=E[(Y-\hat{Y})^{2}|X=x]$
+\end_inset
+
+ (not 
+\begin_inset Formula $E[(Y-f(X))^{2}|X=x]$
+\end_inset
+
+), we have:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+E\left[\left(Y-\hat{f}\left(X\right)\right)^{2}\vert X=x\right]=\underbrace{{\left[f(x)-\hat{f}\left(x\right)\right]^{2}}}_{\text{reducible}}+\underbrace{Var(\epsilon)}_{Irreducible}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Fitting a better model or finding a better 
+\begin_inset Formula $\hat{f}(x)$
+\end_inset
+
+ that approximate 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ would reduce the 
+\series bold
+reducible
+\series default
+ part of the error, but the 
+\series bold
+irreducible
+\series default
+ part of the error depends on the natural variance of 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Inference
+\end_layout
+
+\begin_layout Standard
+We are often interested in understanding the way that 
+\begin_inset Formula $Y$
+\end_inset
+
+ is affected as 
+\begin_inset Formula $X_{1},\dots X_{p}$
+\end_inset
+
+ changes.
+ In this situation we wish to estimate 
+\begin_inset Formula $f$
+\end_inset
+
+, but our goal is not necessarily to make predictions for 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ We instead want to understand the relationship between 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ Here are some of the typical questions one would ask:
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Which predictors are associated with the response?
+\shape default
+ It is often the case that only a small fraction of available predictors
+ are associated with 
+\begin_inset Formula $Y$
+\end_inset
+
+, identifying the few important predictors among a large set of possible
+ variables can be very useful.
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+What is the relationship between the response and each predictor? 
+\shape default
+How does 
+\begin_inset Formula $Y$
+\end_inset
+
+ changes as 
+\begin_inset Formula $X$
+\end_inset
+
+ change
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Can the relationship between 
+\begin_inset Formula $Y$
+\end_inset
+
+ and each predictor be adequately summarized using a linear equation, or
+ is the relationship more complicated? 
+\end_layout
+
+\begin_layout Subsubsection*
+Prediction or Inference?
+\end_layout
+
+\begin_layout Standard
+This really depends, many times we only care about prediction, there are
+ times where we only care about inference, but sometimes we care a combination
+ of two.
+ This really comes with experience (Read the Advertising example that illustrate
+ the point in textbook starting page 20).
+\end_layout
+
+\begin_layout Subsubsection*
+Trade-offs
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Prediction accuracy V.S.
+ Interpretability
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Generally, linear models will give us better interpretability, but it might
+ not be complex enough to do a good job in prediction.
+ Other times, we might have a very complex model that does a great job in
+ prediction, but is very difficult to interpret.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Good fit V.S.
+ Over-fit V.S.
+ Under-fit
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+How dowe know when the fit is just right? Test error & using the method
+ of Cross Validation 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Parsimony V.S.
+ Black-Box
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+We often prefer a simpler model involving fewer variables over a black-box
+ predictor involving them all (Ocam's razor principle)
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-03-30 at 10.03.38 AM.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Assessing Model Accuracy
+\end_layout
+
+\begin_layout Standard
+Suppose we fit a model 
+\begin_inset Formula $\hat{f}(x)$
+\end_inset
+
+ to some training data 
+\begin_inset Formula $Tr=\left\{ x_{i},y_{i}\right\} _{1}^{N}$
+\end_inset
+
+, and we wish to see how well it performs
+\end_layout
+
+\begin_layout Itemize
+We could compute the average squared prediction error over 
+\series bold
+Tr:
+\begin_inset Formula \[
+MSE_{Tr}=Ave_{i\in Tr}\left[y_{i}-\hat{f}(x_{i})\right]^{2}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+But training error is biased toward overfit models.
+ Instead, we should assess the model using test data 
+\begin_inset Formula $TE=\left\{ x_{i},y_{i}\right\} _{1}^{N}$
+\end_inset
+
+ 
+\begin_inset Formula \[
+MSE_{TE}=Ave_{i\in TE}\left[y_{i}-\hat{f}(x_{i})\right]^{2}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Check out the typical scenarios in 
+\color blue
+
+\begin_inset CommandInset href
+LatexCommand href
+name "Figure 2.9 - 2.11"
+target "https://class.stanford.edu/c4x/HumanitiesScience/StatLearning/asset/statistical_learning.pdf"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+In Figure 2.9, the true 
+\begin_inset Formula $f$
+\end_inset
+
+ is somwhat nonlinear
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+A linear model is too simple, and have high training & test error (underfitting)
+\end_layout
+
+\begin_layout Itemize
+A highly nonlinear model is too complex, so it has very low training error,
+ but very high test error (overfitting)
+\end_layout
+
+\begin_layout Itemize
+Another one that is just right, probably determined by CV.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+In Figure 2.10, the true 
+\begin_inset Formula $f$
+\end_inset
+
+ is linear
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+A linear model is quite appropriate, so it has low training and low test
+ error
+\end_layout
+
+\begin_layout Itemize
+A nonlinear model is too complex, so it has low training error, but high
+ test error (overfitting)
+\end_layout
+
+\begin_layout Itemize
+Anothre one that is just right, notice it is close to the linear model
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+In Figure 2.11,the true 
+\begin_inset Formula $f$
+\end_inset
+
+ is highly nonlinear
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+A linear model is too simple, so it has high training and test error (underfitti
+ng)
+\end_layout
+
+\begin_layout Itemize
+A nonlinear model is appropriate, so it has low training and test error
+ 
+\end_layout
+
+\begin_layout Itemize
+Another one that is just right, notice it is closer to the complex model.
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection*
+Bias and Variance Trade-off
+\end_layout
+
+\begin_layout Standard
+Suppose we have fit a model 
+\begin_inset Formula $\hat{f}(x)$
+\end_inset
+
+ to some training data 
+\series bold
+Tr, 
+\series default
+and let 
+\begin_inset Formula $(x_{0},y_{0})$
+\end_inset
+
+ be a test observation drawn from the population.
+ If the true model is 
+\begin_inset Formula $Y=f(X)+\epsilon$
+\end_inset
+
+ with 
+\begin_inset Formula $f(X)=E(Y|X=x)$
+\end_inset
+
+, then we have
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+E\left(y_{0}-\hat{f}(x_{0})\right)^{2}=Var(\hat{f}(x_{0}))+[Bias(\hat{f}(x_{0}))]^{2}+Var(\epsilon)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The expectation averages over the variability of 
+\begin_inset Formula $y_{0}$
+\end_inset
+
+ as well as the variability of
+\series bold
+ 
+\begin_inset Formula $\mathbf{Tr}=\left\{ x_{i},y_{i}\right\} _{1}^{N}$
+\end_inset
+
+.
+ 
+\series default
+Here, the notation 
+\begin_inset Formula $E\left(y_{0}-\hat{f}(x_{0})\right)^{2}$
+\end_inset
+
+defines the 
+\shape italic
+\color black
+expected test MSE, 
+\shape default
+\color inherit
+and refers to the average test MSE that we would obtain if we repeatedly
+ estimated 
+\begin_inset Formula $f$
+\end_inset
+
+ using a large number of different training sets, and tested each at 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+.
+ The overall expected test MSE can be computed by averaging 
+\begin_inset Formula $E\left(y_{0}-\hat{f}(x_{0})\right)^{2}$
+\end_inset
+
+ over all possible values of 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ in the test set.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What do we mean by the variance and bias of a statistical learning method?
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Source of Variance
+\series default
+: It refers to the amount by which 
+\begin_inset Formula $\hat{f}$
+\end_inset
+
+ would change if we estimated it using a different training data set.
+ Since the training data are used to fit the statistical learning method,
+ different training data sets will result in a different 
+\begin_inset Formula $\hat{f}$
+\end_inset
+
+.
+ Ideally, the estimate of 
+\begin_inset Formula $f$
+\end_inset
+
+ should not vary too much between training set replica.
+ However, if a method has high variance then small changes in teh training
+ data can result in large changes in 
+\begin_inset Formula $\hat{f}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Source of Bias
+\series default
+: It refers to the error that is introduced by approximating a real-life
+ problem, wihch may be extremely complicated, by a much simpler model.
+ 
+\end_layout
+
+\begin_layout Standard
+Typically, as the flexibility of 
+\begin_inset Formula $\hat{f}$
+\end_inset
+
+ increases, the bias decreases, but the variance increases.
+ The relative rate of change of these two quantities determines whether
+ the test MSE increases or decreases.
+ Choosing the flexibility based on average test error amounts to a bias-variance
+ trade-off.
+ Bias-variance trade-off for the three examples above are presented here:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-03-30 at 10.31.05 AM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Classification Problems
+\end_layout
+
+\begin_layout Standard
+Thus far, our discussion of model accuracy has been focused on the regression
+ setting.
+ But many of the concepts that we have encountered, such as bias-variance
+ trade-off, transfer over to the classification setting with only some modificat
+ions due to the fact that 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ is no longer numerical.
+ Here, the response variable 
+\begin_inset Formula $Y$
+\end_inset
+
+ is qualitative, but the goal is the same:
+\end_layout
+
+\begin_layout Itemize
+Build a classifer 
+\begin_inset Formula $C(X)$
+\end_inset
+
+ that assigns a class label from 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ to a future unlabeled observation 
+\begin_inset Formula $X$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Assess the uncertainty in each classification
+\end_layout
+
+\begin_layout Itemize
+Understand the roles of the different predictors among 
+\begin_inset Formula $X=(X_{1}\dots X_{p})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Assessing Model accuracy
+\end_layout
+
+\begin_layout Standard
+The most natural metric to assess model accuracy is the mis-classification
+ error rate, which amounts to
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+MSE_{Tr} & = & Ave_{i\in Tr}I\left(y_{0}\neq\hat{y_{0}}\right)\\
+MSE_{Te} & = & Ave_{i\in Te}I\left(y_{0}\neq\hat{y_{0}}\right)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is simply the proportion of unseen observation where the predicted
+ label does not equal to the true labels.
+\end_layout
+
+\begin_layout Subsubsection*
+The Bayes Classifier
+\end_layout
+
+\begin_layout Standard
+It can be shown that the test error rate given above is minimized, on average,
+ by a very simple classifier that assigns each observation to the most likely
+ class, given its predictor values.
+ In other word the Bayes optimal classfier at 
+\begin_inset Formula $x$
+\end_inset
+
+ is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+C(x)=j\:\text{if}\: p_{j}(x)=max\left\{ p_{1}(x)\dots p_{K}(x)\right\} \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $p_{j}(x)=P(Y=j|X=x)$
+\end_inset
+
+ is the 
+\series bold
+true
+\series default
+ conditional probability that 
+\begin_inset Formula $Y=j$
+\end_inset
+
+, given the value of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ Of course, in reality, we do not know the true conditional probabilities,
+ but this bayes optimal classifier is great when we need to establish the
+ lower bound/baseline for testing models on a set of simulated data, and
+ compare different model performance with the baseline.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The bayes error rate at 
+\begin_inset Formula $X=x_{0}$
+\end_inset
+
+ will be 
+\begin_inset Formula $1-max_{j}P(Y=j|X=x_{0})$
+\end_inset
+
+.
+ In general, the overall Bayes error rate is given by
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+1-E\left(max_{j}P(Y=j|X)\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the expectation averages the probability over all possible values
+ of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ The Bayes error rate is analogous to the irreducible error, discussed earlier.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the classification setting, SVM builds structured models for 
+\begin_inset Formula $C(x)$
+\end_inset
+
+, but logistic regression & generalized additive model builds structured
+ model to represent 
+\begin_inset Formula $p_{k}(x)$
+\end_inset
+
+ directly.
+\end_layout
+
+\begin_layout Subsection*
+Side Topic: 
+\begin_inset Formula $K$
+\end_inset
+
+- nearest neighbors
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $K-$
+\end_inset
+
+nearest neighbors method was used in this chapter to demonstrate the bias-varian
+ce trade-offs.
+ But it was also used to demonstrated modeling in high dimensional space.
+ Namely, the curse of dimensionality, where observation tend to sit at the
+ boundaries of the space, and all the observations are quite far apart from
+ each other.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rule of Thumb:
+\end_layout
+
+\begin_layout Itemize
+Nearest neighbor averaging can be pretty good for small 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ i.e.
+ 
+\begin_inset Formula $p\leq4$
+\end_inset
+
+ and large-ish 
+\begin_inset Formula $N$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+It can be very lousy when 
+\begin_inset Formula $p$
+\end_inset
+
+ is large due to curse of dimensionality
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+We need to get a reasonable fraction, around 
+\begin_inset Formula $10\%$
+\end_inset
+
+ of 
+\begin_inset Formula $N$
+\end_inset
+
+ values of 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ to average to bring down the variance
+\end_layout
+
+\begin_layout Itemize
+A 
+\begin_inset Formula $10\%$
+\end_inset
+
+ neighborhood in high dimensions need no longer be local, so we lose the
+ spirit of local averaging or majority vote.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Lingering Questions
+\end_layout
+
+\begin_layout Standard
+In this chapter, we introduced:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+E\left[\left(Y-\hat{f}\left(X\right)\right)^{2}\vert X=x\right] & = & \underbrace{{\left[f(x)-\hat{f}\left(x\right)\right]^{2}}}_{\text{reducible}}+\underbrace{Var(\epsilon)}_{Irreducible}\\
+E\left(y_{0}-\hat{f}(x_{0})\right)^{2} & = & Var(\hat{f}(x_{0}))+[Bias(\hat{f}(x_{0}))]^{2}+Var(\epsilon)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What are the difference of the two?
+\end_layout
+
+\begin_layout Itemize
+I think for the first quantity, the expectation is over 
+\begin_inset Formula $(Y,X)$
+\end_inset
+
+, and only after then make a prediction on 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ This means that we have all the data from the population to build 
+\begin_inset Formula $\hat{f}$
+\end_inset
+
+, so we are not limited by just a snapshot of the training set.
+ Also, when assessing the error, we also have the whole 
+\begin_inset Formula $(Y,X)$
+\end_inset
+
+ population at our disposal.
+ 
+\end_layout
+
+\begin_layout Itemize
+In the second setting, we do not have the whole 
+\begin_inset Formula $(Y,X)$
+\end_inset
+
+ population at our disposal.
+ At any given time, we only have a snapshot of it, meaning, the training
+ set, 
+\begin_inset Formula $\mathbf{Tr}=\left\{ x_{i},y_{i}\right\} _{1}^{N}$
+\end_inset
+
+, and we are using that training set to build 
+\begin_inset Formula $\hat{f}$
+\end_inset
+
+.
+ This means that for different training set, we will have different 
+\begin_inset Formula $\hat{f}$
+\end_inset
+
+, and that's where the 
+\begin_inset Formula $Var(\hat{f}$
+\end_inset
+
+) comes in.
+ 
+\end_layout
+
+\begin_layout Standard
+I think this highlights the difference between 
+\series bold
+fitting
+\series default
+ and 
+\series bold
+learning
+\series default
+ (i.e.
+ 
+\series bold
+making predictions
+\series default
+), as mentioned in Learning from Data | Caltech Course! In fitting, we used
+ up all the data that is ever available, but in learning, we can only learned
+ from the limited training set we have at hand, and that's the key that
+ resulted in the tension between variance & Bias.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Is my interpretation right?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Chapter 3: Linear Regression
+\end_layout
+
+\begin_layout Standard
+Linear regression is the cornerstone of many of the more complex learning
+ algorithms we will discussed later, so it's important to study in its own
+ right.
+ The set of questions I want to focus on are:
+\end_layout
+
+\begin_layout Itemize
+What are the standard set of questions that we will be able to address using
+ Linear Regression?
+\end_layout
+
+\begin_layout Itemize
+What are the woes of (interpreting) linear regressions
+\end_layout
+
+\begin_layout Itemize
+Model assumption -- When is it (not) appropriate to use LR?
+\end_layout
+
+\begin_layout Itemize
+Some additional modeling techniques like qualitative variables, interactions,
+ higher order/non-linear terms
+\end_layout
+
+\begin_layout Subsection*
+What are the standard set of questions that LR can address?
+\end_layout
+
+\begin_layout Standard
+Very often, when we have a supervised learning problem involving prediction
+ and interpretation, we are likely to ask the following questions:
+\end_layout
+
+\begin_layout Itemize
+Is there a relationship between 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+? (F-statistics can be our friend here: Is there at least one predictors
+ that is related to 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ T-statistics can be used here: Does each of the 
+\begin_inset Formula $X$
+\end_inset
+
+ relates to 
+\begin_inset Formula $Y$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Itemize
+How strong is the relationship between 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+? (
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ can be our friend here)
+\end_layout
+
+\begin_layout Itemize
+Which 
+\begin_inset Formula $X's$
+\end_inset
+
+ contribute to 
+\begin_inset Formula $Y$
+\end_inset
+
+? (Subset selection can be helpful here, what are the main effects?)
+\end_layout
+
+\begin_layout Itemize
+How accurately an we estimate the effect of each 
+\begin_inset Formula $X$
+\end_inset
+
+ on 
+\begin_inset Formula $Y$
+\end_inset
+
+? (The 
+\begin_inset Formula $\beta's$
+\end_inset
+
+ coefficients of the linear model can be helpful here)
+\end_layout
+
+\begin_layout Itemize
+How accurately can we predict future sales? (MSE on test set)
+\end_layout
+
+\begin_layout Itemize
+Is the relationship linear? (Modeling checking, ANOVA)
+\end_layout
+
+\begin_layout Itemize
+Is there synergy among the 
+\begin_inset Formula $X$
+\end_inset
+
+'s? (Adding interaction terms, in addition to main effect?)
+\end_layout
+
+\begin_layout Subsubsection*
+Is there a relationship between (all) 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+? 
+\begin_inset Formula $(F-test)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In simple linear regression, since there is only 1 predictor, checking whether
+ there is a relationship between 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+ amounts to just checking 
+\begin_inset Formula $H_{0}:\:\beta_{1}=0$
+\end_inset
+
+.
+ In the context of multiple linear regression, we need to check:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+H_{0} & : & \beta_{1}=\beta_{2}=\dots=\beta_{p}=0\\
+H_{A} & : & \text{at least one of the }\beta's\:\text{is non-zero}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The classicial test is the 
+\begin_inset Formula $F$
+\end_inset
+
+-test, available in 
+\begin_inset Formula $R$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $F$
+\end_inset
+
+-statistics is in the form 
+\begin_inset Formula $F=\frac{(TSS-RSS)/p}{RSS/(n-p-1)}$
+\end_inset
+
+.
+ It can be shown that 
+\begin_inset Formula $E[RSS/(n-p-1)]=\sigma^{2}$
+\end_inset
+
+, and under 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+, 
+\begin_inset Formula $E[(TSS-RSS)/p]=\sigma^{2}$
+\end_inset
+
+.
+ So when the null is true, 
+\begin_inset Formula $F$
+\end_inset
+
+-statistics would be close to 1, otherwise, it would be much larger (intuition
+ is that the predictors are good, so 
+\begin_inset Formula $RSS$
+\end_inset
+
+ would be small, 
+\begin_inset Formula $TSS-RSS$
+\end_inset
+
+ would be big, so 
+\begin_inset Formula $F$
+\end_inset
+
+-statistic would be large).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Is there a relationship between each of the 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+? 
+\begin_inset Formula $(t-test)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sometimes we would want to test if a particular subset of 
+\begin_inset Formula $q$
+\end_inset
+
+ coefficients are 0s, this correspond to 
+\begin_inset Formula $H_{0}:\:\beta_{p-q+1}=\dots=\beta_{p}=0$
+\end_inset
+
+, and yet again we use 
+\begin_inset Formula $F=\frac{(RSS_{0}-RSS)/p}{RSS/(n-p-1)}$
+\end_inset
+
+ where 
+\begin_inset Formula $RSS_{0}$
+\end_inset
+
+ is the fitted model with all the predictors except those 
+\begin_inset Formula $q$
+\end_inset
+
+ predictors.
+ The idea is the same, instead of comparing the full fit model's performance
+ (RSS) with the performance of the full null model (TSS), we replace TSS
+ with the appropriate baseline 
+\begin_inset Formula $RSS_{0}$
+\end_inset
+
+.
+ When we run 
+\begin_inset Formula $t$
+\end_inset
+
+-test on each of the individual predictors, we are impact running this 
+\begin_inset Formula $F$
+\end_inset
+
+-test with 
+\begin_inset Formula $RSS_{0}=$
+\end_inset
+
+ the fit of the model with that one single predictor removed 
+\begin_inset Formula $(q=1)$
+\end_inset
+
+.
+ In other words, the 
+\begin_inset Formula $t$
+\end_inset
+
+-test in multiple regression is measuring the partial effect of each of
+ the variables, while holding all else constant.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In addition to the 
+\begin_inset Formula $F$
+\end_inset
+
+- statistics view, we can also view the inference as a 
+\begin_inset Formula $t$
+\end_inset
+
+- test directly.
+ Since we assume a underlying linear statistical model in the context of
+ linear regression, assuming that we have different replica of the training
+ set, we will be able to produce different linear regression lines with
+ each training set.
+ This means that we can view the coefficients 
+\begin_inset Formula $\beta's$
+\end_inset
+
+ as random variable, and we can do inference on them.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By inference, I mean we can get estimated values of 
+\begin_inset Formula $\beta$
+\end_inset
+
+'s using 
+\begin_inset Formula $\hat{\beta}$
+\end_inset
+
+'s.
+ We can also get their corresponding 
+\begin_inset Formula $SE(\hat{\beta})$
+\end_inset
+
+, and get 
+\begin_inset Formula $t-$
+\end_inset
+
+statistics to do hypothesis testing and compute confidence interval.
+ The whole game is so we can decide on the following two competing hypotheses:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+H_{0} & : & \text{There is no relationship between \ensuremath{X\:}and \ensuremath{Y}}\\
+H_{1} & : & \text{There is some relationship between \ensuremath{X\:}and \ensuremath{Y}}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+How accurately an we estimate the effect of each 
+\begin_inset Formula $X$
+\end_inset
+
+ on 
+\begin_inset Formula $Y$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Standard
+The best way is to look at the regression coefficients.
+ The ideal scenario of running a multiple regression is when the predictors
+ are uncorrelated -- a balance design.
+ This would allow us to interpret the coefficients as 
+\begin_inset Quotes eld
+\end_inset
+
+a unit change in 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+ is associated with a 
+\begin_inset Formula $\beta_{j}$
+\end_inset
+
+ unit change in 
+\begin_inset Formula $Y$
+\end_inset
+
+, while all the other variable stay fixed
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Unfortunately, when variables are correlated, we can not make that statement.
+ Correlations amonst predictor cause problems:
+\end_layout
+
+\begin_layout Itemize
+The variance of all coefficients tends to be inflated, sometimes dramatically.
+\end_layout
+
+\begin_layout Itemize
+Interpretation becomes hazardous -- when 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+ changes, everything else changes.
+\end_layout
+
+\begin_layout Itemize
+Claims of causality should be avoided for observational data.
+\end_layout
+
+\begin_layout Subsubsection*
+Which 
+\begin_inset Formula $X$
+\end_inset
+
+'s contribute to 
+\begin_inset Formula $Y$
+\end_inset
+
+? (subset selection)
+\end_layout
+
+\begin_layout Standard
+Usually, the first step in multiple regression is to compute the 
+\begin_inset Formula $F$
+\end_inset
+
+-statistic to see if at least one of the predictors are related to 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ If yes, it is only then natural to ask which are the guilty ones! The popular
+ methods are all subset selection, forward selection, and backward selection:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+All subset selection
+\series default
+: Consider all 
+\begin_inset Formula $2^{p}$
+\end_inset
+
+ model, this is not very feasible when 
+\begin_inset Formula $p$
+\end_inset
+
+ is large
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Forward selection
+\series default
+: Begin with the null model - fit 
+\begin_inset Formula $p$
+\end_inset
+
+ simple linear regression and add to the null model the variable that result
+ in the lowest RSS, we then add to that model the variable that result in
+ the lowest RSS for the new two-variable model.
+ Repeat the process until a stopping criteron is satisfied.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Backward selection
+\series default
+: Start with all variables in the model, and remove the variable with the
+ largest 
+\begin_inset Formula $p$
+\end_inset
+
+-value.
+ The new 
+\begin_inset Formula $(p-1)$
+\end_inset
+
+ variable is fit, and the predictor with the largest 
+\begin_inset Formula $p$
+\end_inset
+
+-value is again removed.
+ This continues a stopping criterion is met.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Mixed selection
+\series default
+: see textbook 79.
+\end_layout
+
+\begin_layout Standard
+Backward selection cannot be used if 
+\begin_inset Formula $p>n$
+\end_inset
+
+, forward selection can always be used.
+ Forward selection is a greedy approach, so it might include variables early
+ that later become redundant.
+ Mixed strategy can remedy this.
+ In Chapter 6, we will discuss more systematic criteria for choosing an
+ 
+\begin_inset Quotes eld
+\end_inset
+
+optimal
+\begin_inset Quotes erd
+\end_inset
+
+ member in the path of the models produced by forward or backward stepwise
+ selection.
+ This include mallow 
+\begin_inset Formula $C_{p},\: AIC,\: BIC,\:$
+\end_inset
+
+ adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Given that there is a relationship between 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+, how strong is the relationship? (
+\begin_inset Formula $R^{2}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+It talks about 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $RSE$
+\end_inset
+
+ (root-mean-square) as the basis here.
+ The basic idea is to compare different models (models that use different
+ subset of predictors) based on these criteria.
+ The problem with 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is that it would only go up as the number of predictors increases.
+ 
+\begin_inset Formula $RSE=\sqrt{RSS/(n-p-1)}$
+\end_inset
+
+ slightly adjusted for this since if the reduction for 
+\begin_inset Formula $RSS$
+\end_inset
+
+ is small compare to the addition of variables, 
+\begin_inset Formula $RSE$
+\end_inset
+
+ might go up.
+\end_layout
+
+\begin_layout Subsubsection*
+How well can we make future predictions?
+\end_layout
+
+\begin_layout Standard
+Note, these criteria above 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $RSE$
+\end_inset
+
+ does not tell us how well we will do for future unseen observation.
+ It simply tell us how well the predictors are fitting the current TRAINING
+ data.
+ The best approach is do training, and test it out a heldout set.
+ The best approach now is cross validation (CV), which we will cover in
+ Chapter 5.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+So far in this chapter, we haven't ingrained the concept of measuring test
+ error, or CV error into our practice.
+ For example, Using 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ to measure the quality of your model is not complete, doing model selection
+ using ONLY the training set is also not correct.
+ These are good questions to ask for providing interpretations for a problem
+ at hand.
+ However, when it comes to prediction, we really need the concept of test
+ error and CV error.
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Textbook pg.
+ 102 - 104 does a very nice summary of how to methodogically answer all
+ these questions! Great case study!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Other Considerations in the Regression Model
+\end_layout
+
+\begin_layout Standard
+We can extend the regression model to be much richer than just using quantitativ
+e variables, we could:
+\end_layout
+
+\begin_layout Itemize
+Include qualitative (factor) variables: some details on encoding, two level,
+ or multi-level qualitative variables (and the concept of a baseline)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Textbook pg.
+ 84-86
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Extension: Using interaction: (quantitative 
+\begin_inset Formula $\times$
+\end_inset
+
+ quantitative) | (qualitiative 
+\begin_inset Formula $\times$
+\end_inset
+
+ quantitative) 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Textbook pg.
+ 87-90
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Extension: Using higher order terms to create non-linear fits.
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Textbook pg.
+ 91
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Potential problems with Regression on modeling assumption
+\end_layout
+
+\begin_layout Standard
+Many problems may occur when fitting a linear regression model, most common
+ among these are:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Non-linearity in the response-predictor
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+If the true relationship is far from linear, then virtually all the conclusions
+ we draw from the fit are suspect.
+ In addition, the prediction accuracy of the model can be significantly
+ reduced.
+ 
+\series bold
+Residual plots 
+\series default
+are useful graphical tool for identifying non-linearity.
+ In the case of simple linear regression, we would plot the residuals 
+\begin_inset Formula $y_{i}-\hat{y}_{i}$
+\end_inset
+
+, versus the predictor 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+.
+ In the case of multiple regression, we plot residual 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ against the fitted values 
+\begin_inset Formula $\hat{y}_{i}$
+\end_inset
+
+.
+ If the residual plots indicates that there are non-linearity, then a simple
+ approach is to use non-linear transformation of the predictors, such as
+ 
+\begin_inset Formula $log(X),\sqrt{X},X^{2}$
+\end_inset
+
+ in the regression model.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-05 at 11.18.45 AM.png
+	scale 30
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Correlation of error terms
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+An important assumption of linear regression is that the error ters, 
+\begin_inset Formula $\epsilon_{1},\epsilon_{2}\dots\epsilon_{n}$
+\end_inset
+
+ are uncorrelated.
+ This means the fact 
+\begin_inset Formula $\epsilon_{i}$
+\end_inset
+
+ is positive, doesn't tell us the direction of 
+\begin_inset Formula $\epsilon_{i+1}$
+\end_inset
+
+.
+ The SE of the coefficients are computed assuming that errors are not correlated.
+ If in fact there are correlations, then the estimated SE would tend to
+ underestimate the true SE.
+ As a result, confidence interval and prediction interval would necessarily
+ be narrower than they truly are.
+ In addition, p-values associated with the model will be lower than they
+ should -- in short, we may have an unwarranted sense of confidence in our
+ model.
+\end_layout
+
+\begin_layout Itemize
+
+\color magenta
+The best extreme example to illustrate this: suppose we accidentally doubled
+ our data, leading to observations and errors terms identical in pairs.
+ If we ignored this, we now have sample size 
+\begin_inset Formula $2n$
+\end_inset
+
+, when in fact we only have 
+\begin_inset Formula $n$
+\end_inset
+
+ samples.
+ Our estimated parameters would be the same (think of each point overlap
+ on itself, so the fit do not change) for samples 
+\begin_inset Formula $2n$
+\end_inset
+
+ v.s.
+ 
+\begin_inset Formula $n$
+\end_inset
+
+, but the confidence would be narrower by a factor of 
+\begin_inset Formula $\sqrt{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+This scenario is most common in time series data, when we can see 
+\begin_inset Quotes eld
+\end_inset
+
+trackings
+\begin_inset Quotes erd
+\end_inset
+
+ on the residual.
+ That is, the residual tend to move in the same direction with each others.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Non-constant variance or error terms
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The same old homoscedasticity v.s.
+ heteroscedasticity.
+ 
+\color magenta
+The solution is to transform the response 
+\begin_inset Formula $Y$
+\end_inset
+
+ using a concave function such as 
+\begin_inset Formula $log(Y)$
+\end_inset
+
+ or 
+\begin_inset Formula $\sqrt{Y}$
+\end_inset
+
+.
+ such a transformation results in a greater amount of shrinkage of the larger
+ responses, leading to a reduction in heteroscedacitity
+\color inherit
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-05 at 11.32.48 AM.png
+	scale 30
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Outliers
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Its is typical that outliers with non-unusual predictor values have little
+ or no impact on the fit.
+ But it could cause other problems, such as inflated RSE or 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The typical way to spot outliers is to plot the residual plot, or the studentize
+d residual plot, typical outliers have studentized value exceeding -2 or
+ 2.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+High-leverage points
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+In contrast to outliers (where 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ might be typical but 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ might be unusually large), high-leverage points are points where 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ are atypical.
+ This could be particularly dangerous, because they tend ot affect the fit
+ significantly.
+ 
+\end_layout
+
+\begin_layout Itemize
+The way to identify high-leverage point is to calculate leverage statistics.
+ The basic idea is captured by how far away the particular 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is away from all the other 
+\begin_inset Formula $x$
+\end_inset
+
+'s.
+ 
+\end_layout
+
+\begin_layout Itemize
+A point that has high studentized residual and leverage means that its 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ are both very atypical, a particuarly dangerous combination!
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Colinearity
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+colinearity can make the coefficients jumpy.
+ This means the SE of the coefficients would be greater, which in terms
+ means that the 
+\begin_inset Formula $t$
+\end_inset
+
+-statistic would be smaller, and we have a much smaller chance of rejecting
+ the null.
+ The implication is a decrease of POWER (in the case that 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is truly non-zero, colinearity can inflate the SE, and cause the 
+\begin_inset Formula $t$
+\end_inset
+
+-statistic to be small, and 
+\begin_inset Formula $p$
+\end_inset
+
+ values to be large).
+\end_layout
+
+\begin_layout Itemize
+A simple to look for colinearity is to look at the correlation matrix, and
+ see which entry is large.
+ However, there are mult-collinearity that involves more than 3 predictors
+ that are not detectable by looking at the correlation matrix.
+ In such cases, we want to use the VIF (Variance inflation factor)
+\end_layout
+
+\begin_layout Itemize
+
+\color magenta
+A VIF that exceeds 5 or 10 indicates a problematic amount of colinearity
+\color inherit
+
+\begin_inset Formula \[
+VIF(\beta_{j})=\frac{1}{1-R^{2}X_{j}|X_{-j}}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+where 
+\begin_inset Formula $R_{X_{j}|X_{-j}}^{2}$
+\end_inset
+
+ is the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ from a regression of 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+ onto all of the other predictors.
+ A large 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ means colinearity, and VIF would be large.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+
+\color blue
+Woes of (Interpreting) Linear/Logistic Regression
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color blue
+Scenario
+\series default
+: Even though the coefficient for 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ is positive (and statistically significant) when fitting 
+\begin_inset Formula $Y$
+\end_inset
+
+ on 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ alone, when 
+\begin_inset Formula $Y$
+\end_inset
+
+ is fitted against 
+\begin_inset Formula $X_{1},X_{2}$
+\end_inset
+
+, then 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+'s coefficient became very close to 0, and the result is not statistically
+ significant.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Why?: 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ 
+\series default
+actually doesn't affect 
+\begin_inset Formula $Y$
+\end_inset
+
+, but 
+\begin_inset Formula $X_{2}$
+\end_inset
+
+ does.
+ When 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ is highly correlated with 
+\begin_inset Formula $Y$
+\end_inset
+
+, when we increase 
+\begin_inset Formula $X_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $Y$
+\end_inset
+
+ would increase, but 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ would also increase.
+ Hence, it would appear as if 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ has an impact on 
+\begin_inset Formula $Y$
+\end_inset
+
+ when in reality it is just masking the effect of 
+\begin_inset Formula $X_{2}$
+\end_inset
+
+ variable that truly matters.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+See textbook 73 & 74.
+ Ice cream (
+\begin_inset Formula $X_{1}$
+\end_inset
+
+), Temperature (
+\begin_inset Formula $X_{2}$
+\end_inset
+
+), and shark attacks 
+\begin_inset Formula $(Y)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Scenario
+\series default
+: When 
+\begin_inset Formula $p$
+\end_inset
+
+-values for each of individual predictors (from 
+\begin_inset Formula $t$
+\end_inset
+
+-test) is small, then it must be the case that at least one variable is
+ related to the response.
+ Why do we need to look at 
+\begin_inset Formula $F$
+\end_inset
+
+-statistic at all?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Why?
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+see page 77 for the full explanation
+\end_layout
+
+\end_inset
+
+: 
+\series default
+Suppose we have
+\series bold
+ 
+\begin_inset Formula $p=100$
+\end_inset
+
+
+\series default
+ and 
+\begin_inset Formula $\beta_{1}=\dots=\beta_{100}=0$
+\end_inset
+
+, then there still will be about 
+\begin_inset Formula $5\%$
+\end_inset
+
+ of the predictors that will have small 
+\begin_inset Formula $p$
+\end_inset
+
+-values (i.e.
+ 
+\begin_inset Formula $p<0.05$
+\end_inset
+
+) just by chance, due to type I error.
+ This means that when we look at however many replica of the training set,
+ 
+\begin_inset Formula $5\%$
+\end_inset
+
+ of the predictors would appeared to be important when there is no relationship
+ between 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ In fact, the chance of having at least 
+\begin_inset Formula $1$
+\end_inset
+
+ predictor to have small 
+\begin_inset Formula $p$
+\end_inset
+
+-value is almost 1.
+ So if we say, if at least 1, or a few predictors are significant, then
+ we say the 
+\begin_inset Formula $X$
+\end_inset
+
+'s altogether are related to 
+\begin_inset Formula $Y$
+\end_inset
+
+, that would have been wrong.
+ The advantage of 
+\begin_inset Formula $F$
+\end_inset
+
+-test is that it adjust for the number of predictors (i.e.
+ regardless of the number of the predictors, the chance of making a mistake
+ is bounded at 
+\begin_inset Formula $5$
+\end_inset
+
+% when 
+\begin_inset Formula $\alpha=5\%$
+\end_inset
+
+).
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Scenario
+\series default
+: [Credit example] How is it possible for student status to be associated
+ with an increase in probability (i.e.
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+ fitted from logistic regression 
+\begin_inset Formula $>0$
+\end_inset
+
+) of credit default when student status is fitted alone, and a drecrease
+ in probability of default (i.e.
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+ fitted from logistic regression 
+\begin_inset Formula $<0$
+\end_inset
+
+) when the predictor BALANCE is also included?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Why? 
+\series default
+In the multiple logistic regression case, it is clear that increase in balance
+ cause higher probability of default.
+ More so, for a fixed balance, students are less likely to default (hence
+ 
+\begin_inset Formula $\beta_{\text{balance}}>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta_{student}<0$
+\end_inset
+
+ when both variables are fitted).
+ So why would 
+\begin_inset Formula $\beta_{\text{student alone}}>0$
+\end_inset
+
+.
+ The reason is correlation/con-founding.
+ When we average over all incomes, we see that students, on average, have
+ higher balance compared to non-student, and higher balance associated with
+ high default rate.
+ Therefore, when we are only looking at student status (and everything else
+ is average out), it appears if student are more likely to default.
+ In other words, student status is not really causing higher default rate,
+ it was after all BALANCE, but the correlation with student status made
+ it appear that students are more likely to default.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+This is very similar to the 
+\begin_inset Formula $W$
+\end_inset
+
+= weight and 
+\begin_inset Formula $H$
+\end_inset
+
+ = height example from lecture slides.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\color blue
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-05 at 3.51.59 PM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Again, be very careful when interpreting the coefficients.
+ It might very well be the case that when you fit the univariate logistic
+ regression, the coefficient is positive.
+ But when you fit a multivariate logistic regression, the coefficient becomes
+ negative.
+ Scenarios like these are often caused by:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The variable DOES have a true association with 
+\begin_inset Formula $Y$
+\end_inset
+
+, but when put together with other highly colinear predictors, it appeared
+ to be redundant 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Football tackels = 
+\begin_inset Formula $0.4\times$
+\end_inset
+
+H v.s.
+ Football tackles = 
+\begin_inset Formula $0.8W-0.1H$
+\end_inset
+
+ falls under this category.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The variable DOES NOT have a true association with 
+\begin_inset Formula $Y$
+\end_inset
+
+, and is significant only because it is correlated with another much relevant
+ variable 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Stduent credit default example above
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+When to use what model? Linear Regression V.S.
+ 
+\begin_inset Formula $K$
+\end_inset
+
+-nearest neighbors
+\end_layout
+
+\begin_layout Standard
+Even though this section compares linear regression with 
+\begin_inset Formula $K$
+\end_inset
+
+-nearest neighbors method, the comparison is really between 
+\shape italic
+\color blue
+parametric 
+\shape default
+\color black
+and
+\shape italic
+\color blue
+ non-parametric 
+\shape default
+\color black
+methods.
+\end_layout
+
+\begin_layout Itemize
+Parametric methods assume a functional form of the underlying 
+\begin_inset Formula $f$
+\end_inset
+
+, thus are more restrictive.
+ But it often have less number of parameters to estimate (tend to have higher
+ bias)
+\end_layout
+
+\begin_layout Itemize
+Non-parametric methods often do not assume a form for 
+\begin_inset Formula $f$
+\end_inset
+
+, and are more flexible.
+ But there are more number of parameters to estimate (tend to have higher
+ variance)
+\end_layout
+
+\begin_layout Standard
+When does linear regression (a parametric method) outperforms 
+\begin_inset Formula $k$
+\end_inset
+
+-nearest neighbors (a non-parametric method)? 
+\shape italic
+The parametric approach will outperform the non- parametric approach if
+ the parametric form that has been selected is close to the true form of
+ 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\shape default
+More details below:
+\end_layout
+
+\begin_layout Itemize
+When the underlying 
+\begin_inset Formula $f(X)$
+\end_inset
+
+ is truly linear, then LR will do better than 
+\begin_inset Formula $k$
+\end_inset
+
+-nearest neighbor, and 
+\begin_inset Formula $k$
+\end_inset
+
+-NN method would do worse for smaller 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-05 at 3.09.03 PM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+When the underlying 
+\begin_inset Formula $f(X)$
+\end_inset
+
+ is somewhat nonlinear, then LR can started to lose for a slightly more
+ complex (moderate 
+\begin_inset Formula $k$
+\end_inset
+
+) 
+\begin_inset Formula $k$
+\end_inset
+
+-NN method.
+ But when the underlying 
+\begin_inset Formula $f(X)$
+\end_inset
+
+ is highly non-linear, then 
+\begin_inset Formula $k$
+\end_inset
+
+-NN can be significantly better
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-05 at 3.11.14 PM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+When we add more irrelevant predictors (and 
+\begin_inset Formula $p$
+\end_inset
+
+ increases), 
+\begin_inset Formula $k$
+\end_inset
+
+-NN can really start to suffer from the 
+\begin_inset Quotes eld
+\end_inset
+
+curse of dimensionality
+\begin_inset Quotes erd
+\end_inset
+
+.
+ LR also deteroriate, but at a much lower rate.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-05 at 3.12.35 PM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection*
+When to use what model? A comparison of classification methods
+\end_layout
+
+\begin_layout Standard
+These six examples
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Textbook pg.153
+\end_layout
+
+\end_inset
+
+ illustrate that no one method will dominate the oth- ers in every situation.
+ When the true decision boundaries are linear, then the LDA and logistic
+ regression approaches will tend to perform well.
+ When the boundaries are moderately non-linear, QDA may give better results.
+ Finally, for much more complicated decision boundaries, a non-parametric
+ approach such as KNN can be superior.
+ But the level of smoothness for a non-parametric approach must be chosen
+ carefully.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-06 at 11.54.46 AM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+When to use what model? Ridge Regression V.S.
+ LASSO
+\end_layout
+
+\begin_layout Paragraph*
+Bias-Variance-Trade-Off of Regularization Technique:
+\end_layout
+
+\begin_layout Standard
+In general, in situations where the relationship between the response and
+ the predictors is close to linear, the least squares estimates will have
+ low bias but may have high variance.
+ This means that a small change in the training data can cause a large change
+ in the least squares coefficient estimates.
+ In particular, when the number of variables 
+\begin_inset Formula $p$
+\end_inset
+
+ is almost as large as the number of observations 
+\begin_inset Formula $n$
+\end_inset
+
+, the least squares estimates will be extremely variable.
+ And if 
+\begin_inset Formula $p>n$
+\end_inset
+
+, then the least squares estimates do not even have a unique solution, whereas
+ ridge regression or LASSO can still perform well by trading off a small
+ increase in bias for a large decrease in variance.
+ Hence, ridge regression and LASSO works best in situations where the least
+ squares estimates have high variance.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Ridge regression also has substantial computational advantages over best
+ subset selection, which requires searching through 
+\begin_inset Formula $2^{p}$
+\end_inset
+
+ models.
+ As we discussed previously, even for moderate values of 
+\begin_inset Formula $p$
+\end_inset
+
+, such a search can be computationally infeasible.
+ In contrast, for any fixed value of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, ridge regression only fitrs a single model, and the model-fitting procedure
+ can be performed quite quickly.
+ It can be shown that the computations for ridge regression, simultaneously
+ for all values of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, are almost identical to those for fitting a model using least squares.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Comparing the LASSO and Ridge Regression:
+\end_layout
+
+\begin_layout Standard
+It is clear that the lasso has a major advantage over ridge regression,
+ in that it produces simpler and more interpretable models that involve
+ only a subset of the predictors.
+ However, which method leads to better prediction accuracy? Here is the
+ take-away:
+\end_layout
+
+\begin_layout Itemize
+If the response is a function of many of the predictors, then ridge regression
+ will generally perform better
+\end_layout
+
+\begin_layout Itemize
+If the response is a function of only a handful of predictors, then LASSO
+ will generally perform better
+\end_layout
+
+\begin_layout Standard
+This very much has to do with the fact that these two methods shrink the
+ coefficients different.
+ Ridge regression will shrink all the coefficient estimates for ALL the
+ predictors towards 0, but not necessarily exactly to 0.
+ On the other hand, LASSO will drive certain coefficient estimates to exactly
+ 0! Here is a simulated example from the textbook:
+\end_layout
+
+\begin_layout Itemize
+A comparison of Ridge & LASSO based on a simulated data set where all 45
+ predictors were related to the response -- that is, none of the true coefficien
+ts 
+\begin_inset Formula $\beta_{1}\dots\beta_{45}$
+\end_inset
+
+ equaled zero.
+ The LASSO implicitly assumes that a number of the coefficients truly equal
+ 0.
+ Consequently, it is not surprising that ridge regression outperforms the
+ LASSO.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice here we plot both model against their 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ on the training data as a useful way to index models, and is a popular
+ way to compare models with different types of regularization.
+ It might not be fair to compare different regularization based on absolute
+ magnitude of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, because different 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ in different regularization might have different trade-off between RSS
+ and model complexity.
+ Using 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ or RSS directly give us fair playing field (we know how hard both methods
+ have worked to fit the model).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-20 at 11.40.39 AM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+A comparison of Ridge & LASSO based on a simulated data set where only 2
+ of the 45 predictors were related to the response -- in this case, since
+ the true model is sparse to start with, LASSO does a better job at capturing
+ the right relationship
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-20 at 11.42.47 AM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These two examples illustrate that neither ridge regression nor the LASSO
+ will universally dominate the other.
+ In general, one might expect the LASSO to perform better when the responde
+ is a function of only a relatively small number of predictors.
+ However, the number of predictors that is related to the response is never
+ known a prior for real data sets.
+ A technique such as cross validation can be used in order to determin which
+ approach is better on a particular data set!
+\end_layout
+
+\begin_layout Paragraph*
+Bayesian Interpretation for Ridge Regression and the LASSO:
+\end_layout
+
+\begin_layout Standard
+One can view ridge regression and LASSO through a Bayesian lens.
+ The goal here is to find the posterior distribution 
+\begin_inset Formula $P(\beta|X,Y)$
+\end_inset
+
+, based on likelihood 
+\begin_inset Formula $f(Y|X,\beta)$
+\end_inset
+
+ and prior distribution 
+\begin_inset Formula $p(\beta)$
+\end_inset
+
+.
+ If we assume the usual linear model,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+Y=\beta_{0}+X_{1}\beta_{1}+\dots+X_{p}\beta_{p}+\epsilon\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and suppose that the errors are independent and drawn from a normal distribution.
+ Furthermore, assume that 
+\begin_inset Formula $p(\beta)=\prod_{j=1}^{p}g(\beta_{j})$
+\end_inset
+
+, for some density function g.
+ It turns out that:
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $g$
+\end_inset
+
+ is a gaussian distribution with mean zero and standard deviation a function
+ of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, then it follows that the posterior mode for 
+\begin_inset Formula $\beta$
+\end_inset
+
+—that is, the most likely value for 
+\begin_inset Formula $\beta$
+\end_inset
+
+, given the data—is given by the ridge regression solution.
+ (In fact, the ridge regression solution is also the posterior mean.)
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $g$
+\end_inset
+
+ is a Laplace distribution with mean zero and scale parameter a function
+ of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, then it follows that the posterior mode for 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is the LASSO solution.
+ However, the LASSO solution is not the posterior mean.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Chapter 4: Classification
+\end_layout
+
+\begin_layout Standard
+Given a feature vector 
+\begin_inset Formula $X$
+\end_inset
+
+ and a qualitative response 
+\begin_inset Formula $Y$
+\end_inset
+
+ taking values in the discrete set 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+, the clasification task is to build a function 
+\begin_inset Formula $C(X)$
+\end_inset
+
+ that takes as input the feature vector 
+\begin_inset Formula $X$
+\end_inset
+
+ and predicts its value for 
+\begin_inset Formula $Y$
+\end_inset
+
+; i.e.
+ 
+\begin_inset Formula $C(X)\in\mathcal{C}$
+\end_inset
+
+.
+ We will talk about methods such as SVM (in chapter 9) that directly construct
+ a classifer that produce classes 
+\begin_inset Formula $C(X)\in\mathcal{C}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Often, we are more interested in estimating the probabilities that 
+\begin_inset Formula $X$
+\end_inset
+
+ belongs to each category in 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+.
+ For example, it is more valuable to have an estimate of the probability
+ that an insurance claim is fraudulent, than a classification fraudulent
+ or not.
+ Logistic regression, discrimnant analysis fall under this category of methods.
+\end_layout
+
+\begin_layout Subsection*
+Logistic Regression
+\end_layout
+
+\begin_layout Standard
+When the outcome is binary, using linear regression to perform classification
+ can be suitable
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Suitable because in the population 
+\begin_inset Formula $E(Y|X=x)=P(Y=1|X=x)$
+\end_inset
+
+, and that's what we want to estimate.
+ In the case of binary outcome, linear regression is equivalent to linear
+ discrimnant analysis.
+\end_layout
+
+\end_inset
+
+, but more often than not we ended up with probability estimates are outside
+ of the 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+ range.
+ When the outcome has more than two classes, there is no clear ordering
+ of the classes in 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+, but changing the encoding means we have some implicit ordering of the
+ outcomes
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Even if there is a natural ordering, we are assuming the difference between
+ each pair of outcome has the same distance, this is often false.
+\end_layout
+
+\end_inset
+
+ -- In such cases, logistic regression and discrimnant analysis are better
+ tools.
+\end_layout
+
+\begin_layout Itemize
+The probability 
+\begin_inset Formula $P(Y=k|X=x)$
+\end_inset
+
+ is modeled as 
+\begin_inset Formula $p(X)=\frac{e^{\beta_{0}+\mathbf{X}\mathbf{\beta}}}{1+e^{\beta_{0}+\mathbf{X}\mathbf{\beta}}}$
+\end_inset
+
+ or 
+\begin_inset Formula $log\left(\frac{p(X)}{1-P(X)}\right)=\mathbf{X\beta}$
+\end_inset
+
+ -- the log-odd is linear in the parameters.
+ This functional form has implications in terms of interpretation:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+increase 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ by one unit changes the log odds by 
+\begin_inset Formula $\beta_{1}$
+\end_inset
+
+.
+ Equivalently, increase 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ by one unit changes the odds by 
+\begin_inset Formula $e^{\beta_{1}}$
+\end_inset
+
+, this is because
+\begin_inset Formula \[
+\frac{\left(\frac{P(X_{new})}{1-P(X_{new})}\right)}{\left(\frac{P(X)}{1-P(X)}\right)}=\frac{\left(e^{\beta_{0}+(X+1)\beta_{1}+\dots}\right)}{\left(e^{\beta_{0}+(X)\beta_{1}+\dots}\right)}=e^{\beta_{1}}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The amount of change in 
+\begin_inset Formula $p(X)$
+\end_inset
+
+ due to one unit change in 
+\begin_inset Formula $X$
+\end_inset
+
+ will depend on the value of 
+\begin_inset Formula $X$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+But regardless of the value of 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+, if 
+\begin_inset Formula $\beta_{1}$
+\end_inset
+
+ is positive/negative, then increasing 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ will associate with increasing/decreasing 
+\begin_inset Formula $p(X)$
+\end_inset
+
+ [WHY?]
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+We can also use indicator variables as predictors in the logistic regression
+ model.
+\end_layout
+
+\begin_layout Itemize
+The fitting of the parameters is done via Maximum Likelihood Estimation.
+ It has no closed form solution, so it is often solved using iterative least
+ squares (in R).
+\end_layout
+
+\begin_layout Itemize
+
+\color blue
+The logistic regression coefficient might be small -- ALWAYS remember, the
+ unit of the coefficient comes in the same units as the predictors! 
+\end_layout
+
+\begin_layout Itemize
+When the number of classes in 
+\begin_inset Formula $\mathcal{C}$
+\end_inset
+
+ is 
+\begin_inset Formula $>2$
+\end_inset
+
+, we would model 
+\begin_inset Formula $P(Y=k|X)$
+\end_inset
+
+ as 
+\begin_inset Formula \begin{eqnarray*}
+P(Y=k|X) & = & \frac{exp(\beta_{0k}+\beta_{1k}X_{1}+\dots+\beta_{pk}X_{p})}{\sum_{l=1}^{K}exp(\beta_{0l}+\beta_{1l}X_{1}+\dots+\beta_{pl}X_{p})}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This is often referred to as multinomial regression or (soft-max regression
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+See CS 229 Generative Learning Algorithm (PDF2) section 9.3 on Softmax regression
+\end_layout
+
+\end_inset
+
+).
+ However, in practice, this model is used much less often than discriminant
+ analysis.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Logistic regression can also fit quadratic boundaries like QDA, by explictly
+ including quadratic terms in the model.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Discrimnant Analysis
+\end_layout
+
+\begin_layout Standard
+Generally, in classification, when we are interested in estimating the class
+ probabilities, we have two modeling approach:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Discrimnant Learning Algorithm
+\series default
+: This approach models 
+\begin_inset Formula $P(Y=k|X=x)$
+\end_inset
+
+ directly, without modeling 
+\begin_inset Formula $P(X=x)=f_{k}(x)$
+\end_inset
+
+ explicitly (i.e.
+ Logistic Regression).
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Generative Learning Algorithm
+\series default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+See CS 229 Generative Learning Algorithm (PDF 2) to get a better understanding
+\end_layout
+
+\end_inset
+
+: This approach models the distribution of 
+\begin_inset Formula $X$
+\end_inset
+
+ in each of the classes separately, and then use Bayes theorem to flip things
+ around and obtain 
+\begin_inset Formula $P(Y|X)$
+\end_inset
+
+.
+ LDA, QDA actually falls under this category, don't get confused by the
+ 'discrimnant' in the naming.
+ 
+\end_layout
+
+\begin_layout Standard
+As a reminder for Bayes theorem:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+P(Y=k|X=x) & = & \frac{P(X=x|Y=k)\times P(Y=k)}{P(X=x)}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One writes this slightly differently for discriminant analysis:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+P(Y=k|X=x) & = & \frac{\pi_{k}f_{k}(x)}{\sum_{l=1}^{K}\pi_{l}f_{l}(x)}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $f_{k}(x)=P(X=x|Y=k)$
+\end_inset
+
+ is the density for 
+\begin_inset Formula $X$
+\end_inset
+
+ in class 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ Here, we will use normal densities in LDA/QDA, but we can have other variants:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Assume 
+\begin_inset Formula $X$
+\end_inset
+
+ follow some other distribution other than normal
+\end_layout
+
+\begin_layout Itemize
+Assume the components of 
+\begin_inset Formula $\mathbf{X}=(X_{1}\dots X_{p})$
+\end_inset
+
+ are independent from each other, so 
+\begin_inset Formula $f_{k}(\mathbf{X})=\prod f_{kj}(x_{j})$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Formula $\pi_{k}=P(Y=k)$
+\end_inset
+
+ is the marginal prior probability for class 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Why do we need another method, when we already have logistic regression?
+\end_layout
+
+\begin_layout Itemize
+When the classes are well separated, the parameters of the logistic regression
+ model is surprsingly unstable.
+ LDA does not suffer from that issue.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Logistic regression was invented by Biostatistician, where the data are
+ usually not clearly separable
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+When 
+\begin_inset Formula $n$
+\end_inset
+
+ is small and the 
+\begin_inset Formula $x$
+\end_inset
+
+ are approximately normal, LDA does better.
+\end_layout
+
+\begin_layout Itemize
+Finally, when 
+\begin_inset Formula $K>2$
+\end_inset
+
+, then LDA is very popular.
+\end_layout
+
+\begin_layout Itemize
+When the underlying assumption about 
+\begin_inset Formula $X$
+\end_inset
+
+ is correct, this approach will give us the optimal classification rule
+ (Bayes optimal classifer)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+CS 229 Generative Learning Algorithm (PDF 2) also has a section that compare
+ logistic regression with LDA.
+ The basic trade-off is that GDA is better when the assumption about 
+\begin_inset Formula $X$
+\end_inset
+
+ is correct, otherwise, logistic regression is more robust
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Linear Discrimnant Analysis when 
+\begin_inset Formula $p=1$
+\end_inset
+
+ or 
+\begin_inset Formula $p>1$
+\end_inset
+
+ (LDA)
+\end_layout
+
+\begin_layout Standard
+Our goal is to classify the example with max 
+\begin_inset Formula $p_{k}(x)=\frac{\pi_{k}f_{k}(x)}{\sum\pi_{k}f_{k}(x)}$
+\end_inset
+
+.
+ In LDA, we assume that each of the 
+\begin_inset Formula $f_{k}(x)$
+\end_inset
+
+ is univariate normal and all the classes have the same covariance 
+\begin_inset Formula $\sum_{k}=\sum\:\forall k$
+\end_inset
+
+.
+ Under this assumption, getting the predicted 
+\begin_inset Formula $p_{k}(x)$
+\end_inset
+
+ amounts to estimating 
+\begin_inset Formula $\pi_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{k}(x)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\pi_{k}$
+\end_inset
+
+ would simply be the proportion of samples that falls in class 
+\begin_inset Formula $k$
+\end_inset
+
+, and to get 
+\begin_inset Formula $f_{k}(x)$
+\end_inset
+
+, we just need to estimate 
+\begin_inset Formula $\mu_{k}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma_{k}^{2}$
+\end_inset
+
+.
+ Once we have these, we can plug into 
+\begin_inset Formula $p_{k}(x)$
+\end_inset
+
+, and classify 
+\begin_inset Formula $x$
+\end_inset
+
+ with the class where 
+\begin_inset Formula $p_{k}(x)$
+\end_inset
+
+ is maximized.
+ It can be shown, with some algebraic simplification that 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\delta_{k}(x) & = & x\times\frac{\mu_{k}}{\sigma^{2}}-\frac{\mu_{k}^{2}}{2\sigma^{2}}+log(\pi_{k})\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We do not know the parameters in the discriminant score, so they need to
+ be estimated and plug-in:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\hat{\delta}_{k}(x)=x\times\frac{\hat{\mu}_{k}}{\hat{\sigma_{k}}}-\frac{\hat{\mu}_{k}^{2}}{2\hat{\sigma_{k}}}+log(\hat{\pi}_{k})\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that 
+\begin_inset Formula $\delta_{k}(x)$
+\end_inset
+
+ is a linear function of 
+\begin_inset Formula $x$
+\end_inset
+
+.
+ The case of 
+\begin_inset Formula $p>1$
+\end_inset
+
+ is very similar, except that now 
+\begin_inset Formula $f_{k}(\mathbf{X})$
+\end_inset
+
+ is multivariate normal, the resulting discriminant score 
+\begin_inset Formula $\delta_{k}$
+\end_inset
+
+ is also a linear function (i.e.
+ 
+\begin_inset Formula $\delta_{k}(x)=c_{k0}+c_{k1}x_{1}+c_{k2}x_{2}+\dots c_{kp}x_{p}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection*
+Quadratic Discrimnant Analysis (QDA)
+\end_layout
+
+\begin_layout Standard
+As we have discussed, LDA assumes that the observations within each class
+ are drawn from a multivariate Gaussian distribution with a class- specific
+ mean vector and a covariance matrix that is common to all K classes.
+ Quadratic discriminant analysis (QDA) provides an alternative approach.
+ Like LDA, the QDA classifier results from assuming that the observations
+ from each class are drawn from a Gaussian distribution, and plugging estimates
+ for the parameters into Bayes’ theorem in order to per- form prediction.
+ However, unlike LDA, QDA assumes that each class has its own covariance
+ matrix.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+That is, each x in each class 
+\begin_inset Formula $k\sim N(\mathbf{\mu_{k}},\mathbf{\sum_{K}})$
+\end_inset
+
+, where 
+\begin_inset Formula $\mathbf{\sum_{k}}$
+\end_inset
+
+ is covariance matrix of the 
+\begin_inset Formula $k^{th}$
+\end_inset
+
+ class.
+ In LDA, we assume 
+\begin_inset Formula $\sum_{k}=\sum\:\forall\: k$
+\end_inset
+
+.
+ And it turns out the the decision boundary for QDA is quadratic.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In both LDA & QDA, once we have obtained the 
+\begin_inset Formula $\hat{\delta}_{k}(x)$
+\end_inset
+
+, we can turn these into estimates for class probabilities:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\hat{P}(Y=k|X=x) & = & \frac{exp(\hat{\delta}_{k}(x))}{\sum_{l=1}^{K}exp(\hat{\delta}_{l}(x))}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so classifying to the largest 
+\begin_inset Formula $\hat{\delta}_{k}(x)$
+\end_inset
+
+ amounts to classifying to the class for which 
+\begin_inset Formula $\hat{P}(Y=k|X=x)$
+\end_inset
+
+ is largest.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+\color blue
+When would we prefer LDA over QDA?
+\end_layout
+
+\begin_layout Standard
+The answer lies in bias-variance-trade-off.
+ When there are 
+\begin_inset Formula $p$
+\end_inset
+
+ predictors, then estimating a covariance matrix requires estimating 
+\begin_inset Formula $p(p+1)/2$
+\end_inset
+
+ parameters (the correlation entries in the correlation matrix).
+ QDA estimates a separate covariance matrix for each class, for a total
+ of 
+\begin_inset Formula $Kp(p+1)/2$
+\end_inset
+
+ parameters.
+ With 50 predictors this is some multiple of 1225, which is a lot of parameters.
+ By instead assum- ing that the K classes share a common covariance matrix,
+ the LDA model becomes linear in 
+\begin_inset Formula $x$
+\end_inset
+
+, which means there are 
+\begin_inset Formula $Kp$
+\end_inset
+
+ linear coefficients to estimate.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Consequently, LDA is a much less flexible classifier than QDA, and so has
+ substantially lower variance.
+ This can potentially lead to improved prediction performance.
+ But there is a trade-off: if LDA’s assumption that the K classes share
+ a common covariance matrix is badly off, then LDA can suffer from high
+ bias.
+ 
+\color blue
+Roughly speaking, LDA tends to be a better bet than QDA if there are relatively
+ few training observations and so reducing variance is crucial.
+ In contrast, QDA is recommended if the training set is very large, so that
+ the variance of the classifier is not a major concern
+\color inherit
+, or if the assumption of a common covariance matrix for the 
+\begin_inset Formula $K$
+\end_inset
+
+ classes is clearly untenable.
+\end_layout
+
+\begin_layout Subsubsection*
+Other forms of Discriminant Analysis
+\end_layout
+
+\begin_layout Standard
+Naive Bayes assumes features are independent in each class.
+ useful when 
+\begin_inset Formula $p$
+\end_inset
+
+ is large, and so multivariate methods like QDA and even LDA break down,
+ because there are simply too many parameters to estimate.
+\end_layout
+
+\begin_layout Itemize
+Gaussian naive Bayes assumes each 
+\begin_inset Formula $\sum_{k}$
+\end_inset
+
+ is diagonal: 
+\begin_inset Formula $\delta_{k}(x)\:\propto log\left[\pi_{k}\prod_{j=1}^{p}f_{kj}(x_{j})\right]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+can use for mixed feature vectors (qualitative and quantitative).
+ If 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+ is qualitative, replace 
+\begin_inset Formula $f_{kj}(x_{j})$
+\end_inset
+
+ with probability mass function over discrete categories.
+\end_layout
+
+\begin_layout Itemize
+This modeling approach is almost always wrong in approximating the underlying
+ true 
+\begin_inset Formula $f$
+\end_inset
+
+, but in the context of classification, we are not aiming to get the probability
+ exactly right.
+ All we care about is which probability is the highest.
+ So this technique allowed us to be more biased, but in returns we get a
+ huge reduction in the parameters we need to estimate.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-06 at 11.32.55 AM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Assessing model accuracy
+\end_layout
+
+\begin_layout Standard
+Assessing model accuracy in the context of classification is more complicated
+ than regression, where we just need to calculate 
+\begin_inset Formula $MSE$
+\end_inset
+
+.
+ In the context of classification, the underlying data set might be unbalanced,
+ this means that the absolute number of mis-classification error is meaningless.
+ If we have an extremely unbalanced data set, say 
+\begin_inset Formula $3.3\%$
+\end_inset
+
+ default class.
+ A naive classification that always predict non-default class would achieve
+ this low mis-classification error, but it does not mean it is good.
+ If we look beyond the misclassification rate, and look at specificity and
+ sensitivity, it has a very low sensitity (The % of true defaulter capture
+ is low, because we just blindly say everyone is non-defaulter).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As we have seen, LDA is trying to approximate the Bayes classifer, which
+ have the lowest total error rate out of all classifers.
+ That is, Bayes classifer will yield the smallest possible total number
+ of misclassified observations, irrespective of which class the error comes
+ from.
+ This means we should not just look at misclassification rate to assess
+ the quality of a classifer, we need to look at other metrics.
+ This is where the typical concept of thresholding, false positive, false
+ negative, and the ROC curve + AUC (Area under the curve) are useful.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I find the other book 
+\begin_inset Quotes eld
+\end_inset
+
+Applied Predictive Modeling
+\begin_inset Quotes erd
+\end_inset
+
+ does quite a nice job in discussing in more details how to deal with unbalanced
+ data set.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I also thought this chart is neat, because for the longest time I cannot
+ remember the definitions of false +, false -, sensitivity, specificity:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-05 at 4.51.15 PM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/Screen Shot 2014-04-05 at 4.47.08 PM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Lingering Questions:
+\end_layout
+
+\begin_layout Standard
+We talk about prospective & restrospective study (case-control campling)
+ in this segment.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Prospective Study: 
+\series default
+In prospective study, we might follow 1000 individuals, for 20 years, and
+ observe their risk factor, and eventually figure out if each one of them
+ have heart diseases.
+ This is a valid approach, but will take very long (and hence expensive).
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Retrospective Study
+\series default
+: Also known as case-control sampling, is a good way to get around the above
+ problem.
+ We simply pick out all the patients who have heart diseases, and sample
+ a control sample from people who don't have heart disease, and study them
+ together.
+ This is faster, and cheaper, and especially helpful when the positive class
+ that you care about is very rare (CTR problems).
+\end_layout
+
+\begin_layout Standard
+
+\color red
+This approach will give us accurate estimate for the coefficient, except
+ the intercept.
+ We can always correct for the estimate for the intercept.
+\color inherit
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Slide 16/40 of class notes
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Finally, if you have unbalanced data set, in what ratio should one sample?
+ Based on the diminishing return with respect to the reduction in the coefficien
+t variance, the suggestion is 5:1
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-06 at 10.40.35 AM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Chapter 5: Resampling Methods
+\end_layout
+
+\begin_layout Standard
+In this section, we will discuss resampling methods.
+ These methods refit a model of interest to samples formed from the training
+ set itself, in order to obtain additional information about the fitted
+ model.
+ For example, they provide estimates of test-set prediction error, and the
+ standard deviation and bias of our parameter estimates.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We will introduce two widely used methods here:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Cross Validation
+\series default
+: This technique aims to get a more reliable and accurate estimate of the
+ test error (
+\shape italic
+model assessment
+\shape default
+), or to select the appropriate level of flexibility (
+\shape italic
+model selection
+\shape default
+)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Boostrap Sampling
+\series default
+: This technique is used in several context, but most oftenly used to estimate
+ the standard deviation and bias of the parameter estimate
+\end_layout
+
+\begin_layout Standard
+In certain situations, we might use bootstrap to estimate CV error (e.g.
+ OOB error in random forest), but it is often easier to use CV directly.
+\end_layout
+
+\begin_layout Subsection*
+Cross Validation
+\end_layout
+
+\begin_layout Standard
+Before introducing what cross validation is, it's important to draw distinction
+ between the 
+\shape italic
+test error
+\shape default
+ and the 
+\shape italic
+training error.
+ 
+\shape default
+The test error is the average error that result from using a statistical
+ learning method to predict the response of an unseen, new observation.
+ In contrast, the training error can be easily calculated by applying the
+ statistical learning method to the observations used in training.
+ But the training error rate often is quite different from the test error,
+ and can dramatically underestimate the test error.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-11 at 9.35.16 AM.png
+	scale 30
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As a result, we need to be very careful when estimating the test error to
+ avoid false optimism.
+ Some methods may include:
+\end_layout
+
+\begin_layout Itemize
+Make a mathematical adjustment to the training error rate in order to better
+ estimate test error rate.
+ These include the Cp statistic, AIC, BIC, that take into account model
+ complexity (i.e.
+ bias-variance-trade-off).
+\end_layout
+
+\begin_layout Itemize
+In this chapter, we will talk about estimating test error using heldout
+ set.
+\end_layout
+
+\begin_layout Subsubsection*
+Validation-Set Approach
+\end_layout
+
+\begin_layout Standard
+The first approach is just validation - Take half of data for training,
+ and take the other half for validation.
+ We then train the model using the training set exclusively, and evaluate
+ the test error using the validation test set only.
+ The validation set approach is conceptually simple and easy to implement,
+ but it has two potential drawbacks:
+\end_layout
+
+\begin_layout Itemize
+As is shown in the right-hand panel below, the test error estimate is highly
+ variable, since the calculation depends on precisely which observations
+ are included in the training set and which observations are included in
+ the validation set.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Textbook pg.
+ 177
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+In the validation approach, only a subset of the observations—those that
+ are included in the training set rather than in the validation set—are
+ used to fit the model.
+ Since statistical methods tend to per- form worse when trained on fewer
+ observations, this suggests that the validation set error rate may tend
+ to overestimate the test error rate for the model fit on the entire data
+ set.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/Screen Shot 2014-04-11 at 9.40.35 AM.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+I think these two particular drawbacks is CLOSELY related to what Caltech
+ Learning from Data (Lecture 13 - validation, slide 16) is trying to convey,
+ except in the Caltech course makes the trade-off a little bit more explicit.
+ Basically, this approach sounds like the estimated test error using CV
+ will be biased (overestimated) (point 2), and the variance of the estimate
+ is going to be highly variable (point 1).
+\end_layout
+
+\begin_layout Subsubsection*
+K-Fold Cross Validation
+\end_layout
+
+\begin_layout Standard
+This is a widely used approach.
+ The idea is to randomly divide the data into 
+\begin_inset Formula $K$
+\end_inset
+
+ equal-sized parts.
+ We leave out part 
+\begin_inset Formula $k$
+\end_inset
+
+, fit the model to the other 
+\begin_inset Formula $K-1$
+\end_inset
+
+ parts (combined), and then obtain predictions for the left-out 
+\begin_inset Formula $k^{th}$
+\end_inset
+
+ part.
+ This is done in turn for each part 
+\begin_inset Formula $k=1,2,\dots K$
+\end_inset
+
+ and then the squared deviation of the prediction and the label are average
+ to get the test error estimate.
+ The details:
+\end_layout
+
+\begin_layout Itemize
+Let the 
+\begin_inset Formula $K$
+\end_inset
+
+ parts be 
+\begin_inset Formula $C_{1},C_{2},\dots C_{K}$
+\end_inset
+
+ where 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+ denotes the indices of the observations in part 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ There are 
+\begin_inset Formula $n_{k}$
+\end_inset
+
+ observations in part 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Compute 
+\begin_inset Formula \begin{eqnarray*}
+CV_{(K)} & = & \sum_{k=1}^{K}\frac{n_{k}}{n}MSE_{k}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+where 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $MSE_{k}=\frac{1}{n_{k}}\sum_{i\in C_{k}}\left(y_{i}-\hat{y}_{i}\right)^{2}$
+\end_inset
+
+ , and 
+\begin_inset Formula $\hat{y}_{i}$
+\end_inset
+
+ is the fit for observation 
+\begin_inset Formula $i$
+\end_inset
+
+, obtained from the data with part 
+\begin_inset Formula $k$
+\end_inset
+
+ removed.
+ Setting 
+\begin_inset Formula $K=n$
+\end_inset
+
+ yields 
+\begin_inset Formula $n$
+\end_inset
+
+-fold or leave-one-out cross validation (LOOCV).
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection*
+A nice special case (LOOCV)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Ignoring the math details since it's just a special case of 
+\begin_inset Formula $K$
+\end_inset
+
+-fold CV
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now, the LOOCV approach could be computationally expensive, since we have
+ to refit the model 
+\begin_inset Formula $O(\text{number of samples})$
+\end_inset
+
+ times.
+ Luckily, in the case of linear regression and polynomial regression, there
+ is a convenient formula we can use to calculate LOOCV in one fit (using
+ the original fit from the whole data set):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+CV_{(n)} & = & \frac{1}{n}\sum_{i=1}^{n}\left(\frac{y_{i}-\hat{y}_{i}}{1-h_{i}}\right)^{2}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\hat{y}_{i}$
+\end_inset
+
+ is the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ fitted value from the original least squares fit, and 
+\begin_inset Formula $h_{i}$
+\end_inset
+
+ is the leverage defined in earlier chapter.
+ This makes sense, since points with high levarge, when removed, would have
+ a huge impact on fit, and so the error on that point should be inflated.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Leave-one-out cross validation is closely related to the validation approach
+ above, but it attempts to address that method's drawback:
+\end_layout
+
+\begin_layout Itemize
+Like the validation set approach, LOOCV involves in splitting the data into
+ 2 parts.
+ However, instead of creating two subsets of comparable size, the training
+ sets are much larger (
+\begin_inset Formula $n-1$
+\end_inset
+
+ training observations in each 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+).
+ The bias is likely going to be smaller, because we used up 
+\begin_inset Formula $\frac{n-1}{n}$
+\end_inset
+
+ fraction of the whole data set instead of only 
+\begin_inset Formula $\frac{1}{2}$
+\end_inset
+
+.
+ Consequently, the LOOCV approach tend not to overestimate the test error
+ rate as much as validation approach.
+\end_layout
+
+\begin_layout Itemize
+In contrast to the validation approach which will yield different results
+ when applied repeatedly due to randomness in the training/validation split,
+ performing LOOCV multiple times will always yield the same results: there
+ is no randomness in the training/validation splits (for that particular
+ data set).
+\end_layout
+
+\begin_layout Itemize
+Typically, this approach doesn't shake up the data enough.
+ The estimates from each fold are highly correlated and hence their average
+ can have high variance!
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+Here, although the bias is better, the variance is still high (that is,
+ from training set to training set).
+ Because 
+\begin_inset Formula $Var(C_{(K)})=Var(\frac{1}{n}\sum_{i=1}^{n}(y_{i}-\hat{y}_{i})^{2})$
+\end_inset
+
+, and since the particular training data for each 
+\begin_inset Formula $k$
+\end_inset
+
+ overlap with each other substaintially, the covariance terms would inflate
+ 
+\begin_inset Formula $Var(CV_{(K)})$
+\end_inset
+
+, which means that we will still have a wide CI, this implies that we will
+ still be uncertain about the actual test error, since our overall goal
+ is to pin that down.
+\end_layout
+
+\begin_layout Subsubsection*
+Back to 
+\begin_inset Formula $K$
+\end_inset
+
+-fold Cross Validation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $K$
+\end_inset
+
+-fold Cross Validation is a common and attractive alternative to LOOCV,
+ because of its computational efficiency.
+ However, the advantage of 
+\begin_inset Formula $K$
+\end_inset
+
+-fold CV is not only computational, there are other advantages involving
+ bias-variance trade-off.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When we divided up the data by 10-fold, we are still using 
+\begin_inset Formula $\sim4/5$
+\end_inset
+
+ or 
+\begin_inset Formula $9/10$
+\end_inset
+
+ of the data for training, so the bias is likely not to be overestimated.
+ Also, when we compute the variance of 
+\begin_inset Formula $CV$
+\end_inset
+
+, the data are shaken up enough that the covariance term wouldn't play a
+ big role, so the variability of the estimate wouldn't as high compare to
+ validation approach of LOOCV.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When we perform cross-validation, our goal might be to determine how well
+ a given statistical learning procedure can be expected to perform on independen
+t data; in this case, the actual estimate of the test MSE is of interest.
+ But at other times we are interested only in the location of the minimum
+ point in the estimated test MSE curve.
+ This is because we might be performing cross-validation on a number of
+ statistical learning methods, or on a single method using different levels
+ of flexibility, in order to identify the method that results in the lowest
+ test error.
+ In those cases, we might be off in terms of MSE, but 
+\begin_inset Formula $K$
+\end_inset
+
+-fold CV can usually do a very good job in finding the minimum.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-13 at 10.14.15 AM.png
+	scale 35
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Two important points from this figure:
+\end_layout
+
+\begin_layout Itemize
+LOOCV has no variability on that data set.
+ All the data point is used for CV, so there is only 1 curve
+\end_layout
+
+\begin_layout Itemize
+The variability for 10-fold CV test error is much smaller compared to the
+ validation approach
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Bias-Variance-Trade-off in 
+\begin_inset Formula $K$
+\end_inset
+
+-fold CV
+\end_layout
+
+\begin_layout Standard
+To emphasize again, we mentioned that 
+\begin_inset Formula $k$
+\end_inset
+
+-fold CV with 
+\begin_inset Formula $k<n$
+\end_inset
+
+ has a computational advantage to LOOCV.
+ But putting computational issues aside, a less obvious but potentially
+ more important advantage of 
+\begin_inset Formula $k$
+\end_inset
+
+-fold CV is that it often gives more accurate estimates of the test error
+ rate than does LOOCV.
+ This has to do with a bias-variance trade-off.
+\end_layout
+
+\begin_layout Subsubsection*
+Bias
+\end_layout
+
+\begin_layout Itemize
+The validation approach can lead to overestimates of the test error rate,
+ since it only used half of the observations for training, compared to using
+ the whole data set.
+\end_layout
+
+\begin_layout Itemize
+In the case of LOOCV, we used 
+\begin_inset Formula $n-1$
+\end_inset
+
+ for training, which is almost as many as the number of observations in
+ the full data set.
+\end_layout
+
+\begin_layout Itemize
+With 
+\begin_inset Formula $k$
+\end_inset
+
+-fold CV where 
+\begin_inset Formula $k=5,10$
+\end_inset
+
+ will, this leads to intermediate level of bias, since each training set
+ contain 
+\begin_inset Formula $\frac{K-1}{K}\times n$
+\end_inset
+
+ observations - fewer than LOOCV, but substantially more than in the validation
+ set.
+\end_layout
+
+\begin_layout Standard
+Therefore, from the perspective of bias reduction, it is clera that LOOCV
+ is to be preferred to 
+\begin_inset Formula $k$
+\end_inset
+
+-fold CV.
+\end_layout
+
+\begin_layout Subsubsection*
+Variance
+\end_layout
+
+\begin_layout Standard
+However, we know that bias is not hte only source for concern in an estimating
+ procedure; we must also consider the procedure's variance.
+\end_layout
+
+\begin_layout Itemize
+The validation approach has high variance in its procedure, because the
+ test error estimate depends on the random split of which observations is
+ in training, and which are in test set.
+\end_layout
+
+\begin_layout Itemize
+It turns out that LOOCv has higher variance than does 
+\begin_inset Formula $k$
+\end_inset
+
+-fold CV with 
+\begin_inset Formula $k<n$
+\end_inset
+
+.
+ Why? Although we are effectively averaging the prediction of 
+\begin_inset Formula $n$
+\end_inset
+
+ fitted models (averaging reduce variance), each of the model trained are
+ using almost an identical set of observations.
+ Therefore, the ouput are highly (postively) correlated with each other.
+ This can lead to higher variance to the procedure due to covariance terms.
+\end_layout
+
+\begin_layout Itemize
+In the case of 
+\begin_inset Formula $k$
+\end_inset
+
+-fold CV, we are averaging the outputs of 
+\begin_inset Formula $k$
+\end_inset
+
+ fitted models that are somewhat less correlated with each other, since
+ the overlap between training sets in each model is smaller.
+\end_layout
+
+\begin_layout Standard
+To summarize, there is a bias-variance trade-off associated with the choice
+ of 
+\begin_inset Formula $k$
+\end_inset
+
+ in 
+\begin_inset Formula $k$
+\end_inset
+
+-fold cross-validation.
+ Choosing 
+\begin_inset Formula $k=5$
+\end_inset
+
+ or 
+\begin_inset Formula $10$
+\end_inset
+
+ empirically yield testg error rate estimates that suffer neither from excessive
+ly high bias nor from very high variance.
+\end_layout
+
+\begin_layout Subsection*
+\begin_inset Formula $K$
+\end_inset
+
+-fold Cross Validation for Classification
+\end_layout
+
+\begin_layout Standard
+We divide the data into 
+\begin_inset Formula $K$
+\end_inset
+
+ rouhgly equal-sized parts 
+\begin_inset Formula $C_{1},C_{2},\dots C_{K}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+ denotes the indices of the observations in part 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ There are 
+\begin_inset Formula $n_{k}$
+\end_inset
+
+ observations in part 
+\begin_inset Formula $k$
+\end_inset
+
+: If 
+\begin_inset Formula $n$
+\end_inset
+
+ is a multiple of 
+\begin_inset Formula $K$
+\end_inset
+
+, then 
+\begin_inset Formula $n_{k}=n/K$
+\end_inset
+
+.
+ Compute
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+CV_{(K)} & = & \sum_{k=1}^{K}\frac{n_{k}}{n}Err_{k}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $Err_{k}=\frac{1}{n_{k}}\sum_{i\in C_{k}}I\left(y_{i}\neq\hat{y}_{i}\right)$
+\end_inset
+
+.
+ The estimated standard deviation of 
+\begin_inset Formula $CV_{K}$
+\end_inset
+
+ is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad$
+\end_inset
+
+
+\begin_inset Formula $\widehat{SE}\left(CV_{(K)}\right)=\sqrt{\frac{1}{K-1}\sum_{k=1}^{K}\left(Err_{k}-\overline{ERR_{k}}\right)^{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Right or Wrong Way of Doing Cross Validation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+The general lesson here -- We can use the labels to do feature selection,
+ or use it to construct a separate classfier to form a new predictor.
+ There is nothing wrong with these approaches, as long as the feature selection
+ that use labels & construction of the classifier are only done using the
+ labels from the training set AND the labels from the test set are not being
+ used in this procedure before prediction!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+(Feature selection)
+\series default
+ How to assess whether pre-filtering out predictors (this is in some sense
+ feature selection) is an effective procedure for prediction -- See slide
+ 17 - 21 of class notes.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+(Pre-validation)
+\series default
+ How to construct a new predictor based on training labels, and use that
+ predictor for prediction, compared with some other benchmark predictors
+ -- See slide 38 - 43 of class notes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+The Bootstrap
+\end_layout
+
+\begin_layout Standard
+The bootstrap is a flexible and powerful statistical tool that can be used
+ to quantify the uncertainty associated with a given estimator or statistical
+ learning method.
+ For example, it can provide an estimate of the standard error of a coefficient,
+ or a confidence interval for that coefficient.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In an idealized world, if we would like to quantify the uncertainty of an
+ estimator or statistical learning method, we would just get a huge number
+ of data replica from the mother population, calculate the estimate, and
+ see the variance/spread in order to understand the uncertainty.
+ However, in real world, we often do not have access to the population,
+ the boostrap approach allows us to use a computer to mimic the process
+ of obtaining new data sets, so that we can estimate the variability of
+ our estimate without generating additional samples.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rather than repeatedly obtaining independent data sets from the population,
+ we instead obtain dstinct data sets by repeatedly sampling observations
+ from the original data set 
+\series bold
+with replacement
+\series default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-13 at 11.21.32 AM.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Sampling bootstrap samples can be tricky
+\end_layout
+
+\begin_layout Standard
+When we just have samples that are 
+\begin_inset Formula $i.i.d$
+\end_inset
+
+, sampling bootstrap samples are simple -- all we need to do is to sample
+ from this data set with replacement.
+ However, in cases where the data points are correlated with each other
+ (say a time series), one needs to be more careful in sampling:
+\end_layout
+
+\begin_layout Itemize
+One technique is called block sampling, where we create blocks of consecutive
+ observations, and sample those with replacements.
+ Then we paste together sampled blocks to obtain a bootstrap dataset.
+ Each block are assume to be uncorrelated with each other.
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+I am not entirely sure why we need to have 
+\begin_inset Formula $i.i.d$
+\end_inset
+
+ samples for bootstraps -- Maybe it has to do with convergence (proof from
+ STAT 200B, Berkeley?).
+ I think another issue with non 
+\begin_inset Formula $i.i.d$
+\end_inset
+
+ samples is that we would ended up with a sampling distribution that does
+ not represent the true underlying population (e.g.
+ only a small snapshot of the whole data sets), and the boostrap procedure,
+ in that case, would be operating on samples that are all biased.
+\end_layout
+
+\begin_layout Subsubsection*
+Obtaining Confidence Interval Using Bootstrap
+\end_layout
+
+\begin_layout Standard
+The main utility of bootstrapping is to obtain standard errors of an estimate.
+ It also give us a convenient way to get the approximate confidence interval
+ (based on the sampling distribution).
+ This method is called "Bootstrap percentile confidence interval", and is
+ one of the simplest method to extract CI for the estimate using bootstrap
+ samples.
+ Remember, the interpretation for the Confidence Interval is still the same
+ (frequentist):
+\end_layout
+
+\begin_layout Itemize
+If we repeat the procedure many times, then about 90% of the time the random
+ interval would contain the true parameter.
+ However, for this particular interval, whether it contains the true parameter
+ or not, we do not know.
+\end_layout
+
+\begin_layout Subsubsection*
+Using Bootstrap to estimate prediction error?
+\end_layout
+
+\begin_layout Standard
+In cross-validation, each of the 
+\begin_inset Formula $K$
+\end_inset
+
+ validation folds is distinct from the other 
+\begin_inset Formula $K-1$
+\end_inset
+
+ folds used for training: there is no overlap.
+ This is crucial for its success.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+To estimate prediction error using the bootstrap, we could think about using
+ each bootstrap dataset as our training sample, and the original sample
+ as our validation smaple.
+ But each bootstrap sample has significant overlap with the original data.
+ About 
+\begin_inset Formula $2/3$
+\end_inset
+
+ of the original data points appear in each bootstrap sample.
+ This will cause the bootstrap to seriously underestimate the true prediction
+ error.
+\end_layout
+
+\begin_layout Standard
+There are fixes -- by only using predictions for those observations that
+ did not (by chance) occur in the current bootstrap sample (this is what
+ random forest and out-of-bag estimate is), but the method gets complicated,
+ and in the end, CV provides a simpler, more attractive approach for estimating
+ prediction error.
+\end_layout
+
+\begin_layout Itemize
+The other way around -- with original sample = training sample, bootstrap
+ dataset = validation is even worse! This is because all the test data are
+ in the training set, and the learning procedure have already seen every
+ observations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Lingering Questions
+\end_layout
+
+\begin_layout Standard
+I think by now, I have a pretty good grasp of the bias-variance trade-off
+ for cross validation (i.e.
+ whether to use validation approach, LOOCV, or 
+\begin_inset Formula $k$
+\end_inset
+
+-fold CV).
+ I will introduce some of the explanation and trend of thoughts from 
+\begin_inset Quotes eld
+\end_inset
+
+Learning from Data
+\begin_inset Quotes erd
+\end_inset
+
+ course (Caltech), specifically from lecture 13 (Validation) to reinforce
+ the insight we learned here.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The overall goal of validation is the following formula:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\underbrace{E_{\text{out}}\left(h\right)}_{\text{validation estimate this quantity}} & = & E_{\text{in}}\left(h\right)+\text{overfit penalty}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What we want, is to not only have a low 
+\begin_inset Formula $E_{\text{out}}$
+\end_inset
+
+, but also have a very reliable estimate of 
+\begin_inset Formula $E_{\text{out}}$
+\end_inset
+
+ so we know how well exactly we are doing!
+\end_layout
+
+\begin_layout Subsubsection*
+Analyzing the estimate
+\end_layout
+
+\begin_layout Standard
+One a single out-of-sample 
+\begin_inset Formula $\left(\mathbf{x},y\right)$
+\end_inset
+
+, the error is 
+\begin_inset Formula $e\left(h\left(\mathbf{x}\right),y\right)$
+\end_inset
+
+.
+ When we have regression, we typically use the squared error 
+\begin_inset Formula $\left(h\left(\mathbf{x}\right)-y\right)^{2}$
+\end_inset
+
+, and in the context of classification, we use the binary error 
+\begin_inset Formula $\left[h\left(\mathbf{x}\right)\neq y\right]$
+\end_inset
+
+.
+ More importantly, when we take the expected value (over 
+\begin_inset Formula $X,Y$
+\end_inset
+
+?), we have:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+E\left[e\left(h\left(\mathbf{x}\right),y\right)\right] & = & E_{out}\left(h\right)\\
+Var\left[e\left(h\left(\mathbf{x}\right),y\right)\right] & = & \sigma^{2}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore, it's good news that the expected value of this error is an unbiased
+ estimate of 
+\begin_inset Formula $E_{out}$
+\end_inset
+
+.
+ However, this is not enough, we need to make sure that the variance of
+ this estimate is not highly variable.
+ This is where we move from a single point to a set.
+ On a validation set 
+\begin_inset Formula $(x_{1},y_{1}),\cdots(x_{K},y_{K})$
+\end_inset
+
+, the error is 
+\begin_inset Formula $E_{val}(h)=\frac{1}{K}\sum_{k=1}^{K}e(h(x_{k}),y_{,k})$
+\end_inset
+
+, which gives us 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\mathbb{E}\left[E_{val}(h)\right] & = & \frac{1}{K}\sum_{k=1}^{K}\mathbb{E}\left[e(h(x_{k}),y_{k})\right]=E_{out}(h)\\
+Var\left[E_{val}(h)\right] & = & \frac{1}{K^{2}}\sum_{k=1}^{K}Var\left[e(h(x_{k}),y_{k})\right]=\frac{\sigma^{2}}{K}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This means, under a validation set, we use 
+\begin_inset Formula $E_{val}(h)$
+\end_inset
+
+ as an estimate for 
+\begin_inset Formula $E_{out}(h)$
+\end_inset
+
+, and it is an unbiased estimator, where the variability of the estimate
+ is determined by the size of the validation set 
+\begin_inset Formula $K$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+E_{val}(h) & = & E_{out}(h)+O\left(\frac{1}{\sqrt{K}}\right)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To summarize, the more samples we have in the validation set, the more accurate
+ our estimate 
+\begin_inset Formula $E_{val}$
+\end_inset
+
+ of 
+\begin_inset Formula $E_{out}$
+\end_inset
+
+ would be!
+\end_layout
+
+\begin_layout Subsubsection*
+But there is a cost
+\end_layout
+
+\begin_layout Standard
+It's important to remember that we have limited data.
+ The full data set has 
+\begin_inset Formula $N$
+\end_inset
+
+ data points, and taking more points for validation means that we have less
+ points for training 
+\begin_inset Formula $(N-K)$
+\end_inset
+
+.
+ 
+\begin_inset Formula $K$
+\end_inset
+
+ is taken out of 
+\begin_inset Formula $N$
+\end_inset
+
+! This means that there is a cost associated with having a large validation
+ set -- Remember from the learning curve, when the number of example is
+ small, then the inherent 
+\begin_inset Formula $E_{out}$
+\end_inset
+
+ is going to be high.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-13 at 2.50.25 PM.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We do not want to be an extreme situation where we have a large validation
+ set, and only have 1 left for traning.
+ In such case, we will be able to deliver a very good estimate of 
+\begin_inset Formula $E_{out}$
+\end_inset
+
+, but the 
+\begin_inset Formula $E_{out}$
+\end_inset
+
+ itself is going to be a terrible one.
+ That is not what we want! We want both low 
+\begin_inset Formula $E_{out}$
+\end_inset
+
+ and have its estimate to be reliable AT THE SAME TIME.
+\end_layout
+
+\begin_layout Subsubsection*
+The dilemma about 
+\begin_inset Formula $K$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The following chain of reasoning really pin down the bias-variance trade-off
+ for Cross Validation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-13 at 2.59.01 PM.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+We want 
+\begin_inset Formula $K$
+\end_inset
+
+ to be small, because we want to make sure 
+\begin_inset Formula $g^{-}$
+\end_inset
+
+ is not too far away from 
+\begin_inset Formula $g$
+\end_inset
+
+, so that 
+\begin_inset Formula $E_{out}(g^{-})\approx E_{out}(g)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+We want 
+\begin_inset Formula $K$
+\end_inset
+
+ to be large, because we want the estimate of 
+\begin_inset Formula $E_{out}(g^{-})$
+\end_inset
+
+, which is 
+\begin_inset Formula $E_{val}(g^{-})$
+\end_inset
+
+ to be a reliable estimate, so 
+\begin_inset Formula $E_{out}(g^{-})\approx E_{val}(g)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The overall goal, is to make 
+\begin_inset Formula $E_{out}(g)$
+\end_inset
+
+ as small as possible, but using 
+\begin_inset Formula $E_{val}(g^{-})$
+\end_inset
+
+ as our guiding principles to make the various learning choices.
+ The trade-off is then described quite nicely under the 
+\begin_inset Quotes eld
+\end_inset
+
+Bias-Variance Trade-off of 
+\begin_inset Formula $K$
+\end_inset
+
+-fold CV
+\begin_inset Quotes erd
+\end_inset
+
+ section.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Chapter 6: Linear Model Selection and Regularization
+\end_layout
+
+\begin_layout Standard
+Recall the linear model
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+Y & = & \beta_{0}+\beta_{1}X_{1}+\dots+\beta_{p}X_{p}+\epsilon\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the lectures that follow, we consider some approaches for extedning the
+ linear model framework.
+ In the lectures covering Chapter 7, we generalize the linear model in order
+ to accommodate non-linear, but still additive, relationships.
+ In Chapter 8, we consider even more general non-linear models.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Why might we want to use another fitting procedure instead of least squares?
+ As we will see, alternative fitting procedures can yield better 
+\shape italic
+prediction accuracy
+\shape default
+ and 
+\shape italic
+model interpretability
+\series bold
+\shape default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\color blue
+Prediction Accuracy
+\series default
+\shape default
+\color inherit
+: Provided that the true relationship is linear, then the least square procedure
+ will have low bias.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+If 
+\begin_inset Formula $n\gg p$
+\end_inset
+
+, that is, if there are way more observations than the number of predictors,
+ we would also have low variance
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $p$
+\end_inset
+
+ is comparable to 
+\begin_inset Formula $n$
+\end_inset
+
+, then there can be a lot of variability in the least square fit, resulting
+ in overfitting 
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $p>n$
+\end_inset
+
+, then there is no longer a unique least squares coefficient estimate: the
+ variance is infinite
+\end_layout
+
+\begin_layout Standard
+By constraining the coefficient, we will be able to control the variance
+ part of the fitting procedure.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\color blue
+Model Interpretability
+\series default
+\shape default
+\color inherit
+: It is often the case that some or many of the variables used in a multiple
+ regression are in fact not associated with the response.
+ Including irrelevant variables leads to unnecessary complexity.
+ By removing these variables, that is, by setting some of the coefficients
+ to 
+\begin_inset Formula $0$
+\end_inset
+
+, we can obtain a model that is more easily interpreted.
+ We will consider feature selection or variable selection AND shrinkage
+ methods.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Remember 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ method shrink coefficients towards 0, which effectively is doing feature
+ selection.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are many alternatives, in this chapter, we will discuss three importnat
+ classes of methods:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\color magenta
+Subset selection
+\series default
+\shape default
+\color inherit
+: This approach involves identifying a subset of the 
+\begin_inset Formula $p$
+\end_inset
+
+ predictors that we believe to be related to the response.
+ We then fit a model using least squares on the reduced set of variables.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\color magenta
+Shrinkage
+\series default
+\shape default
+\color inherit
+: This approach involves fitting a model involving all 
+\begin_inset Formula $p$
+\end_inset
+
+ predictors.
+ However, the estimated coefficients are shrunken towards zero relative
+ to the least squares estimates.
+ This shrinkage (also known as regularization) has the effect of reducing
+ variance.
+ Depending on what type of shrinkage is performed, some of the coefficients
+ may be estimated to be exactly zero.
+ Hence, shrinkage methods can also perform variable selection.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\shape italic
+\color magenta
+Dimension reduction
+\series default
+\shape default
+\color inherit
+: This approach involves projecting the 
+\begin_inset Formula $p$
+\end_inset
+
+ predictors into a 
+\begin_inset Formula $M$
+\end_inset
+
+-dimensional subspace, where 
+\begin_inset Formula $M<p$
+\end_inset
+
+.
+ This is acheived by computing 
+\begin_inset Formula $M$
+\end_inset
+
+ different linear combinations, or projections, of the original predictors.
+ Then these 
+\begin_inset Formula $M$
+\end_inset
+
+ projections are used as predictors to fit the linear regression model by
+ least squares.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Subset Selection
+\end_layout
+
+\begin_layout Subsubsection*
+Best subset selection
+\end_layout
+
+\begin_layout Standard
+This can be considered as a brute force approach, where we consider all
+ 
+\begin_inset Formula $2^{p}$
+\end_inset
+
+ possible models 
+\begin_inset Formula $\left(\binom{p}{1}+\binom{n}{2}+\dots+\binom{p}{p}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-19 at 3.18.49 PM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The important thing to notice here is that the process is broken down to
+ two parts (and the same pattern is true for stepwise regression as well):
+\end_layout
+
+\begin_layout Itemize
+Part 1: For each choice of 
+\begin_inset Formula $k$
+\end_inset
+
+, we apply the same procedure, we pick the BEST model in terms of smallest
+ RSS / largest 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+.
+ 
+\color red
+My understanding here is that we are going after how many predictors we
+ should use, not what is the exact set of predictors, given a fixed size
+ 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ Therefore, as long as we standardize the fitting procedure (in this case,
+ we choose the best model, based on RSS/
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ for each size), then it's a fair comparison.
+\end_layout
+
+\begin_layout Itemize
+Part 2: Once we have pin down the representative for each size 
+\begin_inset Formula $k$
+\end_inset
+
+, we select a single best model from among 
+\begin_inset Formula $\mathcal{M}_{0},\dots\mathcal{M}_{p}$
+\end_inset
+
+ not based on RSS, but based on some estimate of the test error.
+ After all, we are going after the test error, not training error.
+ using RSS & 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ would have been inappropriate because they monotonically decrease as we
+ increase the number of predictors.
+ And since training error almost always underestimate test error when we
+ have a large number of predictors, it's important to use metrics such as
+ 
+\begin_inset Formula $C_{p}$
+\end_inset
+
+, AIC, BIC, or adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+, those that do a much better job at estimating test error, to be the judge.
+\end_layout
+
+\begin_layout Standard
+Although we have presetned best subset selection here for least squares
+ regression, the same ideas apply to other type of models, such as logistic
+ regression.
+ However, instead of using RSS, we use deviance -- negative two times the
+ maximized log-likelihood for a broader class of models.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For computational reasons, best subset selection cannot be applied with
+ very large 
+\begin_inset Formula $p$
+\end_inset
+
+.
+ 
+\color red
+Best subset selection may also suffer from statistical problems when 
+\begin_inset Formula $p$
+\end_inset
+
+ is large.
+ The larger the search space, the higher the chance of finding models that
+ look good on the training data, even though they might not have any predictive
+ power on future data.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color red
+I don't understand, wouldn't we solve this problem if we always faithfully
+ use test error instead?
+\end_layout
+
+\end_inset
+
+
+\color inherit
+ Thus an enormous search space can lead to overfitting and high variance
+ of the coefficient estimates.
+ For both of these reasons, stepwise methods, which explore a far more restricte
+d set of models, are attractive alternatives to best subset selection.
+\end_layout
+
+\begin_layout Subsubsection*
+Forward Stepwise Regression
+\end_layout
+
+\begin_layout Standard
+Instead of searching through 
+\begin_inset Formula $2^{p}$
+\end_inset
+
+ models, forward selection only search through 
+\begin_inset Formula $\sum_{k=0}^{p-1}(p-k)=1+p(p+1)/2\sim O\left(\left(p^{2}\right)\right)$
+\end_inset
+
+ instead of 
+\begin_inset Formula $O\left(2^{p}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-19 at 3.42.09 PM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Again, if we decompose the algorithm into two parts, the idea becomes apparent:
+\end_layout
+
+\begin_layout Itemize
+Part I: Again, here we are trying to construct, for each size 
+\begin_inset Formula $k$
+\end_inset
+
+, the best model.
+ However, instead of what subset selection did, we choose the models (or
+ best models for each size 
+\begin_inset Formula $k$
+\end_inset
+
+) in a nested fashion.
+ The searching is different, but the end result is the same, we pick the
+ best model for each of the size 
+\begin_inset Formula $k$
+\end_inset
+
+! That's what's important
+\end_layout
+
+\begin_layout Itemize
+Part II: Again, once we have our 
+\begin_inset Formula $\mathcal{M}_{0}\dots\mathcal{M}_{p}$
+\end_inset
+
+, we use estimates of test error to compare them among each others.
+\end_layout
+
+\begin_layout Standard
+There is no guarantee that stepwise regression's selection of 
+\begin_inset Formula $\mathcal{M}_{k}$
+\end_inset
+
+ would be the same as best subset's selection of 
+\begin_inset Formula $\mathcal{M}_{k}$
+\end_inset
+
+.
+ This could happen if 
+\begin_inset Formula $\mathcal{M}_{k}$
+\end_inset
+
+ from best subset selection contains variable other than those in 
+\begin_inset Formula $\mathcal{M}_{k-1}$
+\end_inset
+
+ from stepwise regression + the new variable introduced in step 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ (See slide 12 as an example; Also see the plot that Rob plot).
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Rob's comment: f there is no correlation between the predictors, it can
+ be shown that best subset selection and stepwise selection would yield
+ the same sequence of models.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Backward Stepwise Regression
+\end_layout
+
+\begin_layout Standard
+The backward stepwise regression is very similar to forward stepwise procedure,
+ but it still with a model that uses all the variables.
+ It has the same computational advantage over best subset selection, but
+ it also has no guarantee that it will be able to find the same 
+\begin_inset Formula $\mathcal{M}_{k}$
+\end_inset
+
+ as best subset regression.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-19 at 3.59.17 PM.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Like forward stepwise selection, the backward selection approach searches
+ through only 
+\begin_inset Formula $1+p(p+1)/2$
+\end_inset
+
+ models, and so can be applied in settings where 
+\begin_inset Formula $p$
+\end_inset
+
+ is too large.
+ Also like forward stepwise selection, it performs a guided search over
+ model space, and so effectively considers substaintially more than 
+\begin_inset Formula $1+p(p+1)/2$
+\end_inset
+
+ models.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There is one major drawback of backward selection that is not present at
+ forward stepwise method.
+ Since we need to start from the full model in backward stepwise method,
+ we must need 
+\begin_inset Formula $n>p$
+\end_inset
+
+, we cannot fit the full model otherwise.
+ On the other hand, we can use the forward stepwise procedure even when
+ 
+\begin_inset Formula $p>n$
+\end_inset
+
+, since we didn't use the full model to start with.
+ Therefore, the only subset selection method that is feasible when 
+\begin_inset Formula $p$
+\end_inset
+
+ large is forward stepwise selection.
+\end_layout
+
+\begin_layout Subsection*
+Choosing the Optimal Model
+\end_layout
+
+\begin_layout Standard
+As we discussed in the earlier section, the part II of the subset selection
+ algorithm is important -- by picking the right estimate of test error,
+ we will be able to determine which size 
+\begin_inset Formula $k$
+\end_inset
+
+ is the most competitive in terms of test error.
+ As we have alluded earlier, the training error can be a poor estimate of
+ the test error.
+ Therefore, RSS and 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ are not suitable for selecting the best model among a collection of models
+ with different numbers of predictors.
+ There are two common approach to find good estimates of test error:
+\end_layout
+
+\begin_layout Itemize
+We can indirectly estimate test error by making a mathematical adjustment
+ to the training error to account for the bias-variance trade-off.
+\end_layout
+
+\begin_layout Itemize
+We can directly estimate the test error, using either validation approach
+ of cross validation approach, as discussed in Chapter 5.
+\end_layout
+
+\begin_layout Subsubsection*
+Make mathematical adjustment to training errors
+\end_layout
+
+\begin_layout Paragraph*
+
+\bar under
+\begin_inset Formula $C_{p}$
+\end_inset
+
+- mallow's statistic:
+\end_layout
+
+\begin_layout Standard
+For a fitted least squares modle containing 
+\begin_inset Formula $d$
+\end_inset
+
+ predictors, the 
+\begin_inset Formula $C_{p}$
+\end_inset
+
+ estimate of test MSE is computed using the equation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+C_{p} & = & \frac{1}{n}\left(RSS+2d\hat{\sigma^{2}}\right)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\hat{\sigma^{2}}$
+\end_inset
+
+ is an estimate of the variance of the error 
+\begin_inset Formula $\epsilon$
+\end_inset
+
+ associated with each response measurement.
+ Essentially, the 
+\begin_inset Formula $C_{p}$
+\end_inset
+
+ statistic takes into account model complexity and the variance introduced
+ as we increase the number of variables introduced in the model.
+ Here, we choose the model that gives us the lowest 
+\begin_inset Formula $C_{p}$
+\end_inset
+
+ -- low 
+\begin_inset Formula $RSS$
+\end_inset
+
+ and low penalty on complexity.
+\end_layout
+
+\begin_layout Paragraph*
+
+\bar under
+AIC:
+\end_layout
+
+\begin_layout Standard
+The AIC criterion is defined for a large class of models fit by maximum
+ likelihood.
+ In the case of the model (6.1) with Gaussian errors, maximum likelihood
+ and least squares are the same thing.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+AIC & = & \frac{1}{n\hat{\sigma^{2}}}\left(RSS+2d\hat{\sigma^{2}}\right)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Again, the lower the AIC, the better the model test error performance.
+\end_layout
+
+\begin_layout Paragraph*
+
+\bar under
+BIC:
+\end_layout
+
+\begin_layout Standard
+Also very similar to the above two statistics, but it is more aggresive
+ in penalizing models with bigger complexity.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+BIC & = & \frac{1}{n}\left(RSS+log(n)d\hat{\sigma^{2}}\right)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is because 
+\begin_inset Formula $log(n)>2$
+\end_inset
+
+ for 
+\begin_inset Formula $n>7$
+\end_inset
+
+.
+ The basic idea is the same though, it's trying to balance fitting with
+ complexity.
+\end_layout
+
+\begin_layout Paragraph*
+
+\bar under
+Adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+This one is slightly different from the above three, but it's very popular
+ among non-statisticians who know 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\text{Adjusted \ensuremath{R^{2}}} & = & 1-\frac{RSS/\left(n-d-1\right)}{TSS/\left(n-1\right)}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The intuition behind the adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is that once all of the correct variables have been included in the model,
+ adding additional noise variables will lead to only a very small decrease
+ in RSS.
+ Since adding noise variables leads to an increase in d, such variables
+ will lead to an increase in 
+\begin_inset Formula $RSS/\left(n-d-1\right)$
+\end_inset
+
+.
+ and consequently a decrease in the adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+.
+ Therefore, in theory, the model with the largest adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ will have only correct variables and no noise variables.
+ Unlike the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ statistic, the adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ statistic pays a price for the inclusion of unnecessary variables in the
+ model.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+One important thing is that 
+\begin_inset Formula $C_{p}$
+\end_inset
+
+, BIC, and Adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ cannot be generalized to a broader class of models, since the concept of
+ RSS do not exist.
+ 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Here we have presented the formulas for AIC, BIC, and 
+\begin_inset Formula $C_{p}$
+\end_inset
+
+ in the case of a linear model fit using least squares; however, these quantitie
+s can also be defined for more general types of models, and they have good
+ theoretical justification based on study of asymtoptics.
+ Adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+, on the other hand, has less theoretical support.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Validation Approach of Cross Validation
+\end_layout
+
+\begin_layout Standard
+Each of the PART I, procedures in subset selections methods returns a sequence
+ of model 
+\begin_inset Formula $\mathcal{M}_{k}$
+\end_inset
+
+ indexed by model size 
+\begin_inset Formula $k=0,1,2,\dots$
+\end_inset
+
+ Our job here is to select 
+\begin_inset Formula $\hat{k}$
+\end_inset
+
+.
+ Once selected, we will return model 
+\begin_inset Formula $\mathcal{M}_{\hat{k}}$
+\end_inset
+
+ that gives us the best performance on test error.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We compute the validation set error or the cross validation error for each
+ model 
+\begin_inset Formula $\mathcal{M}_{k}$
+\end_inset
+
+ under consideration, and then select 
+\begin_inset Formula $k$
+\end_inset
+
+ for which the resulting estimated test error is smallest.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This procedure has an advantage relative to AIC, BIC, 
+\begin_inset Formula $C_{p}$
+\end_inset
+
+, and adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+, in that it provides a direct estimate of the test error, and doesn't require
+ an estimate of the error variance 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+, which is not estimable when 
+\begin_inset Formula $p>n$
+\end_inset
+
+ (when a saturated model is fitted because 
+\begin_inset Formula $\hat{\sigma^{2}}=0)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It can also be used in a wider range of model selection tasks, even in case
+ when it is hard to pinpoint the model degrees of freedom (e.g.
+ the number of predictors in the model in the case of shrinkage) or hard
+ to estimate 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Shrinkage / Regularization
+\end_layout
+
+\begin_layout Standard
+The subset selection methods use least squares to fit a linear model that
+ contains a subset of the predictors.
+ As an alternative, we can fit a model containing 
+\series bold
+all
+\series default
+ 
+\begin_inset Formula $p$
+\end_inset
+
+ predictors using a technique that 
+\shape italic
+constrains
+\shape default
+ or 
+\shape italic
+regularizes
+\shape default
+ the coefficient estimates, or equivalently, that shrinks the coefficient
+ estimates towards zero.
+ Such technique would generally increase the bias component moderately,
+ in exchange for a large(r) reduction in variance in the bias-variance-trade-off.
+ The two best-known techniques for shrinking the regression coefficients
+ towards zero are ridge regression and the lasso.
+\end_layout
+
+\begin_layout Subsubsection*
+Ridge Regression
+\end_layout
+
+\begin_layout Standard
+Recall that the least squares fitting procedure estimates 
+\begin_inset Formula $\beta_{0},\beta_{1}\dots\beta_{p}$
+\end_inset
+
+ using the values that minimize:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+RSS & = & \sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}\beta_{j}x_{ij}\right)^{2}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The aim here is to solely minimize the RSS.
+ In contrast, the rige regression coefficient estimates 
+\begin_inset Formula $\hat{\beta}^{R}$
+\end_inset
+
+ are the values that minimize
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+\begin_inset Formula \[
+{\color{blue}\sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}\beta_{j}x_{ij}\right)^{2}}+{\color{magenta}\lambda\sum_{j=1}^{p}\beta_{j}^{2}=RSS+\lambda\sum_{j=1}^{p}\beta_{j}^{2}}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\lambda\ge0$
+\end_inset
+
+ is a tuning parameter, to be determined separately.
+ The optimization problem now juggles between two terms in its objective
+ function: 1).
+ RSS - or how good the model fit is, 2).
+ the model complexity penalty, or whether the model is overly complex.
+ 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ here plays an important role in adjusting the bias-variance tradeoff:
+\end_layout
+
+\begin_layout Itemize
+As 
+\begin_inset Formula $\lambda\downarrow0$
+\end_inset
+
+, there are essentially no penalty in having large 
+\begin_inset Formula $\beta$
+\end_inset
+
+ coefficients (or small for that matter).
+ Therefore, the 
+\begin_inset Formula $\beta$
+\end_inset
+
+ coefficients are not really being constrained, and it will work very hard
+ to minimize the RSS to produce a good model fit.
+ When 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+, the fit is essentially the same as the least squares fit.
+\end_layout
+
+\begin_layout Itemize
+As 
+\begin_inset Formula $\lambda\uparrow\infty$
+\end_inset
+
+, the cost of choosing large 
+\begin_inset Formula $\beta$
+\end_inset
+
+ coefficients becomes much more costly, and the coefficients are much more
+ constrained.
+ In this case, the model fit is likely to be poorer, but the model complexity
+ is likely to be lower.
+ At 
+\begin_inset Formula $\lambda=\infty$
+\end_inset
+
+, the resulting model will be a null model with all coefficients equal 0.
+\end_layout
+
+\begin_layout Standard
+The key concept here is that we do not just focus on the fit (having low
+ bias), we also incorporate the penalty for having an overly complex model
+ into the optimization problem! 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ does the job of balancing these trade-offs, and the best practice is to
+ use Cross validation to select the right level of balance.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+We want to shrink the estimated association of each variable with the response;
+ however, we do not want to shrink the intercept coefficient 
+\begin_inset Formula $\beta_{0}$
+\end_inset
+
+, which is simply a measure of the mean value of the response when all 
+\begin_inset Formula $x$
+\end_inset
+
+'s are 0.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Scaling the predictors:
+\end_layout
+
+\begin_layout Standard
+The standard least squares coefficient estimates are 
+\shape italic
+\color black
+scale invariant: 
+\shape default
+multiplying 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+ by a constant 
+\begin_inset Formula $c$
+\end_inset
+
+ simply leads to a scaling of the least squares coefficient estimates by
+ a factor of 
+\begin_inset Formula $1/c$
+\end_inset
+
+.
+ In other words, regardless of how the 
+\begin_inset Formula $j^{th}$
+\end_inset
+
+ predictor is scaled, 
+\begin_inset Formula $X_{j}\hat{\beta}_{j}$
+\end_inset
+
+ will remain the same.
+ In contrast, the ridge regression coefficient estimates can change substantiall
+y when multiplying a given predictor by a constant.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color black
+For instance, consider the income variable, which is measured in dollars.
+ One could reasonably have measured income in thousands of dollars, which
+ would result in a reduction in the observed values of income by a factor
+ of 1,000.
+ Now due to the sum of squared coefficients term in the ridge regression
+ formulation, such a change in scale will not simply cause the ridge regression
+ coefficient estimate for income to change by a factor of 1,000.
+ In other words, 
+\begin_inset Formula $X_{j}\hat{\beta}_{j,\lambda}^{R}$
+\end_inset
+
+ will depend not only on 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, but also on the scaling of the 
+\begin_inset Formula $j^{th}$
+\end_inset
+
+ predictor.
+ In fact, the value of 
+\begin_inset Formula $X_{j}\hat{\beta}_{j,\lambda}^{R}$
+\end_inset
+
+ may even depend on the scaling of the other predictors! Therefore, it is
+ best to apply ridge regression after standardizing the predictors, using
+ the formula:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\tilde{x}_{ij} & = & \frac{\tilde{x}_{ij}}{\sqrt{\frac{1}{n}\sum_{i=1}^{n}\left(x_{ij}-\bar{x}_{j}\right)^{2}}}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so that they are all on the same scale.
+\end_layout
+
+\begin_layout Subsubsection*
+LASSO
+\end_layout
+
+\begin_layout Standard
+Ridge regression does have one obvious disadvantage: unlike subset selection,
+ which will generally select models that involve just a subset of the variables
+ (parsimony), ridge regression will include all 
+\begin_inset Formula $p$
+\end_inset
+
+ predictors in the final model.
+ This may not be a problem for prediction accuracy, but it can create a
+ challenge in model interpretation in settings in which the number of variables
+ 
+\begin_inset Formula $p$
+\end_inset
+
+ is quite large.
+ The LASSO is a great alternative to ridge regression.
+ The LASSO coefficients, 
+\begin_inset Formula $\hat{\beta}^{L}$
+\end_inset
+
+, minimize the quantity:
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+\begin_inset Formula \[
+{\color{blue}\sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}\beta_{j}x_{ij}\right)^{2}}+{\color{magenta}\lambda\sum_{j=1}^{p}|\beta_{j}|}=RSS+{\color{magenta}\lambda\sum_{j=1}^{p}|\beta_{j}|}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+As with ridge regression, the lasso shrinks the coefficient estimates towards
+ zero.
+ However, in the case of the lasso, the 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ penalty has the effect of forcing some of the coefficient estimates to
+ be exactly equal to 0 when the tuning parameter 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is sufficiently large.
+ Hence, much like best subset selection, the LASSO performs variable selection
+ and encourages parsimony.
+ We say that the LASSO yields spare, or parsimonious model.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Another Formulation for Best Subset Regression, Ridge Regression, and the
+ LASSO
+\end_layout
+
+\begin_layout Standard
+We can see the close connections of the three approaches mentioned above
+ if we consider the problem
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\min_{\beta}\left\{ \sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\sum_{j=1}^{p}\beta_{j}x_{ij}\right)^{2}\right\}  & \text{subject to} & \sum_{j=1}^{p}|\beta_{j}|\leq s\quad OR\quad\sum_{j=1}^{p}\beta_{j}^{2}\leq s\quad OR\quad\sum_{j=1}^{p}I\left(\beta_{j}\neq0\right)\leq s\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While all three problems aim to minimize RSS, the three optimization problem
+ have different constraints.
+ In the LASSO and ridge regression case, we are constraining the coefficient
+ estimates using 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ norm and 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+ norm respectively.
+ In the case of best subset selection, we are subject to the constraint
+ that no more than 
+\begin_inset Formula $s$
+\end_inset
+
+ coefficients can be nonzero.
+ Unfortuanately, solving the last optimization is computationally infeasible,
+ since it requires considering all 
+\begin_inset Formula $\binom{p}{s}$
+\end_inset
+
+ models containing 
+\begin_inset Formula $s$
+\end_inset
+
+ predictors.
+ Therefore, we can interpret ridge and LASSO as computationally feasible
+ alternatives to best subset selectio nthat replace the intractable form
+ of the budget with forms that are easier to solve! Of course, LASSO is
+ more closely related to best subset selection since it actually perform
+ feature selection.
+\end_layout
+
+\begin_layout Paragraph*
+The variable selection property of LASSO:
+\end_layout
+
+\begin_layout Standard
+Why is it that the LASSO, unlike ridge regression, results in coefficient
+ estimates that are exactly equal to 0? The constrained optimization above
+ can be used to shed light on the issue -- The key is that the feasible
+ region of 
+\begin_inset Formula $L_{1}$
+\end_inset
+
+ penalty has corners, but not for 
+\begin_inset Formula $L_{2}$
+\end_inset
+
+.
+ This means that the optimal solution 
+\begin_inset Formula $\hat{\beta}^{L}$
+\end_inset
+
+ are likely to take place at corners, which corresponding to some coefficient
+ estimates equal to 0! A picture in 
+\begin_inset Formula $p=2$
+\end_inset
+
+ best illustrates this:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Screen Shot 2014-04-20 at 11.29.53 AM.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Selecting the tuning parameter 
+\begin_inset Formula $\lambda$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+As for subset selection, for ridge regression and LASSO we require a method
+ to determine which of the models under consideration is best.
+ That is, we require a method selecting a value for the tuning parameter
+ 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ or equivalently, the value of the constraint 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ Cross Validation provides a simple way to tackle this problem.
+ We choose a grid of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ values, and compute the CV error for each value of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ We then select the tuning parameter value for which the CV error is smallest.
+ Finally, the model is re-fit using all of the available observation and
+ the selected value of the tuning parameter.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This very last step/point is explained much more clearly in 
+\begin_inset Quotes eld
+\end_inset
+
+Learning from Data
+\begin_inset Quotes erd
+\end_inset
+
+ Caltech course, Lecture 13 
+\begin_inset Quotes eld
+\end_inset
+
+Validation
+\begin_inset Quotes erd
+\end_inset
+
+, notes slide 7 (
+\begin_inset Formula $K$
+\end_inset
+
+ is put back to 
+\begin_inset Formula $N$
+\end_inset
+
+).
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Dimension Reduction Methods
+\end_layout
+
+\begin_layout Standard
+The methods we have discussed so far in this chapter have involved fitting
+ linear regression models, via least squares or shruken approach, using
+ 
+\series bold
+ALL 
+\series default
+the original predictors, 
+\begin_inset Formula $X_{1}\dots X_{p}$
+\end_inset
+
+.
+ We now explore a class of approaches that 
+\shape italic
+transform 
+\shape default
+the predictors and then fit a least squares modle using the transformed
+ variables.
+ We will refer to these techniques as dimension reduction methods.
+\end_layout
+
+\begin_layout Subsubsection*
+Dimension Reduction Methods: Details
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $Z_{1}\dots Z_{M}$
+\end_inset
+
+ represent 
+\begin_inset Formula $M<p$
+\end_inset
+
+ linear combinations of our original 
+\begin_inset Formula $p$
+\end_inset
+
+ predictors, That is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+Z_{m} & = & \sum_{j=1}^{p}\phi_{mj}X_{j}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for some constant 
+\begin_inset Formula $\phi_{m1},\dots\phi_{mp}$
+\end_inset
+
+.
+ We can then fit the linear regression model,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+y_{i} & = & \theta_{0}+\sum_{m=1}^{M}\theta_{m}z_{im}+\epsilon_{i},\: i=1\dots n\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+using ordinary least squares.
+ Note that the regression coefficients are given by 
+\begin_inset Formula $\theta$
+\end_inset
+
+'s.
+ Also note that,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\sum_{m=1}^{M}\theta_{m}z_{im} & = & \sum_{m=1}^{M}\theta_{m}\sum_{j=1}^{p}\phi_{mj}x_{ij}=\sum_{j=1}^{p}\sum_{m=1}^{M}\theta_{m}\phi_{mj}x_{ij}=\sum_{j=1}^{p}\beta_{j}x_{ij}\\
+\text{where}\quad\beta_{j} & = & \sum_{m=1}^{M}\theta_{m}\phi_{mj}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hence, a dimension reduction least squares model can be thought of as a
+ special case of the original linear regression model.
+ Dimension reduction serves to constrain the estimated 
+\begin_inset Formula $\beta_{j}$
+\end_inset
+
+ coefficients, since now they must satisfied the constraints above.
+ This can help us to win in terms of bias-variance-trade-offs if 
+\begin_inset Formula $\phi$
+\end_inset
+
+'s are chosen appropriately.
+ In this section, we talk about two ways of selecting 
+\begin_inset Formula $Z_{m}$
+\end_inset
+
+'s (or equivalently choosing 
+\begin_inset Formula $\theta$
+\end_inset
+
+s).
+\end_layout
+
+\begin_layout Subsubsection*
+Principal Component Regression (PCR, not PCA)
+\end_layout
+
+\begin_layout Standard
+The PCR approach involves constructing the first 
+\begin_inset Formula $M$
+\end_inset
+
+ principal components, 
+\begin_inset Formula $Z_{1}\dots Z_{m}$
+\end_inset
+
+ and then using these components as the predictors in a linear regression
+ model that is fit using least squares.
+ The key idea is that often a small number of principal components suffice
+ to explain most of the variability in the data, as well as the relationship
+ with the response.
+ In other words, 
+\shape italic
+we assume that the directions in which 
+\begin_inset Formula $X_{1}\dots X_{p}$
+\end_inset
+
+ show the most variation are the directions that are associated with 
+\begin_inset Formula $Y$
+\end_inset
+
+!
+\shape default
+ While this assumption is not guarantee to be true, it often turns out to
+ be a reasonable enough approximation.
+ To re-iterate, the steps for PCR are:
+\end_layout
+
+\begin_layout Itemize
+Standardize 
+\begin_inset Formula $X_{1}\dots X_{p}$
+\end_inset
+
+.
+ Run PCA on the data matrix 
+\begin_inset Formula $X$
+\end_inset
+
+ to get principal components 
+\begin_inset Formula $Z_{m}$
+\end_inset
+
+'s.
+\end_layout
+
+\begin_layout Itemize
+Fit an least squares model using the 
+\begin_inset Formula $M$
+\end_inset
+
+ principal components where 
+\begin_inset Formula $M<p$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice that we are still able to recover the original coefficients 
+\begin_inset Formula $\beta_{j}$
+\end_inset
+
+ because 
+\begin_inset Formula $\beta_{j}=\sum_{m=1}^{M}\theta_{m}\phi_{mj}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is generally recommended to standardize each original predictor before
+ running PCA.
+ In the absence of standardization, the high variance variables will tend
+ to play a larger role in the principal components obtained, and the scale
+ on which the variables are measured will ultimately have an effect on the
+ final PCR model.
+ The choice of 
+\begin_inset Formula $M$
+\end_inset
+
+, the number of principal components, is determined via Cross Validation.
+ When 
+\begin_inset Formula $M=p$
+\end_inset
+
+, then we are back to the typical OLS model.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We note that even though PCR provides a simple way to perform regression
+ using 
+\begin_inset Formula $M<p$
+\end_inset
+
+ predictors, it is NOT a feature selection method! This is because each
+ of the 
+\begin_inset Formula $M$
+\end_inset
+
+ principal components used in the regression is a linear combination of
+ all 
+\begin_inset Formula $p$
+\end_inset
+
+ of the original features.
+ Therefore, while PCR often performs quite well in many practical settings,
+ it does not result in a development of a model that relies upon a small
+ set of the original features.
+ In this sense, PCR is more closely related to ridge regression than to
+ the LASSO.
+ I nfact, one can show that PCR and ridge regression are very closely related.
+ One can even think of ridge regression as a continuous version of PCR.
+\end_layout
+
+\begin_layout Subsubsection*
+Partial Least Squares (PLS)
+\end_layout
+
+\begin_layout Standard
+The PCR approach that we just described involves identifying linear combinations
+, or directions, that best represent the predictors 
+\begin_inset Formula $X_{1}\dots X_{p}$
+\end_inset
+
+.
+ These directions are identified in an 
+\series bold
+unsupervised
+\series default
+ way, since the response 
+\begin_inset Formula $Y$
+\end_inset
+
+ is not used to help determine the principal component directions.
+ That is, the response does not supervise the identification of the principal
+ components.
+ Consequently, PCR suffers from a drawback: there is no guarantee that the
+ directions that best explain the predictors will also be the best directions
+ to use for predicting the response.
+ PLS aims to address this issue.
+ The steps for PLS are:
+\end_layout
+
+\begin_layout Itemize
+Standardize 
+\begin_inset Formula $X_{1}\dots X_{p}$
+\end_inset
+
+.
+ Run PLS on the data matrix 
+\begin_inset Formula $X$
+\end_inset
+
+ to get principal components 
+\begin_inset Formula $Z_{m}$
+\end_inset
+
+s
+\end_layout
+
+\begin_layout Itemize
+Fit a least squares model using the 
+\begin_inset Formula $M$
+\end_inset
+
+ PLS directions
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+PLS procedure:
+\end_layout
+
+\begin_layout Itemize
+Compute the first direction 
+\begin_inset Formula $Z_{1}$
+\end_inset
+
+ by setting each 
+\begin_inset Formula $\phi_{j1}$
+\end_inset
+
+ equal to the coefficient from the simple linear regression of 
+\begin_inset Formula $Y$
+\end_inset
+
+ onto 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+.
+ This allows us to give more weights to predictors that are more correlated
+ with the response
+\end_layout
+
+\begin_layout Itemize
+Once we obtained 
+\begin_inset Formula $Z_{1}=\sum_{j=1}^{p}\phi_{j1}X_{j}$
+\end_inset
+
+, we then adjust each of the variables for 
+\begin_inset Formula $Z_{1}$
+\end_inset
+
+.
+ Specifically, we regress each variable on 
+\begin_inset Formula $Z_{1}$
+\end_inset
+
+ and take the residuals.
+ These residuals can be interpret as the remaining information that has
+ not been explained by the first PLS direction.
+ We then compute 
+\begin_inset Formula $Z_{2}$
+\end_inset
+
+ using this orthogonalized data in exactly the same fashion as 
+\begin_inset Formula $Z_{1}$
+\end_inset
+
+ was computed based on the original data.
+ This means we will compute 
+\begin_inset Formula $\phi_{j2}$
+\end_inset
+
+ equal to the coefficient from the simple linear regression of 
+\begin_inset Formula $Y$
+\end_inset
+
+ onto 
+\begin_inset Formula $Res(X_{j}\sim Z_{1})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+For 
+\begin_inset Formula $Z_{k}$
+\end_inset
+
+, we compute 
+\begin_inset Formula $\phi_{jk}$
+\end_inset
+
+ equal to the coefficient from the simple linear regression of 
+\begin_inset Formula $Y$
+\end_inset
+
+ onto 
+\begin_inset Formula $Res(X_{j}\sim(Z_{1}+\dots Z_{k-1}))$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Itemize
+This iterative approach can be repeated 
+\begin_inset Formula $M$
+\end_inset
+
+ times to identify multiple PLS directions for a least squares fit.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Rob said that generally he found Ridge regression and PCR to be comparable
+ or better than PLS, there is no clear evidence that PLS is more superior.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Lingering Questions
+\end_layout
+
+\begin_layout Subsubsection*
+What is the right mental model for thinking about subset selection (Use
+ RSS/
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ in part I, and test error for part II)?
+\end_layout
+
+\begin_layout Standard
+The way I think about subset selection is a two part process:
+\end_layout
+
+\begin_layout Itemize
+Part 1: For each choice of 
+\begin_inset Formula $k$
+\end_inset
+
+, we apply the same procedure to arrive at that model for that size.
+ The relationship across models might be {unrelated, nested...etc}, but the
+ important thing is that they are selected the same way (i.e.
+ for each size, pick the model with the smallest RSS).
+ 
+\color black
+My understanding here is that we are going after how many predictors we
+ should use, not what is the exact set of predictors, given a fixed size
+ 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ Therefore, as long as we standardize the fitting procedure (in this case,
+ we choose the best model, based on RSS/
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ for each size), then it's a fair comparison.
+\end_layout
+
+\begin_layout Itemize
+Part 2: Once we have pin down the representative for each size 
+\begin_inset Formula $k$
+\end_inset
+
+, we select a single best model from among 
+\begin_inset Formula $\mathcal{M}_{0},\dots\mathcal{M}_{p}$
+\end_inset
+
+ not based on RSS, but based on some estimate of the test error.
+ After all, we are going after the test error, not training error.
+ using RSS & 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ would have been inappropriate because they monotonically decrease as we
+ increase the number of predictors.
+ And since training error almost always underestimate test error when we
+ have a large number of predictors, it's important to use metrics such as
+ 
+\begin_inset Formula $C_{p}$
+\end_inset
+
+, AIC, BIC, or adjusted 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+, those that do a much better job at estimating test error, to be the judge.
+\end_layout
+
+\begin_layout Standard
+Is this way of thinking correct?
+\end_layout
+
+\begin_layout Subsubsection*
+How would you use validation and/or cross validation for subset selection
+ exactly?
+\end_layout
+
+\begin_layout Paragraph*
+Validation:
+\end_layout
+
+\begin_layout Standard
+In the case of validation approach, we will break up data into a single
+ training set and a single validation set.
+ We would use the training set to build 
+\begin_inset Formula $\mathcal{M}_{1}\dots\mathcal{M}_{p}$
+\end_inset
+
+, without referencing the validation at all.
+ Once we have our 
+\begin_inset Formula $p$
+\end_inset
+
+ best models 
+\begin_inset Formula $\mathcal{M}$
+\end_inset
+
+, we would then apply them to the same validation set, and compute the estimated
+ test error, and pick 
+\begin_inset Formula $k$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathcal{M}_{k}$
+\end_inset
+
+ has the lowest test error, say denoted 
+\begin_inset Formula $err_{test}(\mathcal{M}_{k})\:\forall k$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph*
+Cross-Validation:
+\end_layout
+
+\begin_layout Standard
+It's very similar to the validation case, but we repeat the process for
+ different pairs of (training, validation) sets, for 
+\begin_inset Formula $K=5,10$
+\end_inset
+
+.
+ In the end of each pair of (training, validation) set, we would arrive
+ at 
+\begin_inset Formula $err_{test}(\mathcal{M}_{j})^{(l)}$
+\end_inset
+
+, to find the best model, we would simply compare
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\frac{1}{K}\sum_{l=1}^{K}err_{test}(\mathcal{M}_{1})^{(l)},\frac{1}{K}\sum_{l=1}^{K}err_{test}(\mathcal{M}_{2})^{(l)},\dots\frac{1}{K}\sum_{l=1}^{K}err_{test}(\mathcal{M}_{p})^{(l)}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and pick the model with lowest cross validation (average) error.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The important thing here is that for a fixed size 
+\begin_inset Formula $\bar{k}$
+\end_inset
+
+, the 
+\begin_inset Formula $\mathcal{M}_{\bar{k}}^{(l)}$
+\end_inset
+
+ for different 
+\begin_inset Formula $l$
+\end_inset
+
+ might yield a different size 
+\begin_inset Formula $\bar{k}$
+\end_inset
+
+.
+ In other words, even when 
+\begin_inset Formula $\bar{k}$
+\end_inset
+
+ is fixed, because we are using different replica of full data for training,
+ we will yield differet model model (i.e.
+ different set of 
+\begin_inset Formula $\bar{k}$
+\end_inset
+
+ predictors are being chosen), despite they all have 
+\begin_inset Formula $\bar{k}$
+\end_inset
+
+ predictors in the model.
+ I think this is O.K, and it again emphasize the importance that we are model
+ selecting for the hyper-parameter 
+\begin_inset Formula $k$
+\end_inset
+
+ (what is the right 
+\begin_inset Formula $k$
+\end_inset
+
+), not what exact 
+\series bold
+set of predictors we should choose!
+\end_layout
+
+\end_body
+\end_document
