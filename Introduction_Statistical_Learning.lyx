@@ -8467,5 +8467,1438 @@ Generalized Additive Model (GAM)
  predictor) to deal with multiple predictors!
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Polynomial Regression
+\end_layout
+
+\begin_layout Standard
+One way to extend linear regression to settings in which the relationship
+ between the predictors and the response is nonlinear has been to replace
+ the standard linear model with a polynomial function
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\left(y_{i}=\beta_{0}+\beta_{1}x_{i}+\epsilon_{i}\right)\Longrightarrow\left(y_{i}=\beta_{0}+\beta_{1}x_{i}+\beta_{2}x_{i}^{2}\dots+\beta_{d}x_{i}^{d}+\epsilon_{i}\right)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Essentially, we create new predictor by taking the powers of the original
+ single predictors 
+\begin_inset Formula $X_{1}=X,\: X_{2}=X^{2}$
+\end_inset
+
+, etc.
+ In this scenario, 
+\color blue
+we are often not interested in the coefficients.
+ We are more interested in the fitted values 
+\begin_inset Formula ${\color{black}\hat{f}(x_{0})=\hat{\beta_{0}}+\hat{\beta_{1}}x_{0}+\hat{\beta_{2}}x_{0}^{2}\dots+\hat{\beta_{d}}x_{0}^{d}+\epsilon_{i}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+We either fix the degree 
+\begin_inset Formula $d$
+\end_inset
+
+ at some reasonably low value, else use corss-validation to choose 
+\begin_inset Formula $d$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Since 
+\begin_inset Formula $\hat{f}(x_{0})$
+\end_inset
+
+ is a linear function of the 
+\begin_inset Formula $\hat{\beta}_{l}$
+\end_inset
+
+, we can get a simple expression for pointwise-variances 
+\begin_inset Formula $Var\left[\hat{f}\left(x_{0}\right)\right]$
+\end_inset
+
+ at any value 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $\hat{\mathbf{C}}$
+\end_inset
+
+ is the 
+\begin_inset Formula $(d+1)\times(d+1)$
+\end_inset
+
+ covariance matrix of 
+\begin_inset Formula $\hat{\beta}_{j}$
+\end_inset
+
+, and if 
+\begin_inset Formula $l_{0}^{T}=\left(1,x_{0},x_{0}^{2},\dots x_{0}^{d}\right)$
+\end_inset
+
+, then 
+\begin_inset Formula $Var\left[\hat{f}\left(x_{0}\right)\right]=l_{0}^{T}\hat{\mathbf{C}}l_{0}$
+\end_inset
+
+.
+ This allows us to estimate the variability of the estimate using 
+\begin_inset Formula $\hat{f}(x_{0})\pm2\times se\left[\hat{f}(x_{0})\right]$
+\end_inset
+
+ as confidence band.
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This extension also applies to logistic regression.
+ For example,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+P\left(y_{i}>250|x_{i}\right) & = & \frac{exp(\beta_{0}+\beta_{1}x_{i}+\beta_{2}x_{i}^{2}+\dots+\beta_{d}x_{i}^{d})}{1+exp(\beta_{0}+\beta_{1}x_{i}+\beta_{2}x_{i}^{2}+\dots+\beta_{d}x_{i}^{d})}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+To get the confidence interval, compute upper and lower bounds on on the
+ logit scale, and then invert to get on probability scale.
+\end_layout
+
+\begin_layout Standard
+More generally
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Can fit using 
+\begin_inset Formula $y\sim poly(x,degree=3)$
+\end_inset
+
+ in R
+\end_layout
+
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Itemize
+We can do this separately on several variables - just stack the variables
+ into one matrix, and separate out the pieces afterwards.
+\end_layout
+
+\begin_layout Itemize
+Caveat: Polynomial have notorious tail behavior -- meaning the confidence
+ band is very wiggling at the tails.
+ It doesn't a bad job at extrapolation.
+\end_layout
+
+\begin_layout Subsection*
+Step Functions
+\end_layout
+
+\begin_layout Standard
+Using polynomial functions of the features as predictors in a linear model
+ imposes a global structure on the non-linear function of 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ We can instead use step functions in order to avoid imposing such a global
+ structure.
+ Here we break the range of 
+\begin_inset Formula $X$
+\end_inset
+
+ into bins, and 
+\color blue
+fit a different constant in each bin
+\color inherit
+.
+ This amounts to converting a continuous variable into an ordered categorical
+ variable.
+ In greater details, we create cutpoints 
+\begin_inset Formula $c_{1},c_{2}\dots c_{K}$
+\end_inset
+
+ in the range of 
+\begin_inset Formula $X$
+\end_inset
+
+, and then construct 
+\begin_inset Formula $K+1$
+\end_inset
+
+ new variables
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+C_{0}(X) & = & I\left(X<c_{1}\right)\\
+C_{1}\left(X\right) & = & I\left(c_{1}\leq X<c_{2}\right)\\
+ & \vdots\\
+C_{K-1}(X) & = & I\left(c_{K-1}\leq X<c_{K}\right)\\
+C_{K}(X) & = & I\left(c_{K}\leq X\right)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We then use least squares to fit a linear model using 
+\begin_inset Formula $C_{1}(X),C_{2}(X)\dots C_{K}(X)$
+\end_inset
+
+ as predictors:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+y_{i} & = & \beta_{0}+\beta_{1}C_{1}(x_{i})+\beta_{2}C_{2}(x_{i})+\dots+\beta_{K}C_{K}(x_{i})+\epsilon_{i}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We exclude 
+\begin_inset Formula $C_{0}(X)$
+\end_inset
+
+ as a predictor because it is redundant with the intercept.
+ This is similar to the fact that we need only two dummy variables to code
+ a qualitative variable with three levels.
+ To explain, when 
+\begin_inset Formula $X<c_{1}$
+\end_inset
+
+, all of the predictors are zero, so 
+\begin_inset Formula $\beta_{0}$
+\end_inset
+
+ can be interpreted as the mean value of 
+\begin_inset Formula $Y$
+\end_inset
+
+ for 
+\begin_inset Formula $X<c_{1}$
+\end_inset
+
+.
+ By comparison, the function above predict a response of 
+\begin_inset Formula $\beta_{0}+\beta_{j}$
+\end_inset
+
+ for 
+\begin_inset Formula $c_{j}\leq X<c_{j+1}$
+\end_inset
+
+, so 
+\begin_inset Formula $\beta_{j}$
+\end_inset
+
+ represents the average increase in the response for 
+\begin_inset Formula $X$
+\end_inset
+
+ in 
+\begin_inset Formula $c_{j}\leq X<c_{j+1}$
+\end_inset
+
+ relative to 
+\begin_inset Formula $X<c_{1}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Again, the same technique can be apply to logistic regression
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+P\left(y_{i}>250|x_{i}\right) & = & \frac{exp\left(\beta_{0}+\beta_{1}C_{1}(x_{i})+\beta_{2}C_{2}(x_{i})+\dots+\beta_{K}C_{K}(x_{i})\right)}{1+exp\left(\beta_{0}+\beta_{1}C_{1}(x_{i})+\beta_{2}C_{2}(x_{i})+\dots+\beta_{K}C_{K}(x_{i})\right)}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Step functions are useful for creating interactions that are easy to interpret.
+ For example, interaction effect of Year and Age 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+I\left(\text{Year}\right)<2005)\times\text{Age},\: I(\text{Year}\geq2005)\times\text{Age}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+would allow for different linear function in each Year category.
+ Choice of cutpoints or knots can be problematic, because there is no principle
+ ways of choosing them.
+ Nevertheless, this approach remain popular in biostatistics and epidemiology,
+ among other disciplines.
+ For example, 5-year age groups are often used to define the bins.
+\end_layout
+
+\begin_layout Subsection*
+
+\color blue
+Basis Function
+\end_layout
+
+\begin_layout Standard
+Polynomial and piecewise-constant regression models are in fact two special
+ cases of a 
+\color blue
+basis function
+\color inherit
+ approach.
+ The idea is to have at hand a family of functions or transformation that
+ can be applied to a variable 
+\begin_inset Formula $X$
+\end_inset
+
+: 
+\begin_inset Formula $b_{1}(X),\: b_{2}(X),\:\dots,\: b_{K}(X)$
+\end_inset
+
+.
+ Instead of fitting a linear model of 
+\begin_inset Formula $X$
+\end_inset
+
+, we fit the model
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+y_{i} & = & \beta_{0}+\beta_{1}b_{1}(x_{i})+\beta_{2}b_{2}(X)+\dots+\beta_{K}b_{K}(X)+\epsilon_{i}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that the basis function 
+\begin_inset Formula $b_{1}\left(\cdot\right),\: b_{2}\left(\cdot\right),\dots,\: b_{K}\left(\cdot\right)$
+\end_inset
+
+ are fixed and known.
+ For polynomial regression, the basis functions are 
+\begin_inset Formula $b_{j}(x_{i})=x_{i}^{j}$
+\end_inset
+
+, and for piecewise constant functions they are 
+\begin_inset Formula $b_{j}(x_{i})=I\left(c_{j}\leq x_{i}<c_{j+1}\right)$
+\end_inset
+
+.
+ Ordinary regression simply have 
+\begin_inset Formula $b_{j}(x_{i})=x_{i}$
+\end_inset
+
+.
+ Hence, we can use least squares to estimate the unknown regression coefficients
+ above.
+ Importantly, this means that all of the inference tools for linear models,
+ such as standard errors for the coefficients and 
+\begin_inset Formula $F$
+\end_inset
+
+-statistics for the model's overall significance, are available in this
+ setting.
+ There are many other alternatives for the basis functions, such as wavelets
+ or Fourier series.
+ In the next section, we investigate a very common choice for a basis function:
+ regression splines.
+\end_layout
+
+\begin_layout Subsection*
+Regression Splines
+\end_layout
+
+\begin_layout Standard
+The criticism of fitting a global polynomial is that data point in one end
+ might affect the fit on the other end -- The fit is SMOOTH but is not LOCAL.
+ The criticism of step function is that it is LOCAL, but not SMOOTH (step
+ functions might not take the same values).
+ Regression splines is an extension of the above two methods in which we
+ fit local splines in each of the local region, and at the same time, enforce
+ constraints on the boundaries/knots so that the fit is smooth.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can first start by fitting piecewise polynomial (LOCAL, but not necessarily
+ smooth) in the form:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+y_{i} & = & \begin{cases}
+\beta_{01}+\beta_{11}x_{i}+\beta_{21}x_{i}^{2}+\beta_{31}x_{i}^{3} & \text{if}\: x_{i}<c;\\
+\beta_{02}+\beta_{12}x_{i}+\beta_{22}x_{i}^{2}+\beta_{32}x_{i}^{3} & \text{if}\: x_{i}\geq c.\end{cases}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In each region, we fit a polynomial function (as we describe earlier).
+ In the case of step function, we are simply fitting a piece-wise polynomial
+ of degree 
+\begin_inset Formula $d=0$
+\end_inset
+
+! The issue with this technique is that there is no gaurantee that, at the
+ knots, the fit will be smooth.
+ Therefore, we often want to impose additional constraints on the fit at
+ the knots.
+ This is where we introduce splines.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It turns out that we can use the basis modle to represent a regression spline.
+ The typical choices are linear and cubic splines.
+ A cubic spline with 
+\begin_inset Formula $K$
+\end_inset
+
+ knotes can be modeled as 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+y_{i} & = & \beta_{0}+\beta_{1}b_{1}(x_{i})+\beta_{2}b_{2}(X)+\dots+\beta_{K+3}b_{K+3}(X)+\epsilon_{i}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+for an appropriate choice of basis functions 
+\begin_inset Formula $b_{1},b_{2}\dots b_{K+3}$
+\end_inset
+
+.
+ Just as there are several ways to represent polynomials, there are many
+ equivalent ways to represent cubic splines using different choices of basis
+ function.
+ The most direct way to represent a cubic spline is to start off with a
+ basis for a cubic polynomial - namely, 
+\begin_inset Formula $x,\: x^{2},\: x^{3}$
+\end_inset
+
+, and then add one truncated power basis function per knot:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+h\left(x,\zeta\right) & = & \left(x-\zeta\right)_{+}^{3}=\begin{cases}
+\left(x-\zeta\right)^{3} & \text{if}\: x>\zeta\\
+0 & \text{otherwise}\end{cases}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\zeta$
+\end_inset
+
+is the knot.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+The definition for linear spline can be defined similarly.
+ See lecture slide 9/23 - 12/23.
+\end_layout
+
+\end_inset
+
+ In other words, in order to fit a cubic spline to a data set with 
+\begin_inset Formula $K$
+\end_inset
+
+ knots, we perform least squares regression with an intercept and 
+\begin_inset Formula $3+K$
+\end_inset
+
+ predictors, of the form 
+\begin_inset Formula $X,\: X^{2},\: X^{3},\: h(X,\zeta_{1}),\: h(X,\zeta_{2})\dots h(X,\zeta_{K})$
+\end_inset
+
+ where 
+\begin_inset Formula $\zeta_{1},\zeta_{2},\dots\zeta_{K}$
+\end_inset
+
+ are the knots.
+ This amounts to estimating a total of 
+\begin_inset Formula $K+4$
+\end_inset
+
+ regression coefficients.
+ Again, why are we doing this? This is because we want SMOOTHNESS.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The general definition of a degree-
+\begin_inset Formula $d$
+\end_inset
+
+ spline is that it is a piecewise degree-
+\begin_inset Formula $d$
+\end_inset
+
+ polynomial, with continuity in derivatives up to degree 
+\begin_inset Formula $d-1$
+\end_inset
+
+ at each knot.
+ Therefore:
+\end_layout
+
+\begin_layout Itemize
+A cubic spline is a piecewise degree
+\begin_inset Formula $-3$
+\end_inset
+
+ polynomial, with the first and second derivatives to be continuous at each
+ knot (This means that we will not see kinks, because even the derivatives
+ are smooth).
+\end_layout
+
+\begin_layout Itemize
+A linear spline is a piecewise degree
+\begin_inset Formula $-1$
+\end_inset
+
+ (linear) polynomial, with the 
+\begin_inset Formula $0^{th}$
+\end_inset
+
+ derivative (meaning itself) being continuous.
+\end_layout
+
+\begin_layout Standard
+Generally, regression splines also have bad behaviors at the tails, and
+ Natural Cubic Splines improves this by extrapolates linearly beyond the
+ boundary knots.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Use bs(x, ...) and ns(x, ...) for splines and natural cubic splines in R.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/spline_comparison.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+In the top left, we see that we are simply fitting a piecewise cubic polynomial
+ function.
+ It is adaptive in each local region, but there is no smoothness at the
+ knots.
+\end_layout
+
+\begin_layout Itemize
+In the top right, we have a slight improvement, where we restrict the piecewise
+ cubic polynomial to be continuous.
+ But this is still not good enough, as we see at the knot there is a kink
+ (still not smooth).
+\end_layout
+
+\begin_layout Itemize
+In the bottom two graphs, we fit a cubic and linear splines respectively
+ (using the definitions above).
+ In this case, we finally obtained both LOCALNESS & SMOOTHNESS because splines
+ enforce additional constraints at the knot (fit must be continuous at the
+ derivatives up to 
+\begin_inset Formula $d-1$
+\end_inset
+
+ degree).
+\end_layout
+
+\begin_layout Subsubsection*
+Knot Placements
+\end_layout
+
+\begin_layout Standard
+When we fit a spline, where should we place the knots? The regression spline
+ is most flexible in regions that contain a lot of knots, because in those
+ regions the polynomial coefficients can change rapidly.
+ Hence, one option is to place more knots in places where we feel the function
+ might vary most rapidly, and to place fewer knots where it seems more stable.
+ While this option can work well, in practice it is common to place knots
+ in a uniform fashion.
+ One way to do this is to specify the desired degrees of freedom, and then
+ have the software automatically place the corresponding number of knots
+ at uniform quantiles of the data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+How many knots hsould we use, or equivalently how many degrees of freedom
+ should our splien contain? One option is to try out different numbers of
+ knots and see which produces the best looking curve.
+ An more objective approach is to use cross-validation -- With this method,
+ we remove a portion of the data (say 10%), fit a spline with a certain
+ number of knots to the remaining data, and then use spline to make predictions
+ for the held-out portion.
+ We repeat this process multiple times until each observation has been elft
+ out once, and then compute the overall cross-validated RSS.
+ This procedure can be repated for different numbers of knots 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ Then the value of 
+\begin_inset Formula $K$
+\end_inset
+
+ giving the smallest cross-validated RSS is chosen.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When we fit a Generalized Additive Modle (GAM), we need to fit multiple
+ splines simultaneously on several variables at a time.
+ This could potentially require the selection of degrees of freedom for
+ each variable.
+ In cases like this we typically adopt a more pragmatic approach and set
+ the degrees of freedom to a fixed number, say four, for all terms.
+\end_layout
+
+\begin_layout Subsection*
+Smoothing Splines
+\end_layout
+
+\begin_layout Standard
+Consider the criterion for fitting a smooth function 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ to some data:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\min_{g\in\mathcal{S}}\sum_{i=1}^{n}\left(y_{i}-g\left(x_{i}\right)\right)^{2}+\lambda\int g^{''}(t)^{2}dt\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The first term is RSS, and tries to make 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ match the data at each 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The second term is a roughness penalty and controls how wiggly 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ is.
+ It is modulated by the tuning parameter 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ (The wiggliness of the function 
+\begin_inset Formula $g$
+\end_inset
+
+ can be approximate by the rate of change of 
+\begin_inset Formula $g'$
+\end_inset
+
+).
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The smaller 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, the more wiggly the function, eventually interpolating 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ when 
+\begin_inset Formula $\lambda=0$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+As 
+\begin_inset Formula $\lambda\uparrow\infty$
+\end_inset
+
+, the function 
+\begin_inset Formula $g(x)$
+\end_inset
+
+ becomes linear.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+We can see from above formulation, this is an objective function in the
+ form LOSS 
+\begin_inset Formula $+$
+\end_inset
+
+ PENALTY on model complexity that tries to balance bias-variance-trade-offs.
+ It turns out that the solution for this problem is a natural cubic spline,
+ with a knot at every unique value of 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+it is not the same natural cubic spline that one would get if one applied
+ the basis function approach in knots at 
+\begin_inset Formula $x_{1}\dots x_{n}$
+\end_inset
+
+ -- rather, it is a 
+\shape italic
+\color black
+shrunken version
+\shape default
+\color inherit
+ of such cubic spline.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The obvious advantage of this approach is that we avoid the knot-selection-place
+ment issue, levaing a single 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ to be choosen
+\end_layout
+
+\begin_layout Itemize
+The appropriate level of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ can be chosen again by cross-validation.
+ In particular, the LOOCV error is a popular choice
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Formula \[
+RSS_{CV}(\lambda)=\sum_{i=1}^{n}\left(y_{i}-g_{\lambda}^{(-i)}(x_{i})\right)^{2}=\sum_{i=1}^{n}\left[\frac{y_{i}-\hat{g}_{\lambda}(x_{i})}{1-\left\{ \mathbf{S}_{\lambda}\right\} _{ii}}\right]^{2}\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Finally, it is worth noting that Smoothing splines is an example of a more
+ general modeling class which we can write 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\hat{\mathbf{g}}_{\lambda} & = & \mathbf{S}_{\lambda}\mathbf{y}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+ is the labels, and 
+\begin_inset Formula $\hat{\mathbf{g}}_{\lambda}$
+\end_inset
+
+ is the fitted values (Linear operator on 
+\begin_inset Formula $y$
+\end_inset
+
+ to get 
+\begin_inset Formula $\hat{y}$
+\end_inset
+
+).
+ For this class of models, we can define the 
+\begin_inset Quotes eld
+\end_inset
+
+effective degrees of freedom
+\begin_inset Quotes erd
+\end_inset
+
+ (that better captures the model complexity) as 
+\begin_inset Formula $df_{\lambda}=\sum_{i=1}^{n}\left\{ \mathbf{S}_{\lambda}\right\} _{ii}$
+\end_inset
+
+, which is the trace of the 
+\begin_inset Formula $\mathbf{S}_{\lambda}$
+\end_inset
+
+ operator.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Use smooth.spline(..., df) in R
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Local Regression
+\end_layout
+
+\begin_layout Standard
+Local regression fits flexible non-linear functions in each local regions,
+ which involves computing the fit at a target point 
+\begin_inset Formula $x_{0}$
+\end_inset
+
+ using only the nearby training observations.
+ It is somtimes referred to as a memory-based procedure, because like nearest-ne
+ighbors, we need all the training data each time we wish to compute a prediction.
+ Here is the algorithm -- Local Regression at 
+\begin_inset Formula $X=x_{0}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/local_regression_algorithm.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are several tuning parameters for local regression:
+\end_layout
+
+\begin_layout Itemize
+What kind of 
+\begin_inset Formula $f$
+\end_inset
+
+ to use? The typical choice are linear 
+\begin_inset Formula $f$
+\end_inset
+
+, but we can use constant, linear, quadratic functions.
+\end_layout
+
+\begin_layout Itemize
+What Kernel function 
+\begin_inset Formula $K$
+\end_inset
+
+ to use?
+\end_layout
+
+\begin_layout Itemize
+Most importantly, what should be the span 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ i.e.
+ how large should the neighborhood of points should be used in the fitting
+ procedure? This is probably the most important parameter in determining
+ the wiggliness of the fit.
+ Another way to think about this is 
+\begin_inset Formula $s=k/n$
+\end_inset
+
+, where 
+\begin_inset Formula $k$
+\end_inset
+
+ is the number of points we want to considered in the neighborhood, and
+ is directly related to 
+\begin_inset Formula $s$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Local regression can be generalized in many different ways.
+ One such way is varying coefficient model, where we fit a mutliple regression
+ model that is global in some variables, but local in another (often a time
+ variable).
+ We can also extend the model to 2 variables, in such cases the neighorhood
+ would be a two dimensional neighborhood.
+ Similar to KNN, it suffers from curse of dimensionality when the dimension
+ is high.
+\end_layout
+
+\begin_layout Subsection*
+Generalized Additive Model (GAM)
+\end_layout
+
+\begin_layout Standard
+A natural way to extend the multiple linear regression model 
+\begin_inset Formula $y_{i}=\beta_{0}+\sum_{j=1}^{p}\beta_{j}x_{ij}+\epsilon_{i}$
+\end_inset
+
+ in order to allow for non-linear relationships between each feature and
+ the response is to replace each linear component 
+\begin_inset Formula $\beta_{j}x_{ij}$
+\end_inset
+
+ with a (smooth) non-linear function 
+\begin_inset Formula $f_{j}(x_{ij})$
+\end_inset
+
+.
+ We would then write the model as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+y_{i} & = & \beta_{0}+\sum_{j=1}^{p}f_{j}\left(x_{ij}\right)+\epsilon\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is an example of a GAM.
+ It is called an additive model because we calculate a separate 
+\begin_inset Formula $f_{j}$
+\end_inset
+
+ for each 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+, and then add togethre all of their contribution as the final fit.
+ Many of the methods we disccused above can be used to fit 
+\begin_inset Formula $f_{j}$
+\end_inset
+
+, and can be used as the building blocks for GAM.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For more explanations on how a GAM is fitted, take a look at textbook pg.
+ 284
+\end_layout
+
+\end_inset
+
+.
+ The same technique can be used for classification, where
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+log\left(\frac{p\left(X\right)}{1-p\left(X\right)}\right) & = & \beta_{0}+f_{1}\left(X_{1}\right)+f_{2}\left(X_{2}\right)+\dots+f_{p}\left(X_{p}\right)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+pros and cons of GAM
+\end_layout
+
+\begin_layout Itemize
+GAMs allow us to fit a non-linear 
+\begin_inset Formula $f_{j}$
+\end_inset
+
+ to each 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+, so that we can automatically model non-linear relationships that standard
+ linear regression will miss.
+ 
+\color blue
+This means that we do not need to manually try out many different transformation
+s on each variable individually.
+\end_layout
+
+\begin_layout Itemize
+The non-linear fit can potentially make more accurate predictions for the
+ response 
+\begin_inset Formula $Y$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Because the model is additive, we can still examine the effect of each 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+ on 
+\begin_inset Formula $Y$
+\end_inset
+
+ individually while holding all of the other variables fixed.
+ Hence if we are interested in inference, GAMs provide a useful representation
+\end_layout
+
+\begin_layout Itemize
+The smoothness of the function 
+\begin_inset Formula $f_{j}$
+\end_inset
+
+ for the variable 
+\begin_inset Formula $X_{j}$
+\end_inset
+
+ can be summarized via degrees of freedom
+\end_layout
+
+\begin_layout Itemize
+The main limitation of GAMs is that the model is restricted to be additive.
+ With many variables, important interactions can be missed.
+ However, as with linear regression, we can manually add interaction terms
+ to the GAM model by including additional predictors of the form 
+\begin_inset Formula $X_{j}\times X_{k}$
+\end_inset
+
+.
+ In addition we can add low-dimensional interaction functions of the form
+ 
+\begin_inset Formula $f_{jk}\left(X_{j},X_{k}\right)$
+\end_inset
+
+ into the model; such terms can be fit using two-dimensional smoothers such
+ as local regression, or two-dimensional splines (not covered here).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Lingering Questions:
+\end_layout
+
+\begin_layout Standard
+None so far.
+ But my notes on R labs for Chapter 7 is potentially very helpful! It talks
+ about using ANOVA to compare models, I don't think I fully understand that
+ yet.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+R sessions
+\end_layout
+
+\begin_layout Plain Layout
+
+==================================================================
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+polynomial regression
+\end_layout
+
+\begin_layout Plain Layout
+
+===================
+\end_layout
+
+\begin_layout Plain Layout
+
+- if we use the poly(variable, d = degree), it will automatically create
+ an orthogonal basis functions for us.
+ The advantage of this is that we can directly compared the coefficients
+ for different degrees of that variable, and see to what degree the polynomial
+ is appropriate.
+ This is not going to work when we use variable + I(variable^2) + ...
+ since they are not orthogonal, because we cannot easily interpret the coefficie
+nts, one by one, because they are correlated and tend to move together.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- The good thing is that if all we care is the fitted values, the choice
+ of basis would be affected the fitted values.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- CAUTION: This interpretation of coefficient of orthogonal basis, no longer
+ works when:
+\end_layout
+
+\begin_layout Plain Layout
+
+    - we have a GLM instead of a linear model (because things become non-linear,
+ and 
+\end_layout
+
+\begin_layout Plain Layout
+
+      orthogonality is lost)
+\end_layout
+
+\begin_layout Plain Layout
+
+    - when we have multiple distinct variables in the model
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+So the interpretation only works if you have one variable in a linear model.
+ The solution here is to use the ANOVA function, and it's particularly helpful
+ for comparing a nested sequence of models.
+ The ANOVA output will tell us whether the additional variable helped in
+ reducing the RSS.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+polynomial, this time classification (using glm)
+\end_layout
+
+\begin_layout Plain Layout
+
+====================
+\end_layout
+
+\begin_layout Plain Layout
+
+- We can have polynomial features for a glm, and the fitting is similar.
+ Remember that even if we use poly, the orthogonal basis will no longer
+ be orthogonal because we give weights to fit logistic regression(?).
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- To fit the confidence band, we need to get it at the logit scale, and
+ then transform them into probability scale!
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+spline
+\end_layout
+
+\begin_layout Plain Layout
+
+====================
+\end_layout
+
+\begin_layout Plain Layout
+
+- teach how to use cubic spline using bs(variable, knots = ...) [again, more
+ local than polynomial, have continuous 1st and 2nd derivative]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- teach how to use natural cubic spline using ns().
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- teach how to use smoothing spline.
+ smooth.spline(variable, response, df = ...) where df is the effective degrees
+ of freedom.
+ However, we can use smooth.spline(varaible, response, cv = true) to have
+ the right df chosen for us by cross validation.
+ When we call the fit, we can see the effective degrees of freedom of the
+ smooth.spline(...cv=true) model.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- Generalized Additive Model (GAM).
+ So far we have talked about fitting on a single nonlinear terms.
+ GAM allowed us to fit on multiple nonlinear terms.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- Use gam(response ~ variable ..., data = ...) to fit a gam.
+\end_layout
+
+\begin_layout Plain Layout
+
+- The s(varaible, df = ...) is the GAM syntax for smoothing spline.
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- Can use anova(fit1, fit2, test = "Chisq") to compare just two models(?).
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+- Even for models fitted in lm or glm, we can use plot.glm to plot how each
+ nonlinear term vary or contribute to the response variable.
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
