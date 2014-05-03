@@ -4648,7 +4648,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/Screen Shot 2014-04-05 at 4.47.08 PM.png
+	filename graphs/classification_metric_2.png
 	scale 40
 	rotateOrigin center
 
@@ -9078,7 +9078,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/spline_comparison.png
+	filename graphs/spline_comparison.png
 	scale 40
 	rotateOrigin center
 
@@ -9427,7 +9427,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/local_regression_algorithm.png
+	filename graphs/local_regression_algorithm.png
 	scale 40
 	rotateOrigin center
 
@@ -9898,6 +9898,59 @@ end{verbatim}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Chapter 8: Tree-Based Method
+\end_layout
+
+\begin_layout Standard
+In this chapter, we describe tree-based methods for regression and classificatio
+n.
+ These involve 
+\shape italic
+stratifying
+\shape default
+ or 
+\shape italic
+segmenting
+\shape default
+ the predictor space into a number of simple, distinct regions.
+ In order to make a prediction, we typically use the mean or mode of the
+ training observations in the region to which it belongs.
+ Since the set of splitting rules used to segment the predictor space can
+ be summarized in a tree, these types of approaches are known as 
+\series bold
+decision tree
+\series default
+ methods.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Tree-based methods are simple and useful for interpretation.
+ However, they typically are not competitive with the best supervised learning
+ approaches, such as those seen in earlier chapters, in terms of prediction
+ accuracy.
+ Hence in this chapter we also introduce bagging, random forests, and boosting.
+ Each of these approaches involves producing multiple trees which are the
+ n combined to yield a single consensus prediction.
+ We will see that combining a large number of trees can often result in
+ dramatic improvements in prediction accuracy, at the expense of some loss
+ in interpretation.
 \end_layout
 
 \end_body
