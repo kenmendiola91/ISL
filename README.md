@@ -41,7 +41,7 @@ ISL
 * Local regression
 * Generalized Additive Model (GAM)
 
-### Tree-based methods
+### Chapter 8: Tree-based methods
 * The basic of decision trees
 * Bagging, random forest, and boosting
 
