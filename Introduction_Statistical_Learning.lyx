@@ -3682,6 +3682,140 @@ If
  However, the LASSO solution is not the posterior mean.
 \end_layout
 
+\begin_layout Subsection*
+When to use what model? Linear Models V.S.
+ Tree-based models
+\end_layout
+
+\begin_layout Standard
+Regression and classification trees have a very different flavor from linear
+ models.
+ In particular, linear models assume
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+f(X)=\beta_{0}+\sum_{j=1}^{p}\beta_{j}X_{j}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+whereas regression trees assume a model of the form 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+f(X)=\sum_{m=1}^{M}c_{m}1(X\in R_{m})\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When the relationship between response and predictors are well approximated
+ linearly, then linear model is likely to do better.
+ When there is a more complex relationship between response and predictors,
+ then a tree-based better might give better test error.
+ Of course, when selecting a model, test error is not the only consideration,
+ implementation, interpretability and visualization are very well important
+ factors to consider.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/linear_model_vs_tree_based_model.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Advantages of Tree-based methods:
+\end_layout
+
+\begin_layout Itemize
+Trees are very easy to explain to people.
+ In fact, they are even easier to explain than linear regression!
+\end_layout
+
+\begin_layout Itemize
+Some people believe that decision tree more closely mirror human decision
+ making.
+\end_layout
+
+\begin_layout Itemize
+Trees can be displayed graphically, and are easily interpreted even by a
+ non-expert.
+\end_layout
+
+\begin_layout Itemize
+Trees can easily handle qualitative predictors without the need to create
+ dummy variables.
+\end_layout
+
+\begin_layout Subsubsection*
+Disadvantages of Tree-based methods:
+\end_layout
+
+\begin_layout Itemize
+Trees generally do not have the same level of predictive accuracy as some
+ of the other regression and classification approachesseen in thebook.
+\end_layout
+
+\begin_layout Standard
+We can improve this by using ensemble methods, where we combine weak learners
+ like trees into strong learners.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Lingering Questions:
+\end_layout
+
+\begin_layout Standard
+None so far
+\end_layout
+
 \begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
@@ -9951,6 +10085,1141 @@ Tree-based methods are simple and useful for interpretation.
  We will see that combining a large number of trees can often result in
  dramatic improvements in prediction accuracy, at the expense of some loss
  in interpretation.
+\end_layout
+
+\begin_layout Subsection*
+Decision Trees
+\end_layout
+
+\begin_layout Standard
+Let's first discuss the process of building a regression tree.
+ Roughly speaking, there are two steps
+\end_layout
+
+\begin_layout Itemize
+We divide the predictor space, that is, the set of possible values for 
+\begin_inset Formula $X_{1},X_{2}\dots X_{p}$
+\end_inset
+
+ into 
+\begin_inset Formula $J$
+\end_inset
+
+ distinct and non-overlapping regions 
+\begin_inset Formula $R_{1},R_{2}\dots R_{J}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+For every new observation that falls into the region 
+\begin_inset Formula $R_{j}$
+\end_inset
+
+, we make the same prediction, which is simply the mean of the response
+ values for the training observations in 
+\begin_inset Formula $R_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We now elaborate on the construction of 
+\begin_inset Formula $R_{j}$
+\end_inset
+
+'s above.
+ In theory, the 
+\begin_inset Formula $R_{j}$
+\end_inset
+
+'s can have any shape, but we choose to divide the predictors space into
+ high dimensional rectangles, or boxes, for simplicity and the ease of interpret
+ation.
+ The goal is to find boxes 
+\begin_inset Formula $R_{1},R_{2}\dots R_{J}$
+\end_inset
+
+ that minimize the 
+\begin_inset Formula $RSS$
+\end_inset
+
+, given by
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\sum_{j=1}^{J}\sum_{i\in R_{j}}\left(y_{i}-\hat{y}_{R_{j}}\right)^{2}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\hat{y}_{R_{j}}$
+\end_inset
+
+ is the mean of the training observations in 
+\begin_inset Formula $R_{j}$
+\end_inset
+
+.
+ Unfortunately, this optimization problem is computationally infeasible.
+ As an alternative, we take a 
+\shape italic
+top-down
+\shape default
+, 
+\shape italic
+greedy
+\shape default
+ approach that is known as 
+\shape italic
+recursive binary splitting
+\shape default
+.
+ The approach is 
+\shape italic
+top down
+\shape default
+ because it starts from the top where all the observations belong to the
+ same region and then successively splits the predictor space.
+ Each split is indicated via two new branches further down on the tree (hence
+ 
+\shape italic
+binary
+\shape default
+).
+ It is 
+\shape italic
+greedy
+\shape default
+ because at each step of the tree building process, the best split is made
+ at the particular step, rather than looking ahead and picking a split that
+ will lead to a better tree in some future step.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In order to perform recursive binary splitting, in each of the step/node,
+ we consider all predictors 
+\begin_inset Formula $X_{1},X_{2}\dots X_{p}$
+\end_inset
+
+ and all possible values of the cutoff points 
+\begin_inset Formula $s$
+\end_inset
+
+ such that the resulting tree has the lowest 
+\begin_inset Formula $RSS$
+\end_inset
+
+.
+ In greater details, we seek the value of 
+\begin_inset Formula $j$
+\end_inset
+
+ and 
+\begin_inset Formula $s$
+\end_inset
+
+ that minimize
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\sum_{i:x_{i}\in R_{L}(j,s)}(y_{i}-\hat{y}_{R_{L}})^{2}+\sum_{i:x_{i}\in R_{R}(j,s)}(y_{i}-\hat{y}_{R_{R}})^{2}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\hat{y}_{R_{L}(j,s)}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{y}_{R_{R}(j,s)}$
+\end_inset
+
+ are the mean value of the training observations in the left branch and
+ right branch respectively.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color red
+How exactly is this optimization being done?
+\end_layout
+
+\end_inset
+
+.
+ We then the repeat the same process, recursively, for each of the splitted
+ region, so to minimize RSS.
+ The process continues until a stopping criterion is reached: For example,
+ that there are no more than 5 training observations.
+ Once the regions 
+\begin_inset Formula $R_{j}$
+\end_inset
+
+'s have been determined, we predict the response for a given test observation
+ using the mean response value in which the test observation belongs.
+\end_layout
+
+\begin_layout Subsubsection*
+Tree Pruning
+\end_layout
+
+\begin_layout Standard
+The process described above may produce good predictions on the training
+ set, but not necessarily on the test set.
+ This is because the tree might be too complex, as a result of fitting the
+ training set too hard.
+ Therefore, it is wise to construct a simpler tree (that is, fewer 
+\begin_inset Formula $R_{j}$
+\end_inset
+
+'s), which might lead to smaller variance in the test error at the cost
+ of of some increase in bias.
+ One possible alternative is to only split the node when the split gives
+ us 
+\begin_inset Formula $RSS$
+\end_inset
+
+ reduction that surpass certain threshold, but this approach is too short-sighte
+d, in the sense that a harmless split (with no major reduction in 
+\begin_inset Formula $RSS$
+\end_inset
+
+) might lead to a very good next split (that reduce 
+\begin_inset Formula $RSS$
+\end_inset
+
+ significantly) in the next step.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A better strategy is to grow a very large tree 
+\begin_inset Formula $T_{0}$
+\end_inset
+
+, and prune it back to obtain its subtrees, calculate the cross-validated
+ or validation error on each and everyone of them, and select the best tree.
+ However, running CV on all these subtrees could be a huge search problem,
+ and can be computationally infeasible.
+ As a result, we simply the problem to considered a sequence of nested candidate
+ trees, using the technique of 
+\shape italic
+\color black
+cost complexity pruning
+\shape default
+\color inherit
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rather than considering every subtree, we consider a sequence of subtrees
+ indexed by a nonnegative tuning parameter 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+ For each value of 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ there corespond a subtree 
+\begin_inset Formula $T\subset T_{0}$
+\end_inset
+
+ such that 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\sum_{m=1}^{|T|}\sum_{x_{i}\in R_{m}}(y_{i}-\hat{y}_{R_{m}})^{2}+\alpha\vert T\vert\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+is as small as possible.
+ Here 
+\begin_inset Formula $\vert T\vert$
+\end_inset
+
+ represent the number of terminal nodes in the tree, 
+\begin_inset Formula $R_{m}$
+\end_inset
+
+ is the rectangular predictors region corresponding to the 
+\begin_inset Formula $m^{th}$
+\end_inset
+
+ terminal node, and 
+\begin_inset Formula $\hat{y}_{R_{m}}$
+\end_inset
+
+ is the predicted response associated with 
+\begin_inset Formula $R_{m}$
+\end_inset
+
+.
+ The tuning parameter 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ control the trade-off between RSS and the model complexity, very much similar
+ to the spirit of regularization.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It turns out that as we increase 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ from 0, branches get pruned from the original tree 
+\begin_inset Formula $T_{0}$
+\end_inset
+
+ in a predictable and nested fashion (This is the key that allows us to
+ reduce the search space).
+ We can then use cross-validation to select the optimal 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ in terms of test error.
+ Finally, we return to the full data set and obtain the subtree correspond
+ to 
+\begin_inset Formula $\alpha^{*}$
+\end_inset
+
+ (we can do this because we build a sequence of trees using the full training
+ set).
+ The algorithm is described below:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/cost_complexity_pruning.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Classification Tree
+\end_layout
+
+\begin_layout Standard
+The process of building a classification tree is very similar to regression
+ tree:
+\end_layout
+
+\begin_layout Itemize
+We divide the predictor space, that is, the set of possible values for 
+\begin_inset Formula $X_{1},X_{2}\dots X_{p}$
+\end_inset
+
+ into 
+\begin_inset Formula $J$
+\end_inset
+
+ distinct and non-overlapping regions 
+\begin_inset Formula $R_{1},R_{2}\dots R_{J}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+For every new observation that falls into the region 
+\begin_inset Formula $R_{j}$
+\end_inset
+
+, we make the same prediction, which is simply the 
+\series bold
+mode (not the mean)
+\series default
+ of the response values for the training observations in 
+\begin_inset Formula $R_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In the step where we construct distinct, non-overlapping 
+\begin_inset Formula $R_{j}$
+\end_inset
+
+'s, we also use recursive binary splitting to grow a classification tree.
+ In the classification setting, RSS cannot be used as a criterion for splitting.
+ A natural alternative is to use the classification error rate.
+ This is simply the fraction of training examples that do not belong to
+ the most common class 
+\begin_inset Formula $E=1-\max_{k}(\hat{p}_{mk})$
+\end_inset
+
+.
+ Therefore, for continuous predictor, we find the 
+\begin_inset Formula $(j,s)$
+\end_inset
+
+ pair such that we minimize 
+\begin_inset Formula $E_{L}+E_{R}=1-\max_{k}(\hat{p}_{Lk})+\sum_{x_{i}\in R_{R}}1-\max_{k}(\hat{p}_{Rk})$
+\end_inset
+
+ where 
+\begin_inset Formula $\hat{p}_{mk}$
+\end_inset
+
+ is the proportion of training example that belongs to class 
+\begin_inset Formula $k$
+\end_inset
+
+ in region 
+\begin_inset Formula $R_{m}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+However, classification error is often not sufficiently sensitive for tree
+ growing
+\color inherit
+, and there are two alternative:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Gini Index
+\series default
+: It is defined to be 
+\begin_inset Formula $G=\sum_{k=1}^{K}p_{k}(1-p_{k})$
+\end_inset
+
+, which is a measure of total variance of the 
+\begin_inset Formula $K$
+\end_inset
+
+ classes.
+ When 
+\begin_inset Formula $p_{k}$
+\end_inset
+
+'s are close to 
+\begin_inset Formula $0$
+\end_inset
+
+ or 
+\begin_inset Formula $1$
+\end_inset
+
+, the Gini index is close to 0.
+ Therefore, it is often used as a measure of node purty.
+ If the node is pure, then Gini's index would be small; When the node is
+ uniform/not pure, then the index will be high.
+ For continuous predictor, we again choose the 
+\begin_inset Formula $(j,s)$
+\end_inset
+
+ pair such that it minimize
+\begin_inset Formula \begin{eqnarray*}
+G_{L}+G_{R} & = & \sum_{k=1}^{K}p_{Lk}(1-p_{Lk})+\sum_{k=1}^{K}p_{Rk}(1-p_{Rk})\\
+\\\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Cross Entropy
+\series default
+: An alternative to Gini's index is cross-entropy, given by 
+\begin_inset Formula $D=-\sum_{k=1}^{K}\hat{p}_{mk}log(\hat{p}_{mk})$
+\end_inset
+
+.
+ It turns out that Cross-entropy is numerically very similar to Gini's index.
+ For continuous predictor, we again choose the 
+\begin_inset Formula $(j,s)$
+\end_inset
+
+ pair such that it minimize
+\begin_inset Formula \begin{eqnarray*}
+D_{L}+D_{R} & = & -\sum_{k=1}^{K}p_{Lk}log(p_{Lk})+-\sum_{k=1}^{K}p_{Rk}log(p_{Rk})\\
+\\\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When building a classification tree, either the Gini index or the cross-entropy
+ are typically used to evaluate the quality of a particular split, since
+ these two approaches are more sensitive to node purity than is the classificati
+on error rate.
+ Any of these three approaches might be used when pruning the tree, but
+ the classification error rate is preferable if prediction accuracy of the
+ final pruned tree is the goal.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sometimes a split might yield two terminal nodes that gives the same prediction
+ value (e.g.
+ both prediction predicts class 
+\begin_inset Formula $k$
+\end_inset
+
+).
+ Why would the split still occurs if the prediction is the same for either
+ node? This has to do with node purity.
+ If in the right branch, all the training observations belong to class 
+\begin_inset Formula $k$
+\end_inset
+
+, while the other branch only have 
+\begin_inset Formula $7/11$
+\end_inset
+
+ of them to be in class 
+\begin_inset Formula $k$
+\end_inset
+
+, then if a new observation goes to right branch, we are much more confident
+ about the class prediction of the new observation.
+ 
+\series bold
+A lot of time, we are not only interested in the class prediction, but we
+ are also interested in the node purity because it tells us how confident
+ we are about the prediction!
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Before moving on to ensemble methods, I should point out that we have only
+ discussed node splitting in the case of continuous variables, but splitting
+ based on qualitiative variables is also very common.
+ Often, we choose to put a subset of the factors into one branch, and the
+ others into another branch.
+ The math was not discussed in this book, but I remember CS 246 talk in
+ length about this, at least in the homeworks.
+ 
+\color red
+I don't really know the details here though.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Lingering Questions:
+\end_layout
+
+\begin_layout Subsection*
+Some questions around the math beyond making a split
+\end_layout
+
+\begin_layout Subsubsection*
+Regression Tree
+\end_layout
+
+\begin_layout Standard
+How exactly is the 
+\begin_inset Formula $(j,s)$
+\end_inset
+
+ being chosen in the problem of
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\min_{(j,s)}\sum_{i:x_{i}\in R_{L}(j,s)}(y_{i}-\hat{y}_{R_{L}})^{2}+\sum_{i:x_{i}\in R_{R}(j,s)}(y_{i}-\hat{y}_{R_{R}})^{2}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Classification Tree
+\end_layout
+
+\begin_layout Standard
+Similarly, how exactly is the 
+\begin_inset Formula $(j,s)$
+\end_inset
+
+ being chosen in the classification setting when using Gini index or cross-entro
+py
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\min_{(j,s)}G_{L}+G_{R}\quad\text{or}\quad\min_{(j,s)}D_{L}+D_{R}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Split involving categorical predictors?
+\end_layout
+
+\begin_layout Standard
+Finally, in both regression and classification trees, how do we deal with
+ the split when the predictor is categorical?
+\end_layout
+
+\begin_layout Subsection*
+Some questions around Cost Complexity Pruning
+\end_layout
+
+\begin_layout Standard
+When performing cost complexity pruning, we do the following:
+\end_layout
+
+\begin_layout Itemize
+We first use the whole training set to build a large tree 
+\begin_inset Formula $T_{0}$
+\end_inset
+
+, and use cost complexity pruning to build a sequence of subtrees 
+\begin_inset Formula $T_{\alpha}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+We then use the 
+\series bold
+SAME
+\series default
+ training set again and perform CV to figure out the optimal 
+\begin_inset Formula $\alpha^{*}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+We then return the best tree corresponding to 
+\begin_inset Formula $\alpha^{*}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In this process, we never touch the test set.
+ This is good, because we can truly evalulate the final model using an un-contam
+inated data set.
+ However, we use the training set for both training and parameter tuning.
+ Is this a good practice? It seems like people do this all the time, but
+ I thought breaking the data set to training, validation, and test set is
+ a better practice (if we have eough data to do this split).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In other word, using the training/validation/test set split, we do the following
+ instead:
+\end_layout
+
+\begin_layout Itemize
+We first use 
+\series bold
+training
+\series default
+ set to build 
+\begin_inset Formula $T_{0}$
+\end_inset
+
+ and the sequence of subtrees 
+\begin_inset Formula $T_{\alpha}$
+\end_inset
+
+.
+ Set it aside.
+\end_layout
+
+\begin_layout Itemize
+We use 
+\series bold
+validation
+\series default
+ set to perform cross validation:
+\begin_inset Formula \begin{eqnarray*}
+\text{exclude }k & \alpha=0\dots & \alpha\\
+-1 & T_{0_{err(1,0)}}\dots & T_{\alpha_{err(1,\alpha)}}\\
+-2 & T_{0_{err(2,0)}}\dots & T_{\alpha_{err(2,\alpha)}}\\
+\vdots & \vdots\dots & \vdots\\
+-K & T_{0_{err(K,0)}}\dots & T_{\alpha_{err(K,\alpha)}}\\
+\min_{\alpha} & err(0)=\sum_{k=1}^{K}err(k,0)\dots & err(\alpha)=\sum_{k=1}^{K}err(k,\alpha)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+In CV, using the 
+\begin_inset Formula $(K-1)$
+\end_inset
+
+ fold excluding 
+\begin_inset Formula $k^{th}$
+\end_inset
+
+ fold to build a sequence of 
+\begin_inset Formula $T_{\alpha}$
+\end_inset
+
+ using cost complexity pruning, and use the 
+\begin_inset Formula $k^{th}$
+\end_inset
+
+ fold for calculating validation error for each tree 
+\begin_inset Formula $T_{\alpha}$
+\end_inset
+
+, we then get 
+\begin_inset Formula $err(k,\alpha)$
+\end_inset
+
+.
+ Repeat the same process over 
+\begin_inset Formula $k=1\dots K$
+\end_inset
+
+, we eventually will have validation error for each 
+\begin_inset Formula $T_{\alpha}$
+\end_inset
+
+ in each 
+\begin_inset Formula $(K-1)|K$
+\end_inset
+
+ split.
+ We can then average over the 
+\begin_inset Formula $(K-1)|K$
+\end_inset
+
+ combinations, for each 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ -> 
+\begin_inset Formula $\sum_{k=1}^{K}err(k,\alpha)\:\forall\alpha$
+\end_inset
+
+.
+ Finally, we will be able to compare which 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ gives the best model using the validation set.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice, when we visit each of the 
+\begin_inset Formula $(K-1)|K$
+\end_inset
+
+ combination, the sequence of trees we build, and at each 
+\begin_inset Formula $\alpha$
+\end_inset
+
+, might be different.
+ But that's ok, because we are not testing whether a particular tree performs
+ best, we are testing the premise of using a tree with a 
+\series bold
+particular size
+\series default
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+We can then return to training set to pick out the 
+\begin_inset Formula $T_{\alpha*}$
+\end_inset
+
+.
+ The advantage here is that the parameter tuning process does not cross-contamin
+ate with thet training error.
+\end_layout
+
+\begin_layout Itemize
+Finally, once the final model is settle, we can then run through 
+\series bold
+test
+\series default
+ set to calculate the test error.
+ Here, we did not use the test set for either training or model parameter
+ tuning.
+\end_layout
+
+\begin_layout Standard
+
+\color red
+I think this approach is cleaner, but is it necessarily better?
+\end_layout
+
+\begin_layout Subsection*
+Different ways of dividing up the whole data set for prediction problem
+\end_layout
+
+\begin_layout Standard
+There seem to be many different ways of dividing up the whole data for a
+ prediction problem:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Option 1
+\series default
+: Wrong approach! Use the whole data set for training, without reserving
+ a test set.
+ Report the 
+\begin_inset Quotes eld
+\end_inset
+
+test error
+\begin_inset Quotes erd
+\end_inset
+
+ using the training set.
+ This is dead wrong, because the training error is too optimistic.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Option 2
+\series default
+: Validation Approach - Split it into training and test error.
+ Train on the training set, do not use parameter tuning to balance bias-variance
+-trade-off, calculate test error straight up from the model from training
+ set.
+ This approach is fine, but likely to not give us too good of a test error,
+ because it doesn't adjust for bias-variance-trade-off.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Option 3
+\series default
+: Cross Validation Approach - Essentially the same as option 2, but we split
+ the data set to 
+\begin_inset Formula $K-$
+\end_inset
+
+fold instead of 
+\begin_inset Formula $2-$
+\end_inset
+
+fold.
+ And we also take the average of the test error.
+\end_layout
+
+\begin_layout Standard
+To do any sort of bias-variance-trade-off, we usually need to optimize not
+ just the RSS, but 
+\begin_inset Formula $RSS+\text{\text{parameter}\times penalty}$
+\end_inset
+
+.
+ In such cases, we need to not only train the model, but also use validation
+ set to do parameter tuning (Regularization, Cost complexity pruning 
+\begin_inset Formula $\dots$
+\end_inset
+
+ etc):
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Option 4
+\series default
+: We need to train, parameter tune, and test the model, and we combine everythin
+g into the CV procedure.
+ We use all the data, break it into 
+\begin_inset Formula $K$
+\end_inset
+
+ fold (without reserving a test set aside), and use the CV procedure to
+ fit and pick optimal parameter.
+ The final model performance is reported directly using CV error.
+ This is better than option 1, in the sense that the reported test error
+ is at least on unseen observations.
+ However, reporting the test error with the best complexity parameter is
+ still optimistic, because after all, it is the parameter that gives the
+ best model performance (In itself is one kind form of learning).
+ So it is still not ideal.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Option 5
+\series default
+: Split the data into training set and test set
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\bar under
+Training set:
+\bar default
+ use training set to train the model as well as picking the optimal parameter.
+ This is usually done via doing cross validation using only the training
+ set.
+ Since the model with the best parameter is usually only using 
+\begin_inset Formula $(K-1)/K$
+\end_inset
+
+ of the data, and the actual models might be different across fold, the
+ typical thing to do is to re-fit the model using the full 
+\begin_inset Formula $K$
+\end_inset
+
+ fold training data.
+\end_layout
+
+\begin_layout Itemize
+
+\bar under
+Test set
+\bar default
+: We then report the test set error using the test set on that chosen model.
+\end_layout
+
+\begin_layout Standard
+This is an improvement from 4, where we have valid test error (in the sense
+ of calculating on unseen data), and that test error is not cherry pick
+ with respect to the best parameter.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Option 6
+\series default
+: Split the data into training, validation, and test set
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\bar under
+Training set
+\bar default
+: This is used solely for building a model, indexed by the complexity parameter,
+ which we will later pass down to the test set
+\end_layout
+
+\begin_layout Itemize
+
+\bar under
+Validation set
+\bar default
+: This is solely used for picking the right model complexity (parameter
+ tuning), using using CV
+\end_layout
+
+\begin_layout Itemize
+Once we have the optimal parameter, we find the model built from training
+ set correspond to that parameter
+\end_layout
+
+\begin_layout Itemize
+
+\bar under
+Test set: 
+\bar default
+Finally, we test the model from training set with optimal parameter to get
+ the test error
+\end_layout
+
+\begin_layout Standard
+The advantage here is that we have a valid test error (test on unseen data),
+ we have separate out the training and validation process, which is cleaner.
+ 
+\color red
+I am not sure if this is a more objective approach compared to option 5
+ though.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+It seems like option 4 is analogous to option 1, and option 5,6 are analogous
+ to option 2, we never really use cross validation approach again, 
+\color red
+is there an analogy to option 3 when we need to tune parameters? Can we
+ use nested cross validation approach here?
+\color inherit
+ I think so, the idea is instead of (training, validation), test set (fixed),
+ we create different folds of (training, validation), test set, and average
+ over the test set.
+ So what we really have is
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\{(\text{\ensuremath{\{}training+validation set\ensuremath{\}_{j=1}^{L}}), test set}\}_{i=1}^{K}\]
+
+\end_inset
+
+or
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\{(\text{(training set, \ensuremath{\{}validation set\ensuremath{\}_{j=1}^{L}}), test set}\}_{i=1}^{K}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color red
+(?) I think we can, and it gives us a more objective way to seeing the uncertain
+ty of the test error! I think Trevor Hastie might have talk about this,
+ but I never seen it covered in a textbook so far!
 \end_layout
 
 \end_body
