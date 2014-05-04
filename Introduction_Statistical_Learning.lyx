@@ -10603,8 +10603,7 @@ Gini Index
 
  pair such that it minimize
 \begin_inset Formula \begin{eqnarray*}
-G_{L}+G_{R} & = & \sum_{k=1}^{K}p_{Lk}(1-p_{Lk})+\sum_{k=1}^{K}p_{Rk}(1-p_{Rk})\\
-\\\end{eqnarray*}
+G_{L}+G_{R} & = & \sum_{k=1}^{K}p_{Lk}(1-p_{Lk})+\sum_{k=1}^{K}p_{Rk}(1-p_{Rk})\end{eqnarray*}
 
 \end_inset
 
@@ -10628,8 +10627,7 @@ Cross Entropy
 
  pair such that it minimize
 \begin_inset Formula \begin{eqnarray*}
-D_{L}+D_{R} & = & -\sum_{k=1}^{K}p_{Lk}log(p_{Lk})+-\sum_{k=1}^{K}p_{Rk}log(p_{Rk})\\
-\\\end{eqnarray*}
+D_{L}+D_{R} & = & -\sum_{k=1}^{K}p_{Lk}log(p_{Lk})+-\sum_{k=1}^{K}p_{Rk}log(p_{Rk})\end{eqnarray*}
 
 \end_inset
 
@@ -10702,6 +10700,1021 @@ Before moving on to ensemble methods, I should point out that we have only
  
 \color red
 I don't really know the details here though.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Bagging (Bootstrap Aggregating)
+\end_layout
+
+\begin_layout Standard
+The bootstrap, introduced in chapter 5, is an extremely powerful idea.
+ It is used in many situations in which it is hard or even impossible to
+ directly compute the standard deviation of a quantity of interest.
+ We see that the bootstrap can be used in a completely different context,
+ in order to improve statistical learning methods such as decision trees.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The decision trees discussed in the earlier section suffers from high variance.
+ This means that if we split the data set into two-halves and fit a model
+ on each half, the results that we get could be quite different.
+ In contrast, a procedure with low variance will yield similar results if
+ applied repeatedly to distinct data set.
+ 
+\shape italic
+Bootstrap aggregation
+\shape default
+, or 
+\shape italic
+bagging
+\shape default
+, is a general purpose procedure for reducing the variance of a statistical
+ learning method.
+ We introduce it here because it is often used in the context of decision
+ tree.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Recall that given a set of 
+\begin_inset Formula $n$
+\end_inset
+
+ observations 
+\begin_inset Formula $Z_{1}\dots Z_{n}$
+\end_inset
+
+, each with variance 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+, the variance of the mean 
+\begin_inset Formula $\bar{Z}$
+\end_inset
+
+ will have variance 
+\begin_inset Formula $\sigma^{2}/n$
+\end_inset
+
+.
+ In other words, averaging independent samples reduces variance.
+ Hence, a natural way to reduce the variance and hence increase the prediction
+ accuracy of a statistical learning method is to take many training sets
+ from the population, build a separate prediction model using each training
+ set, and average the resulting predictions.
+ In other word, we could calculate 
+\begin_inset Formula $\hat{f}^{1}(x),\hat{f}^{2}(x),\dots,\hat{f}^{B}(x)$
+\end_inset
+
+ using 
+\begin_inset Formula $B$
+\end_inset
+
+ separate training sets, and average them in order to obtain a single low-varian
+ce statistical learning model, given by
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\hat{f}_{\text{avg}}\left(x\right) & = & \frac{1}{B}\sum_{b=1}^{B}\hat{f}^{b}(x)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Of course, this is not practical because we often do not have the leisure
+ to access to multiple training sets.
+ Instead, we can bootstrap, by taking repeated samples of the data set at
+ hand.
+ In this approach, we generate 
+\begin_inset Formula $B$
+\end_inset
+
+ bootstrapped training data sets.
+ We then train our method on each of the training set in order to get 
+\begin_inset Formula $\hat{f}^{b*}(x)$
+\end_inset
+
+, and finally average all the predictions, to obtain
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\hat{f}_{\text{bag}}(x) & = & \frac{1}{B}\sum_{b=1}^{B}\hat{f}^{b*}(x)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While bagging can improve predictions for many regression methods, it is
+ particularly useful for decision trees.
+ To apply bagging to regression trees, we simply construct 
+\begin_inset Formula $B$
+\end_inset
+
+ regression trees using 
+\begin_inset Formula $B$
+\end_inset
+
+ bootstrapped training sets, and average the resulting predictions.
+ 
+\series bold
+These trees are grown deep, and not pruned
+\series default
+.
+ The reason is that while a single deep tree have high variance, it is has
+ low bias.
+ By bootstrap aggregating, we will be able to reduce the variance part significa
+ntly.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In the context of classification, we follow the same exact procedure, except
+ the prediction is made by taking the majority vote
+\end_layout
+
+\end_inset
+
+ Note that, the number of trees 
+\begin_inset Formula $B$
+\end_inset
+
+ is not a critical parameter with bagging; using a very large 
+\begin_inset Formula $B$
+\end_inset
+
+ will not lead to overfitting.
+ In practice, we use a value of 
+\begin_inset Formula $B$
+\end_inset
+
+ sufficiently large that the error has settled down.
+\end_layout
+
+\begin_layout Subsubsection*
+Out-of-Bag Error Estimation
+\end_layout
+
+\begin_layout Standard
+It turns out that there is a very straightforward way to estimate the test
+ error of a bagged model, without the need to perform cross-validation or
+ the validation set approach.
+ Recall that the key to bagging is that trees are repeatedly fit to bootstrapped
+ subsets of the observations.
+ One can show that on average, each bagged tree makes use of around 
+\begin_inset Formula $2/3$
+\end_inset
+
+ of the observations.
+ Proof:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+P\left(\text{a single observation not be drawn in n trials}\right) & = & \left(1-P\left(\text{be drawn, with equally likely probability}\right)\right)^{n}\\
+ & = & (1-\frac{1}{n})^{n}{\color{red}\longrightarrow}\frac{1}{e}\approx0.36\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This means that if we fixed on the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ observation, and walk through each of 
+\begin_inset Formula $B$
+\end_inset
+
+ bootstrapped training sets, on average, the observation would only be present
+ in 
+\begin_inset Formula $2/3$
+\end_inset
+
+ of the bootstrapped training sets.
+ Therefore, we can predict the response for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ observation using each of the trees in which that observation was OOB,
+ meaning that it was not used for training in that training set.
+ This will yield around 
+\begin_inset Formula $B/3$
+\end_inset
+
+ predictions for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ observation.
+ In order to obtain a single prediction for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ observation, we can average these predicted responses or can take a majority
+ vote.
+ This leads to a single OOB prediction for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ observation.
+ We repeat the same process for all 
+\begin_inset Formula $n$
+\end_inset
+
+ observations, from which the overall OOB MSE or classification error can
+ be computed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The resulting OOB error is a valid estimate of the test error, since the
+ response for each observation is predcited using only the trees that were
+ not fit using that observation.
+ It can be shown that with 
+\begin_inset Formula $B$
+\end_inset
+
+ sufficiently large, the OOB approach is virtually equivalent to LOOCV.
+ This approach is convenient when performing bagging on large data sets
+ for which cross-validation would be computationally onerous.
+\end_layout
+
+\begin_layout Subsubsection*
+Variable Importance Measures
+\end_layout
+
+\begin_layout Standard
+As we have discussed, bagging typically results in improved prediction accuracy.
+ Unfortunately, however, it can be difficult to interpret the resulting
+ model, wheras in a single decision the interpretation is clear.
+ Thus, bagging improves prediction accuracy at the expense of interpretability.
+ Although the collection of bagged trees is much more difficult to interpret
+ than a single tree (each observation goes down a different tree path, and
+ the results are combined), one can still obtain an overall summary of the
+ importance of each predictor.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The typical approach for comparing variable importance measure is constructed
+ in the following way:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Regression
+\series default
+: For each predictors, record the total amount that RSS is decreased due
+ to splits over that given predictor, averaged over all 
+\begin_inset Formula $B$
+\end_inset
+
+ trees.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color red
+I think a predictor can be used multiple times even in a single tree, record
+ ALL of those splits
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Classification
+\series default
+: For each predictors, record the total amount that Gini index/cross-entropy
+ is decreased due to splits over that given predictor, averaged over all
+ 
+\begin_inset Formula $B$
+\end_inset
+
+ trees.
+\end_layout
+
+\begin_layout Standard
+This way, we have an objective way of comparing which predictor tries the
+ hardest, and is most effective in working toward prediction generalization.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Random Forest
+\end_layout
+
+\begin_layout Standard
+Random forests provide an improvement over bagged trees by way of a small
+ tweak that 
+\shape italic
+\color black
+decorrelates
+\shape default
+\color inherit
+ the trees.
+ As in bagging, we build a number of decision trees on bootstrapped training
+ samples.
+ But when building these decision trees, each time a split in a tree is
+ considered, a random sample of 
+\begin_inset Formula $m$
+\end_inset
+
+ predictors is chosen as split candidates from the full set of 
+\begin_inset Formula $p$
+\end_inset
+
+ predictors.
+ The split is allowed to use only one of those 
+\begin_inset Formula $m$
+\end_inset
+
+ randomly chosen predictors.
+ A fresh sample of 
+\begin_inset Formula $m$
+\end_inset
+
+ predictors is taken at each and every split in consideration, and typically
+ we choose 
+\begin_inset Formula $m\approx\sqrt{p}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In other words, in building a random forest, at each split in the tree,
+ the algorithm is 
+\shape italic
+\color black
+not even allowed
+\shape default
+\color inherit
+ to consider a majority of the available predictors.
+ The reason of doing so is decorrelations.
+ Suppose that there is one very strong predictor in the data set, along
+ with a number of moderately strong predictors.
+ Then in the collection of bagged trees, most of all of the trees will use
+ this strong predictor in the top split.
+ Consequently, all bagged trees would look very similar in structure.
+ Hence, the predictions from the bagged trees will be highly correlated.
+ Unfortunately, averaging many highly correlated quantites does not lead
+ to a significant reduction in variance.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Random forest overcome this problem by forcing each split to consider only
+ a subset of the predictors, therefore, providing more variation to the
+ each tree's growing process.
+ On average, only 
+\begin_inset Formula $m/p$
+\end_inset
+
+ of the splits would consider the strong predictor, and about 
+\begin_inset Formula $1-m/p=(p-m)/p$
+\end_inset
+
+ would not.
+ For 
+\begin_inset Formula $m$
+\end_inset
+
+ small, we will be able to give more chance to other predictors, hence,
+ decorrelating the trees so to make the averaging more effective in reducing
+ variance.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Notice in random forest, the tuning parameters here are:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $m$
+\end_inset
+
+, the number of predictors that are allowed to be considered in each split.
+ When 
+\begin_inset Formula $m=p$
+\end_inset
+
+, we are back to bagging (bootstrap aggregating).
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $B$
+\end_inset
+
+, the number of trees we grow.
+ Similarly to bagging, 
+\begin_inset Formula $B$
+\end_inset
+
+ is not a crucial parameter, and large 
+\begin_inset Formula $B$
+\end_inset
+
+ is unlikely to overfit the data.
+ We typically choose 
+\begin_inset Formula $B$
+\end_inset
+
+ large enough for the variance to settle down.
+\end_layout
+
+\begin_layout Standard
+Here is an example where we compare the test error & OOB error of a single
+ decision tree, bagging, and random forest with 
+\begin_inset Formula $m=\sqrt{p}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/tree_methods_comparison.png
+	scale 60
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For the test error, we split the data set into training set and test set:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Single decision tree
+\series default
+: we built the model using the training set, and calculate the test error
+ on test set.
+ There is no 
+\begin_inset Formula $B$
+\end_inset
+
+, so the test error is a flat line.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Bagged model
+\series default
+: as a function of 
+\begin_inset Formula $B$
+\end_inset
+
+, we use the training set to create 
+\begin_inset Formula $B$
+\end_inset
+
+ bootstrapped samples, fit 
+\begin_inset Formula $B$
+\end_inset
+
+ bagged trees, the collection of 
+\begin_inset Formula $B$
+\end_inset
+
+ bagged trees is our model.
+ We the run through each observation in the test set -- get 
+\begin_inset Formula $\sum_{b=1}^{B}\hat{f}^{b}(x)$
+\end_inset
+
+ or majority vote as our prediction, we then calculate the squared error
+ or whether we misclassify for that observation.
+ Once we run through all samples in the test set, we can then finally get
+ the overall MSE or misclassification error, which what we see above.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Random forest model
+\series default
+: as a function of 
+\begin_inset Formula $B$
+\end_inset
+
+, we use the training set to create 
+\begin_inset Formula $B$
+\end_inset
+
+ bootstrapped samples, fit 
+\begin_inset Formula $B$
+\end_inset
+
+ random forest trees, the collection of 
+\begin_inset Formula $B$
+\end_inset
+
+ random forest trees is our model.
+ The rest are exactly the same as the bagged model case.
+\end_layout
+
+\begin_layout Standard
+For the OOB error, we simply use the whole data set (no need to split them
+ into training or test set):
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Single decision tree
+\series default
+: It doesn't exist, since we do not have 
+\begin_inset Formula $B$
+\end_inset
+
+ bootstrapped samples.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Bagged model
+\series default
+: as a function of 
+\begin_inset Formula $B$
+\end_inset
+
+, we use the whole data set to create 
+\begin_inset Formula $B$
+\end_inset
+
+ bootstrapped samples, fit 
+\begin_inset Formula $B$
+\end_inset
+
+ bagged trees, the collection of these 
+\begin_inset Formula $B$
+\end_inset
+
+ bagged trees is our model.
+ We then run through each and every observation in the data set (not test
+ set) -- get 
+\begin_inset Formula $\sum_{b=1}^{B^{-}}\hat{f}^{b}(x)$
+\end_inset
+
+ or majority vote 
+\series bold
+over only the trees that didn't use that observation for fitting
+\series default
+ (I used 
+\begin_inset Formula $B^{-}$
+\end_inset
+
+ to indicate this).
+ The average of these error gives us MSE or misclassification rate.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Random forest model
+\series default
+: as a function of 
+\begin_inset Formula $B$
+\end_inset
+
+, we use the whole data set to create 
+\begin_inset Formula $B$
+\end_inset
+
+ bootstrapped samples, fit 
+\begin_inset Formula $B$
+\end_inset
+
+ random forest trees, the collection of these 
+\begin_inset Formula $B$
+\end_inset
+
+ random forest trees is our model.
+ The calculation for MSE and misclassification is exactly the same as 'bagged
+ model' case.
+\end_layout
+
+\begin_layout Standard
+Here is another example, but only focusing on random forest and only using
+ test misclassification error:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/random_forest_parameter_tuning.png
+	scale 60
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is pretty much the same as the approach above, but now we vary the
+ 
+\begin_inset Formula $m$
+\end_inset
+
+ parameter.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Boosting
+\end_layout
+
+\begin_layout Standard
+Like bagging, boosting is a general approach that can be applied to many
+ statistical learning methods for regression or classification.
+ We only discuss boosting for decision trees.
+ Recall that bagging involves creating multiple copies of the original training
+ data set using the bootstrap, fitting a separate decision tree to each
+ copy, and then combining all of the trees in order to create a single predictiv
+e model.
+ Notably, each tree is built on a bootstrap dat set, independent of the
+ other trees.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Boosting works in a similar way, except that the trees are grown 
+\series bold
+sequentially
+\series default
+: each tree is grown using information from previously grown trees.
+ Boosting algorithm for regression tree
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+Boosting classification was not introduced here! Worth looking into more
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/boosting_algorithm.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Unlike fitting a single large decision tree to the data, which amounts to
+ fitting the data hard and potentially overfitting, the boosting approach
+ instead learns slowly.
+\end_layout
+
+\begin_layout Itemize
+Given the current model, we fit a decision tree to the residuals from the
+ model.
+ We then add this new decision tree into the fittd function in order to
+ update the residuals.
+\end_layout
+
+\begin_layout Itemize
+Each of these trees can be rather small, with just a few terminal nodes,
+ determined by the parameter 
+\begin_inset Formula $d$
+\end_inset
+
+ in the algorithm.
+\end_layout
+
+\begin_layout Itemize
+By fitting small trees to the residuals, we slowly improve 
+\begin_inset Formula $\hat{f}$
+\end_inset
+
+ in areas where it does not perform well.
+ The shrinkage parameters 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ slows the process down even futher, allowing more and different shaped
+ trees to attack the residuals.
+\end_layout
+
+\begin_layout Subsubsection*
+Tuning parameters for Boosting
+\end_layout
+
+\begin_layout Itemize
+The number of trees 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Unlike bagging and random forests, boosting can overfit if 
+\begin_inset Formula $B$
+\end_inset
+
+ is too large, although this overfitting tends to occur slowly if at all.
+ We use cross-validation to choose 
+\begin_inset Formula $B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The shrinkage parameter 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, a small positive number.
+ This controls the rate at which boosting learns.
+ Typical values are 
+\begin_inset Formula $0.01-0.001$
+\end_inset
+
+, and the right choice can depend on the problem.
+ Very small 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ can require using a very large value of 
+\begin_inset Formula $B$
+\end_inset
+
+ in order to acheive good performance.
+\end_layout
+
+\begin_layout Itemize
+The number of splits 
+\begin_inset Formula $d$
+\end_inset
+
+ in each tree, which controls the complexity of the boosted ensemble.
+ Often 
+\begin_inset Formula $d=1$
+\end_inset
+
+ works well, in which case each tree is a stump, consisting of a single
+ split and resulting in an additive model.
+ More generally 
+\begin_inset Formula $d$
+\end_inset
+
+ is the interaction depth, and controls the interaction order of the boosted
+ model, since 
+\begin_inset Formula $d$
+\end_inset
+
+ splits can involve at most 
+\begin_inset Formula $d$
+\end_inset
+
+ variables.
+\end_layout
+
+\begin_layout Standard
+Another illustration of the test error as a function of 
+\begin_inset Formula $B$
+\end_inset
+
+, number of trees built
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/boosting_randomForest_comparison.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Random Forest Model
+\series default
+: same as above
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Boosting Model
+\series default
+: We break the data set into training set and test set.
+ As a function of 
+\begin_inset Formula $B$
+\end_inset
+
+, we use the training set for the boosting model (sequentially).
+ We start with 
+\begin_inset Formula $\left(X,r=y\right)$
+\end_inset
+
+, we then sequentially builds smaller trees using the residuals from the
+ previous model successively, until we reach 
+\begin_inset Formula $B$
+\end_inset
+
+ trees.
+ We then use 
+\begin_inset Formula $\hat{f}_{boost}(x)=\sum_{b=1}^{B}\lambda\hat{f}^{b}(x)$
+\end_inset
+
+ as our model.
+ Run through the test set, and calculate the MSE or misclassification error.
  
 \end_layout
 
@@ -11220,6 +12233,43 @@ or
 (?) I think we can, and it gives us a more objective way to seeing the uncertain
 ty of the test error! I think Trevor Hastie might have talk about this,
  but I never seen it covered in a textbook so far!
+\end_layout
+
+\begin_layout Subsection*
+Questions arise from Variable Importance Measures
+\end_layout
+
+\begin_layout Standard
+The prescription for calculating variable importance is to look at the average
+ decrease in RSS/Gini index due to splits responsible from a particular
+ variables.
+ It seems like we are only looking at the training set error? Why are we
+ not looking at the test error? I remember vaguely that sometimes in linear
+ models, we can remove/add predictors, and use some ANOVA technique to see
+ if the increase/decrease in RSS is worth adding the additional varaible?
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+But it seems like they are all looking at the change in training error,
+ instead of test error (or validation error to be more correct).
+ Why is that? I thought ultimately we are going after prediction accuracy.
+\end_layout
+
+\begin_layout Subsection*
+Questions for Boosting Algorithm
+\end_layout
+
+\begin_layout Standard
+How do we do boosting for classification problem? Perhaps ESL would have
+ more answers there?
 \end_layout
 
 \end_body
