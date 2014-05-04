@@ -11208,7 +11208,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/tree_methods_comparison.png
+	filename graphs/tree_methods_comparison.png
 	scale 60
 	rotateOrigin center
 
@@ -11408,7 +11408,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/random_forest_parameter_tuning.png
+	filename graphs/random_forest_parameter_tuning.png
 	scale 60
 	rotateOrigin center
 
@@ -11502,7 +11502,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/boosting_algorithm.png
+	filename graphs/boosting_algorithm.png
 	scale 50
 	rotateOrigin center
 
@@ -11657,7 +11657,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/boosting_randomForest_comparison.png
+	filename graphs/boosting_randomForest_comparison.png
 	scale 40
 	rotateOrigin center
 
