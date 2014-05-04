@@ -3740,7 +3740,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/linear_model_vs_tree_based_model.png
+	filename graphs/linear_model_vs_tree_based_model.png
 	scale 60
 
 \end_inset
@@ -10453,7 +10453,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/cost_complexity_pruning.png
+	filename graphs/cost_complexity_pruning.png
 	scale 40
 	rotateOrigin center
 
