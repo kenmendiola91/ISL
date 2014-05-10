@@ -12272,5 +12272,308 @@ How do we do boosting for classification problem? Perhaps ESL would have
  more answers there?
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Chapter 9: Support Vector Machine
+\end_layout
+
+\begin_layout Standard
+Support Vector Machine is an approach for classification that was developed
+ in the computer science community in the 1990s.
+ The approach is not statistical, it simply tries to find a plane that separates
+ the classes in feature space.
+ Despite its lack of statistical rooting, it has grown in its popularity
+ and is one of the most competitive methods nowadays.
+ We will discuss SVM in three layers of progression:
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Maximal Margin Classifier
+\shape default
+: It simply tries to find a separating hyperplane that separate the data
+ in the feature space when the data is linearly separable.
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Support Vector Classifier
+\shape default
+: an extension of the maximal margin classifier that can be applied in a
+ borader range of cases, i.g.
+ when the data is noisy or not linearly separable (Softening).
+\end_layout
+
+\begin_layout Itemize
+
+\shape italic
+Support Vector Machine
+\shape default
+: A further extension of the support vector classifier in order to accommodate
+ non-linear class boundaries (Kernel methods).
+\end_layout
+
+\begin_layout Standard
+SVM is typically used for binary classification problem, but it can be extended
+ to multi-class settings as well.
+ Finally, we will draw the connections of SVM with other statistical methods
+ we have seen so far.
+\end_layout
+
+\begin_layout Subsection*
+Maximal Margin Classifier
+\end_layout
+
+\begin_layout Standard
+The intuition of constructing a maximal margin classifier is simple, we
+ want to find a hyperplane that is able to separate the two classes of data,
+ and make the separation as large as possible.
+ Let's introduce some mathematical constructs to characterize the maximal
+ margin classifier problem.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Mathematically, a 
+\begin_inset Formula $p$
+\end_inset
+
+ dimensional hyperplane is defined as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\beta_{0}+\beta_{1}X_{1}+\beta_{2}X_{2}+\dots+\beta_{p}X_{p}=0\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A given 
+\begin_inset Formula $\left(X_{1}\dots X_{p}\right)$
+\end_inset
+
+ that satisfied the condition above lies on the hyperplane.
+ 
+\begin_inset Formula $\left(\beta_{1}\dots\beta_{p}\right)$
+\end_inset
+
+ is the normal vector that is perpendicular to the surface of the hyperplane.
+ For an 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+ that does not lie on the plane, then either 
+\begin_inset Formula $\beta_{0}+\beta_{1}X_{1}+\beta_{2}X_{2}+\dots+\beta_{p}X_{p}>0$
+\end_inset
+
+ or 
+\begin_inset Formula $\beta_{0}+\beta_{1}X_{1}+\beta_{2}X_{2}+\dots+\beta_{p}X_{p}<0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Each of the observations fall into one of the two classes
+\begin_inset Formula $\in\left\{ 1,-1\right\} $
+\end_inset
+
+, and we label their classes as 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+'s.
+ A separating hyperplane has the property that
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\beta_{0}+\beta_{1}X_{1}+\beta_{2}X_{2}+\dots+\beta_{p}X_{p} & >0 & \text{if \ensuremath{y_{i}=1}}\\
+\beta_{0}+\beta_{1}X_{1}+\beta_{2}X_{2}+\dots+\beta_{p}X_{p} & <0 & \text{if \ensuremath{y_{1}=-1}}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Equivalently, a separating hyperplane has the property that for 
+\begin_inset Formula $\left\{ x_{i},y_{i}\right\} $
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+y_{i}\left(\beta_{0}+\beta_{1}X_{1}+\beta_{2}X_{2}+\dots+\beta_{p}X_{p}\right)>0\:\forall i=1\dots n\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If a separating hyperplane exists, we can use it to construct a very natural
+ classifier: a test observation is assigned a class depending on which side
+ of the hyperplane it is located.
+ That is, we classify the test observation 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+ based on the sign of 
+\begin_inset Formula $f\left(x^{*}\right)=\beta_{0}+\beta_{1}x_{1}^{*}+\dots\beta_{p}x_{p}^{*}$
+\end_inset
+
+.
+ If 
+\begin_inset Formula $f\left(x^{*}\right)$
+\end_inset
+
+ is positive, then we assign the test observation to class 
+\begin_inset Formula $1$
+\end_inset
+
+, and if 
+\begin_inset Formula $f\left(x^{*}\right)$
+\end_inset
+
+ is negative, then we assign the test observation to class 
+\begin_inset Formula $-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general, if our data can be perfectly separated using a hyperplane, then
+ there will in fact exist an infinite number of such hyperplanes, so how
+ do we pick one amongst these infinitely many choices? A natural choice
+ is the maximal margin hyperplane, which is the separating hyperplane that
+ is arthest from the training observations.
+ More precisely, we can compute the perpendicular distance of eaching training
+ point to the hyperplane, the maximal margin classifier aims to maximize
+ the margin of the training point that is closest to the hyperplane (because
+ then all the other points from the two classes would be far apart too).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The intuition here is simple, the farther a point is from the margin, the
+ more 
+\begin_inset Quotes eld
+\end_inset
+
+confident
+\begin_inset Quotes erd
+\end_inset
+
+ we are that it is not at the borderline (less ambiguity in determining
+ its class).
+ if we can find a classifier where the two classes are separated well, then
+ we are likely to do a good job for a new test observations.
+ The mathematical definition is as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/maximal_margin_classifier.png
+	scale 60
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This formulation formalizes our characterization of the maximal margin classifie
+r.
+ The constraints ensure that each observation is not only on the correct
+ side of the hyperplane, but they are also at least a distance 
+\begin_inset Formula $M$
+\end_inset
+
+ from the hyperplane.
+ Our goal is to maximize 
+\begin_inset Formula $M$
+\end_inset
+
+ to make the data sa linearly separable as possible.
+\end_layout
+
+\begin_layout Subsection*
+Support Vector Classifier
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
 \end_body
 \end_document
