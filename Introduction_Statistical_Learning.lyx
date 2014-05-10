@@ -12528,7 +12528,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/maximal_margin_classifier.png
+	filename graphs/maximal_margin_classifier.png
 	scale 60
 	rotateOrigin center
 
@@ -12568,11 +12568,819 @@ r.
 \end_layout
 
 \begin_layout Subsection*
-Support Vector Classifier
+Support Vector Classifier (AKA Soft Margin Classifier)
 \end_layout
 
 \begin_layout Standard
+In reality, not all data sets are linearly separable, in such cases, we
+ will not be able to find a maximal margin classifier, so what do we do
+ then? This is where a support vector classifier (a relaxed/softened version
+ of the maximal margin classifier) can be extremely valuable.
+ In fact, there are scenarios where even if the data is linearly separable,
+ we might choose to use SVC instead of MMC.
+\end_layout
 
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Before we dive into the mathematical details of Support Vector Classifier,
+ it's important to note (again) the cases where this tool can be useful,
+ and why it is appealing:
+\end_layout
+
+\begin_layout Subsubsection*
+Use cases
+\end_layout
+
+\begin_layout Itemize
+The data is linearly separable, but noisy -- This is the case where we have
+ a data point that is near the decision boundary.
+ The existence of such point might greatly change the orientation of the
+ hyperplane, and might make the margin very small.
+ This is generally a bad sign, because we are trying to fit the data too
+ hard and are less confident to classify future observation.
+\end_layout
+
+\begin_layout Itemize
+The data is just outright not linearly separable.
+\end_layout
+
+\begin_layout Subsubsection*
+Why it is appealing
+\end_layout
+
+\begin_layout Standard
+The maximal margin classifier necessarily perfectly classify all the data
+ points.
+ Support vector classifier is willing to consider hyperplane that does not
+ do a perfect job, in exchange for
+\end_layout
+
+\begin_layout Itemize
+Greater robustness for individual observations, and 
+\end_layout
+
+\begin_layout Itemize
+Better classification of most of the training, but also test observations
+\end_layout
+
+\begin_layout Standard
+Essentially, we are trading off between bias and variance.
+ A maximal margin classifier is dogmatic in fitting the particular data
+ set perfectly (low bias, but high variance).
+ The support vector classifier is willing to sacrafice bias for lower variance.
+\end_layout
+
+\begin_layout Subsubsection*
+Mathematical Details of Support Vector Classifier
+\end_layout
+
+\begin_layout Standard
+The support vector classifier classifies a test observation depending on
+ which side of a hyperplane it lies.
+ The hyperplane is chosen to correctly separate most of the training observation
+s into the two classes, but may misclassify a few observations.
+ It is to the solution to the optimization problem:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/support_vector_classifier.png
+	scale 60
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The setting is very similar as in the case of maximal margin classifier.
+ The additional tweak is that we are introducing 
+\begin_inset Formula $\epsilon_{1}\dots\epsilon_{n}$
+\end_inset
+
+, slack variables for each of the observations, which allow individual observati
+on to be on the wrong side of the margin OR wrong side of the hyperplane.
+ In particular, the slack variables 
+\begin_inset Formula $\epsilon_{i}$
+\end_inset
+
+ tells us where the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ observation is located, relative to the hyperplane and margin
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color red
+Is it using some kind of complementary slackness argument?
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+If 
+\begin_inset Formula $\epsilon_{i}=0$
+\end_inset
+
+, then the observation is on the correct side of the margin
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+If 
+\begin_inset Formula $0<\epsilon_{i}<1$
+\end_inset
+
+, then the observation is on the wrong side of the margin, but correct side
+ of hyperplane
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+If 
+\begin_inset Formula $\epsilon_{i}>1$
+\end_inset
+
+, then the observation is on the wrong side of margin AND wrong side of
+ the hyperplane
+\end_layout
+
+\begin_layout Standard
+We now consider the role of 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ 
+\begin_inset Formula $C$
+\end_inset
+
+ bounds the number of non-zero 
+\begin_inset Formula $\epsilon_{i}$
+\end_inset
+
+'s, and can be think of as a budget that represent how much we are willing
+ tolerate violations to the margin (and to the hyperplane):
+\end_layout
+
+\begin_layout Itemize
+When 
+\begin_inset Formula $C=0$
+\end_inset
+
+, there is no budget for violations, so 
+\begin_inset Formula $\epsilon_{i}=0\:\forall\: i$
+\end_inset
+
+.
+ Every observation needs to be in the right side of the margin (of course,
+ this is only possible if the data is linearly separable)
+\end_layout
+
+\begin_layout Itemize
+Now, for 
+\begin_inset Formula $C>0$
+\end_inset
+
+, this means that we cannot have more than 
+\begin_inset Formula $C$
+\end_inset
+
+ observations that fall in the wrong side of the hyperplane, this is because
+ (from above) we have seen that observations on the wrong side of the hyperplane
+ has 
+\begin_inset Formula $\epsilon_{i}>1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Onto bullet point 2, this means that when 
+\begin_inset Formula $C$
+\end_inset
+
+ is large, we have more budget/luxury to engaged in violations.
+ However, when 
+\begin_inset Formula $C$
+\end_inset
+
+ is small, we need to be more frugal about our violations.
+ As we increase 
+\begin_inset Formula $C$
+\end_inset
+
+, we are more tolerant, more points would violate the constraints, and the
+ margin will be widen (because we have the budget and can afford violations
+ so to maximize 
+\begin_inset Formula $M$
+\end_inset
+
+).
+ Conversely, when 
+\begin_inset Formula $C$
+\end_inset
+
+ is small, we cannot afford to violate constraints so we cannot expand 
+\begin_inset Formula $M$
+\end_inset
+
+ as much! In practice, 
+\begin_inset Formula $C$
+\end_inset
+
+ is a tuning parameter, and we typically use cross-validation to figure
+ out the optimal 
+\begin_inset Formula $C$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+When 
+\begin_inset Formula $C$
+\end_inset
+
+ is small, we cannot violate too much, so we have to stick to the actual
+ orientation of the data, so we will be fitting the data hard.
+ This means low bias, but potentially high variance.
+\end_layout
+
+\begin_layout Itemize
+When 
+\begin_inset Formula $C$
+\end_inset
+
+ is large, we are more care-free, because we have the budget to violate
+ the constraints.
+ In this case, we are not fitting the data as hard.
+ This means higher bias, but in exchange, the procedure will have lower
+ variance.
+\end_layout
+
+\begin_layout Standard
+Finally, one interesting property of the soft margin classifier is that
+ only a few of the 
+\begin_inset Quotes eld
+\end_inset
+
+support vectors
+\begin_inset Quotes erd
+\end_inset
+
+ training examples are responsible in determining the orientation of the
+ hyperplane.
+ This means that for those observations that are far away from the hyperplane,
+ so long that they lie on the right side of the margin, their position will
+ not affect the 
+\begin_inset Quotes eld
+\end_inset
+
+fit
+\begin_inset Quotes erd
+\end_inset
+
+! This characteristic is in contrast to methods like LDA, where all the
+ observations are being used to determine the fit.
+\end_layout
+
+\begin_layout Subsection*
+Support Vector Machine
+\end_layout
+
+\begin_layout Standard
+Sometimes a linear boundary simply won't work, no matter how generous we
+ give the budget to 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ This is often the case when the data have non-linear structures.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/svm_non_linear_boundary.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In these scenarios, the support vector machine (an extension of the support
+ vector classifier) is particularly useful, and address the non-linearity
+ issue by enlarging the feature space (often using kernel tricks).
+ The idea is simple:
+\end_layout
+
+\begin_layout Itemize
+We realized the data cannot be separated in the original space with hyperplane
+ easily (even with soft margin)
+\end_layout
+
+\begin_layout Itemize
+Expand the feature space
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Using polynomail is one way, this is very similar to the spirit of polynomial
+ regression in Chapter 7.
+ But as we will see, polynomial are generaly not stable and computational
+ burdensome
+\end_layout
+
+\end_inset
+
+ so that training examples can be re-aligned and become linearly separable
+ (or nearly) in the new space
+\end_layout
+
+\begin_layout Itemize
+Apply MMC or SVC in the new space
+\end_layout
+
+\begin_layout Itemize
+Transform back to the original space to get non-linear decision boundaries
+\end_layout
+
+\begin_layout Subsubsection*
+Why Kernel tricks?
+\end_layout
+
+\begin_layout Standard
+The kernel approach that we describe here is simply an efficient computational
+ approach for enacting the idea abvoe.
+
+\color blue
+ We have not discussed exactly how the support vector classifier is computed
+ (but remember to check out Andrew Ng's CS 229 lecture notes on SVM, where
+ he carefully go through the formulation), 
+\series bold
+\color inherit
+but it turns out that the solution to this problem only involve the inner
+ products of the observations, and not the observations themselves
+\series default
+.
+ It can be shown that:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+f\left(x\right) & = & \beta_{0}+\sum_{i=1}^{n}\alpha_{i}\langle x,x_{i}\rangle=\beta_{0}+\sum_{i\in\mathcal{S}}\alpha_{i}\langle x,x_{i}\rangle\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where there are 
+\begin_inset Formula $n$
+\end_inset
+
+ parameters 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+, 
+\begin_inset Formula $i=1\dots n$
+\end_inset
+
+, one per training observation.
+ To estimate the parameters 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+'s and 
+\begin_inset Formula $\beta_{0}$
+\end_inset
+
+, all we need are the 
+\begin_inset Formula $\binom{n}{2}$
+\end_inset
+
+ inner products 
+\begin_inset Formula $\langle x_{i},x_{i'}\rangle$
+\end_inset
+
+ between all pairs of training observations.
+ To make a classification of a new point, we need to calculate 
+\begin_inset Formula $\langle x_{new},x_{i}\rangle$
+\end_inset
+
+.
+ However, it turns out that 
+\begin_inset Formula $\alpha_{i}$
+\end_inset
+
+ is nonzero only for support vectors in the solution, so in making classificatio
+n prediction, we only need the inner products from 
+\begin_inset Formula $x$
+\end_inset
+
+ and observations in 
+\begin_inset Formula $\mathcal{S}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+I cannot emphasize enough about this observation -- 
+\series bold
+the solution to this problem only involves the inner products of the observation
+s, not the observations themselves
+\series default
+.
+ In fitting a SVM, we only need the inner products of the observations.
+ Imagine we are trying to expand the feature space to tackle the non-linearty
+ issue
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Like (9.16) in page 350
+\end_layout
+
+\end_inset
+
+, as we are about to enlarge the feature space, it might be tempting to
+ write down the transformation for each of the observations, but this is
+ not necessary! Fitting only invovles the inner products of these enlarge
+ features.
+ If we know the inner products of the new features, we are set to fit!
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This means the transformation itself can be quite abstract, so long the
+ (new space) inner products are simple to express mathematically.
+ I.e., it doesn't matter if we can explicitly write down the space you have
+ transformed the original variables to, if we can calculate the inner product
+ of pairs of observations in that new space, we can fit a SVM! This is why
+ Kernel 
+\begin_inset Formula $K\left(x_{i},x_{i'}\right)$
+\end_inset
+
+ fits so well in the context.
+ Once we used the trick, we can always project the decision boundary in
+ the enlarged space back to the original space.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The typical popular choices for Kernels are:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Linear Kernel
+\series default
+: 
+\begin_inset Formula $K\left(x_{i},x_{i'}\right)=\sum_{j=1}^{p}x_{ij}x_{i'j}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Polynomial Kernel of degree 
+\begin_inset Formula $d$
+\end_inset
+
+
+\series default
+: 
+\begin_inset Formula $K(x_{i},x_{i'})=\left(1+\sum_{j=1}^{p}x_{ij}x_{i'j}\right)^{d}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Radial Basis Kernel
+\series default
+: 
+\begin_inset Formula $K\left(x_{i},x_{i'}\right)=exp\left(-\gamma\sum_{j=1}^{p}\left(x_{ij}-x_{i'j}\right)^{2}\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+When 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is far from 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+, then 
+\begin_inset Formula $\sum_{j=1}^{p}\left(x_{ij}-x_{i'j}\right)^{2}$
+\end_inset
+
+ is large, and 
+\begin_inset Formula $K(x,x_{i})$
+\end_inset
+
+ would be small.
+ This means that 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ will virtually play no role in determining the label of 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+.
+ This means RBK has very local behaviors.
+\end_layout
+
+\begin_layout Itemize
+The tuning parameter 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ also controls localness.
+ For large/small 
+\begin_inset Formula $\gamma$
+\end_inset
+
+, 
+\begin_inset Formula $K\left(\cdot\right)$
+\end_inset
+
+ will be small/large, so the behavior would be more/less local.
+ 
+\end_layout
+
+\begin_layout Itemize
+In running a SVM with radial basis kernel, we need to tune both 
+\begin_inset Formula $C$
+\end_inset
+
+ and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ to balance bias-variance-tradeoff.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+In particular, the space provided by RBK is infinitely dimensional, using
+ this kernel allows us to expand the feature to a infinite dimensional space
+ (to perform SVM) without worrying what each individual observations would
+ look like in that space.
+ With the kernel trick, the non-linear function form of SVM classifier becomes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+f\left(x\right) & = & \beta_{0}+\sum_{i\in\mathcal{S}}\alpha_{i}K\left(x,x_{i}\right)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $K\left(x,x_{i}\right)$
+\end_inset
+
+ is the kernel of choice.
+ A very powerful tool indeed! Attached is the result of decision boundary
+ (after projection back to the original space) using the kernel trick using
+ polynomial of degree 
+\begin_inset Formula $3$
+\end_inset
+
+ and radial basis kernel respectively.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/kernel_trick_decision_boundary.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Multi-Class SVM
+\end_layout
+
+\begin_layout Standard
+So far, our discussion has been limited to the case of binary classification.
+ But we can easily extend the problem to multi-class classification.
+ The popular approaches are one-versus-one (OVO) and one-versus-all (OVA):
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+OVA
+\series default
+: One versus All.
+ Fit 
+\begin_inset Formula $K$
+\end_inset
+
+ different 
+\begin_inset Formula $2$
+\end_inset
+
+-class SVM classifier 
+\begin_inset Formula $\hat{f}_{k}\left(x\right)$
+\end_inset
+
+, 
+\begin_inset Formula $k=1,\dots K$
+\end_inset
+
+; each class versus the rest.
+ Classify 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+ to the class for which 
+\begin_inset Formula $\hat{f}_{k}(x^{*})$
+\end_inset
+
+ is largest
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+OVO
+\series default
+: One versus One.
+ Fit all 
+\begin_inset Formula $\binom{K}{2}$
+\end_inset
+
+ pairwise classifiers 
+\begin_inset Formula $\hat{f}_{kl}\left(x\right)$
+\end_inset
+
+.
+ Classify 
+\begin_inset Formula $x^{*}$
+\end_inset
+
+ to the class that wins the most pairwise competitions.
+\end_layout
+
+\begin_layout Standard
+Which one to choose? If 
+\begin_inset Formula $K$
+\end_inset
+
+ is not too large, use OVO.
+\end_layout
+
+\begin_layout Subsection*
+ROC Curve
+\end_layout
+
+\begin_layout Subsection*
+Relationship to Logistic Regression
 \end_layout
 
 \end_body
