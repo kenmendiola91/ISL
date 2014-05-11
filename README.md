@@ -1,7 +1,4 @@
-ISL
-===
-
-# Knowledge Vault
+# ISLR Knowledge Vault
 ## Table of Contents
 
 ### Chapter 1: Introduction
