@@ -45,3 +45,9 @@ ISL
 * The basic of decision trees
 * Bagging, random forest, and boosting
 
+### Chapter 9: Support Vector Machine
+* Maximal Margin Classifier
+* Support Vector Classifiers
+* Support Vector Machines
+* SVM with more than two classes
+* Relationship to Logistic Regression
