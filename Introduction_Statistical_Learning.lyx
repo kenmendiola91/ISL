@@ -3801,6 +3801,53 @@ We can improve this by using ensemble methods, where we combine weak learners
  
 \end_layout
 
+\begin_layout Subsection*
+Comparing SVM, Logistic Regression, and LDA for Classification Problems
+\end_layout
+
+\begin_layout Standard
+As we have seen, in the 
+\begin_inset Quotes eld
+\end_inset
+
+relationship to logistic regression
+\begin_inset Quotes erd
+\end_inset
+
+ section in Chapter 9 notes, SVM and logistic regression (with regularization)
+ have very similar LOSS+Penalty formulation, and their loss functions always
+ behave very similarly.
+ So when do we use which?
+\end_layout
+
+\begin_layout Itemize
+When classes are completely (linearly) separable, logistic regression breaks
+ down.
+ In such cases, SVM & LDA is preferred
+\end_layout
+
+\begin_layout Itemize
+Similarly, when classes are (nearly) separable, SVM does better than logistic
+ regression.
+ So does LDA (does better than logistic regression)
+\end_layout
+
+\begin_layout Itemize
+If you wish to estimate probabilities, logistic regression is the choice.
+ Logistic regression with regularization not only has the benefits of returning
+ probabilities, but it also does feature selection.
+\end_layout
+
+\begin_layout Itemize
+SVM does not return probabilities, and does not perform feature selection
+ (the sparsity is in the few number of data points that determines the decision
+ boundaries, not in the number of predictors we used [i.e.
+ in row, not column]).
+ However, for nonlinear boundaries, kernel SVMs are popular.
+ We can use kernel tricks on LR and LDA as well, but computations are more
+ expensive.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Newpage newpage
 \end_inset
@@ -4803,6 +4850,213 @@ status open
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+ROC Curve
+\end_layout
+
+\begin_layout Standard
+Often, binary classification algorithm will not output the classification
+ label directly.
+ For example, in logistic regression, the output is a probability estimate
+ 
+\begin_inset Formula $\hat{p}\left(Y=1\vert X\right)=f(X)$
+\end_inset
+
+, and it's our responsibility to choose the appropriate threshold 
+\begin_inset Formula $t$
+\end_inset
+
+ such that for 
+\begin_inset Formula $f(X)>t$
+\end_inset
+
+, assigned prediction to class 
+\begin_inset Formula $1$
+\end_inset
+
+, and 
+\begin_inset Formula $0$
+\end_inset
+
+ otherwise.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The ROC curve is obtained by forming these predictions and computing the
+ false positive and true positive rates for a range of values of 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ This is a great visual tool that allows us to see the trade-off of true
+ positive and false positive rates at a glance:
+\end_layout
+
+\begin_layout Itemize
+As we increase 
+\begin_inset Formula $t$
+\end_inset
+
+, we become more conservative, so false positive rate 
+\begin_inset Formula $\downarrow$
+\end_inset
+
+, but at the same time, it also become harder for true positive to be classified
+ as positive, so true positive rate 
+\begin_inset Formula $\downarrow$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+As we decrease 
+\begin_inset Formula $t$
+\end_inset
+
+, we become more careless, so false positive rate 
+\begin_inset Formula $\uparrow$
+\end_inset
+
+, and at the same time, it also become much easier for true positive to
+ be classified as positive, so true positive rate 
+\begin_inset Formula $\uparrow$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The ROC curve not only allows us to see the trade-off of true positive rate
+ and false positive for a SINGLE classification, it is also a great tool
+ to compare the model performance of MULTIPLE binary classification algorithm.
+ 
+\end_layout
+
+\begin_layout Itemize
+An optimal classifier will hug the top left corner of the ROC plot (i.e.
+ high true positive rate, and very low false positive rate).
+ 
+\end_layout
+
+\begin_layout Itemize
+A random classifier that does not take 
+\begin_inset Formula $X$
+\end_inset
+
+ into account in making predictions for 
+\begin_inset Formula $Y$
+\end_inset
+
+ will fall on the 45 degree line.
+ Why? Here is the visual explanation (I drew myself):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/ISL/graphs/random_classifier_45_degree_line_explanation.jpg
+	scale 13
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+AUC (Area under the ROC curve)
+\end_layout
+
+\begin_layout Standard
+Often, we might be interested in comparing the model performance of different
+ candidates by comparing them on the basis of one single numerical metric,
+ the AUC is one such metric.
+ It is simply the area under the ROC curve.
+ It alos has a particularly nice probablisitc and statistical interpretation.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Probablistic interpretation
+\series default
+: AUC is the probability that a classifier will rank a randomly chosen positive
+ instance higher than a randomly chosen negative one (asssuming 'positive'
+ rank higher than 'negative').
+ i.e.
+ 
+\begin_inset Formula $P(f(X_{\text{pos}})>f(X_{\text{neg}})\vert\left\{ X_{\text{pos}},Y=\text{pos}\right\} ,\left\{ X_{\text{neg}},Y=\text{neg}\right\} )$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Statistical Interpretation
+\series default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Need to review what these tests are
+\end_layout
+
+\end_inset
+
+: AUC is closely related to the 
+\color red
+Mann-Whitney U test
+\color inherit
+, which tests whether positives are ranked higher than negatives.
+ It is also equivalent to the 
+\color red
+Wilcoxon test of ranks
+\color inherit
+.
+\end_layout
+
+\begin_layout Standard
+Make sure the ROC & AUC comparison is done on the test set, not training
+ set!
 \end_layout
 
 \begin_layout Standard
@@ -12663,7 +12917,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/support_vector_classifier.png
+	filename graphs/support_vector_classifier.png
 	scale 60
 	rotateOrigin center
 
@@ -12920,7 +13174,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/svm_non_linear_boundary.png
+	filename graphs/svm_non_linear_boundary.png
 	scale 40
 	rotateOrigin center
 
@@ -13278,7 +13532,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/kernel_trick_decision_boundary.png
+	filename graphs/kernel_trick_decision_boundary.png
 	scale 40
 	rotateOrigin center
 
@@ -13376,11 +13630,249 @@ Which one to choose? If
 \end_layout
 
 \begin_layout Subsection*
-ROC Curve
+Relationship to Logistic Regression
+\end_layout
+
+\begin_layout Standard
+When SVMs were first introduced in the mid-1990s, they made quite a splash
+ in the statistical and machine learning communitites.
+ This was due in part to their good performance, good marketing, and also
+ to the fact that the underlying approach seemed both novel and mysterious.
+ The approach seemed so distinct from classical approaches such as logistic
+ regression and linear discriminant analysis.
+ Moreover, the idea of using kernel to expand the feature space in order
+ to accommodate non-linear class boundaries appeared to be a unique and
+ valuable characteristics.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However, since that time, deep connections between SVMs and other more classical
+ statistical methods have emerged.
+ It turns out that one can rewrite the optimization for fitting the support
+ vector classifier 
+\begin_inset Formula $f(X)=\beta_{0}+\sum_{j=1}^{p}\beta_{j}X_{j}$
+\end_inset
+
+ as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\min_{\beta_{0},\beta_{1}\dots\beta_{p}}\left\{ \sum_{i=1}^{n}\max\left[0,\:1-y_{i}f(x_{i})\right]+\lambda\sum_{j=1}^{p}\beta_{j}^{2}\right\} \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ is the tuning parameter that controls the bias-variance-trade-off.
+ It turns out that 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ small corresponds to 
+\begin_inset Formula $C$
+\end_inset
+
+ small (high variance, low bias) and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ big corresponds to 
+\begin_inset Formula $C$
+\end_inset
+
+ big (low variance, high bias).
+ When the support vector classifier and SVM were first introduced, it was
+ thought that the tuning parameter 
+\begin_inset Formula $C$
+\end_inset
+
+ was an unimportant 
+\begin_inset Quotes eld
+\end_inset
+
+nuisance
+\begin_inset Quotes erd
+\end_inset
+
+ parameter that could be set to some default value, like 1.
+ However, the loss + penalty formulation for the support vector classifier
+ indicates that this is not the case.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, it is important to note that the particular loss formulation (hinge
+ loss)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+L\left(\mathbf{X},\mathbf{y},\beta\right)=\sum_{i=1}^{n}\max\left[0,\:1-y_{i}\left(\beta_{0}+\beta_{1}x_{i1}+\dots+\beta_{p}x_{ip}\right)\right]\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+has an interesting characteristic that only support vectors play a role
+ in the classifier obtained; observations on the correct side of the margin
+ do not affect it.
+ This is due to the fact that the loss function is exactly zero for observations
+ for which 
+\begin_inset Formula $y_{i}\left(\beta_{0}+\beta_{1}x_{i1}+\dots+\beta_{p}x_{ip}\right)\geq1$
+\end_inset
+
+; these correspond to observations that are on the correct side of the margin.
+ In contrast, the loss function for logistic regression is not exactly zero
+ anywhere.
+ But it is very small for observations that are far from the decision boundary.
+ Due to the similarities between their loss functions, logistic regerssion
+ (with regularization) and SVM often given very similar results.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Below is an illustration comparing the loss function of logistic regression
+ and SVM:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/svm_lr_loss_function_comparison.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection*
-Relationship to Logistic Regression
+Lingering Questions:
+\end_layout
+
+\begin_layout Itemize
+For Support Vector Classifier (not SVM formulation), the observations was
+ made in the textbook.
+ I am still not exaclty sure why:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\color red
+If 
+\begin_inset Formula $\epsilon_{i}=0$
+\end_inset
+
+, then the observation is on the correct side of the margin
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+If 
+\begin_inset Formula $0<\epsilon_{i}<1$
+\end_inset
+
+, then the observation is on the wrong side of the margin, but correct side
+ of hyperplane
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+If 
+\begin_inset Formula $\epsilon_{i}>1$
+\end_inset
+
+, then the observation is on the wrong side of margin AND wrong side of
+ the hyperplane
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+What exactly is the detailed formulation of the SVM optimization, how is
+ it solved? 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+CS 229 Lecture notes provide a much more detailed explanation
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+For AUC, what exactly are 
+\color red
+Mann-Whitney U test 
+\color inherit
+and 
+\color red
+Wilcoxon test of ranks? What's the connections?
+\end_layout
+
+\begin_layout Itemize
+In the textbook, the authors mentioned Support Vector Regression.
+ Is it commonly used, how popular is it, and what is the details behind
+ the algorithm.
 \end_layout
 
 \end_body
