@@ -13774,7 +13774,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/svm_lr_loss_function_comparison.png
+	filename graphs/svm_lr_loss_function_comparison.png
 	scale 50
 	rotateOrigin center
 
@@ -13873,6 +13873,641 @@ Wilcoxon test of ranks? What's the connections?
 In the textbook, the authors mentioned Support Vector Regression.
  Is it commonly used, how popular is it, and what is the details behind
  the algorithm.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Chapter 10: Unsupervised Learning
+\end_layout
+
+\begin_layout Standard
+Most of this book concerns about 
+\shape italic
+supervised learning
+\shape default
+ methods such as regression and classification algorithm.
+ In the supervised learning setting, we typically have access to a set of
+ 
+\begin_inset Formula $p$
+\end_inset
+
+ features 
+\begin_inset Formula $X_{1},X_{2},\dots X_{p}$
+\end_inset
+
+, measured on 
+\begin_inset Formula $n$
+\end_inset
+
+ observations, and a response 
+\begin_inset Formula $Y$
+\end_inset
+
+ also measured on the 
+\begin_inset Formula $n$
+\end_inset
+
+ observations.
+ The goal is usually to make prediction in 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ In the context of unsupervised learning, we also have access to a set of
+ 
+\begin_inset Formula $p$
+\end_inset
+
+ features 
+\begin_inset Formula $X$
+\end_inset
+
+'s, but there is not a corresponding 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ In this context, the goal is to discover interesting things/summarization
+ about the measurements on 
+\begin_inset Formula $X$
+\end_inset
+
+'s such as:
+\end_layout
+
+\begin_layout Itemize
+Data Visualization & Exploratory Data Analysis
+\end_layout
+
+\begin_layout Itemize
+Finding interesting grouping among subgroups
+\end_layout
+
+\begin_layout Standard
+In particular, we will discuss two particular types of unsupervised learning
+ methods:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Principal Component Analysis (PCA)
+\series default
+: a tool used for data visualization or data pre-processing before supervised
+ techniques are applied (like PCR)
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Clustering
+\series default
+: a broad class of methods for discovering unknown subgroups in data
+\end_layout
+
+\begin_layout Standard
+Unsupervised learning are often more subjective, since there is no objective
+ 'labels' that we can used to supervise how well we are predicting the data.
+ However, unsupervised learning has become increasingly important because
+ it is much easier to collect unlabled datat than labeled data.
+\end_layout
+
+\begin_layout Subsection*
+Principal Component Analysis (PCA)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+PCA can often be used as a pre-processing step before a supervised learning
+ method is applied as we have discussed in the context of PCR).
+ We will focus on the unsupervised use cases of PCA, in keeping with the
+ topic of the chapter.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Motivation
+\series default
+: Suppose we wish to visualize 
+\begin_inset Formula $n$
+\end_inset
+
+ observations with measurements on a set of 
+\begin_inset Formula $p$
+\end_inset
+
+ features, as part of an exploratory analysis.
+ We could do this by examining two-dimensional scatterplots of the data,
+ but there are 
+\begin_inset Formula $\binom{p}{2}$
+\end_inset
+
+ such plot.
+ Moreover, most likely none of them will be informative since they each
+ contain just a small fraction of the total information present in the data.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+PCA is a technique that allows us to find a low-dimensional representation
+ of a data set that contains as much as possible of the variation.
+ The idea is that each of the 
+\begin_inset Formula $n$
+\end_inset
+
+ observations live in 
+\begin_inset Formula $p$
+\end_inset
+
+-dimensional space, but not all of these dimensions are equally interesting.
+ PCA seeks a smaller number of dimensions that are as interesting as possible,
+ where the concept of 
+\shape italic
+interesting
+\shape default
+ is measured by the amount that the observations vary along each dimension.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Principal Component Analysis: details
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+PCA involves finding a sequence of linear combinations of the original variables
+, called principal components, that have maximal variance, and are mutually
+ uncorrelated.
+ What does this mean?
+\color inherit
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To formalize the notation, define the 
+\shape italic
+first principal component
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+subsequent PCs can be defined similarly
+\end_layout
+
+\end_inset
+
+
+\shape default
+ of a set of features 
+\begin_inset Formula $X_{1},X_{2}\dots X_{p}$
+\end_inset
+
+ as the normalized linear combination of the features
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+Z_{1} & = & \phi_{11}X_{1}+\phi_{21}X_{2}+\dots+\phi_{p1}X_{p}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+that has the largest variance.
+ By normalized, we mean that 
+\begin_inset Formula $\Vert\phi_{1}\Vert=\sum_{j=1}^{p}\phi_{j1}^{2}=1$
+\end_inset
+
+.
+ We refer to the elements 
+\begin_inset Formula $\phi_{11},\dots,\phi_{p1}$
+\end_inset
+
+ as the loadings of the first principal component.
+ Together, the loadings make up the principal component loading vector,
+ 
+\begin_inset Formula $\phi_{1}=\left(\phi_{11},\phi_{21},\dots\phi_{p1}\right)^{T}$
+\end_inset
+
+.
+ We constrain the loadings so that the norm is 1, since otherwise setting
+ these elements to be arbitrarily large in absolute value could result in
+ an arbitrarily large variance.
+ But what does it mean that 
+\begin_inset Formula $Z_{1}$
+\end_inset
+
+ has the largest variance? We need some geometric intuition.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In Linear Algebra terms, 
+\begin_inset Formula $\phi_{1}$
+\end_inset
+
+ is simply a direction which we can project each record of the data matrix
+ 
+\begin_inset Formula $X$
+\end_inset
+
+ onto; 
+\begin_inset Formula $Z_{1}$
+\end_inset
+
+ is the projection of 
+\begin_inset Formula $X$
+\end_inset
+
+ onto 
+\begin_inset Formula $\phi_{1}$
+\end_inset
+
+, i.e.
+ Proj
+\begin_inset Formula $_{\phi_{1}}\left(X\right)=Z_{1}$
+\end_inset
+
+, or
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+Z_{1}=\left[\begin{array}{c}
+z_{11}\\
+z_{21}\\
+\vdots\\
+z_{n1}\end{array}\right] & = & \left[\begin{array}{c}
+Proj_{\phi_{1}}\left(x^{(1)}\right)\\
+Proj_{\phi_{1}}\left(x^{(2)}\right)\\
+\vdots\\
+Proj_{\phi_{1}}\left(x^{(n)}\right)\end{array}\right]=\left[\begin{array}{c}
+\frac{\phi_{1}^{T}x^{(1)}}{\phi_{1}^{T}\phi_{1}}\\
+\frac{\phi_{1}^{T}x^{(2)}}{\phi_{1}^{T}\phi_{1}}\\
+\vdots\\
+\frac{\phi_{1}^{T}x^{(n)}}{\phi_{1}^{T}\phi_{1}}\end{array}\right]=\left[\begin{array}{c}
+\phi_{1}^{T}x^{(1)}\\
+\phi_{1}^{T}x^{(2)}\\
+\vdots\\
+\phi_{1}^{T}x^{(n)}\end{array}\right]=Proj_{\phi_{1}}\left(X\right)\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/pca_projection.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We refer to 
+\begin_inset Formula $z_{i1}$
+\end_inset
+
+'s as the 
+\shape italic
+scores
+\shape default
+ of the first principal component.
+ It happens so that each element in 
+\begin_inset Formula $Z_{1}$
+\end_inset
+
+ is in fact the distance from the projection to the 'origin' along that
+ direction, so maximizing 
+\begin_inset Formula $Z_{1}$
+\end_inset
+
+ is equivalent to finding projections that are as 'spread out' as possible
+ in that projection direction.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With this geometric intuition in mind, we have a clearer picture what PCA
+ does -- Once we have identified 
+\begin_inset Formula $\phi_{1}$
+\end_inset
+
+, we will find the second principal component 
+\begin_inset Formula $Z_{2}$
+\end_inset
+
+ that has the largest variance, but is uncorrelated to the first PC.
+ We will then proceed with finding the thrid principal component 
+\begin_inset Formula $Z_{3}$
+\end_inset
+
+ that has the largest variance, but is uncorrelated with 
+\begin_inset Formula $PC_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $PC_{2}$
+\end_inset
+
+.
+ Subsequently, we find the 
+\begin_inset Formula $k^{th}$
+\end_inset
+
+ PC that maximize the variance along the direction of 
+\begin_inset Formula $\phi_{k}$
+\end_inset
+
+, but is uncorrelated with 
+\begin_inset Formula $PC_{i},\: i=1,\dots k-1$
+\end_inset
+
+, for all remaining 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ By doing so, we ensure that the direction in which the algorithm is variance
+ maximizing in subsequent directions are uncorrelated, which leads to them
+ being orthogonal.
+ The orthogonality allows us to explore remaining information in the data
+ that is not yet explored.
+ Once we have gone through the exercise for all 
+\begin_inset Formula $p$
+\end_inset
+
+ dimensions, we now very a new view of the data set, using a very special
+ set of 'basis' directions!
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Now that we have an idea of what the algorithm is trying to achieve, given
+ a 
+\begin_inset Formula $n\times p$
+\end_inset
+
+ data set 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+, how do we compute the (first) principal component? Typically, we assume
+ that each of the variables in 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+ has been centered to have mean zero (since we are only interested in the
+ variance).
+
+\color red
+ The above problem
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Optimization problem for subsequent PCs can be defined similarly, except
+ we require the new PC to be orthogonal to the previous ones
+\end_layout
+
+\end_inset
+
+ turns out can be solved using singular value decomposition (SVD).
+ In fact, it can be shown that the PC directions 
+\begin_inset Formula $\phi_{1},\phi_{2},\dots\phi_{p}$
+\end_inset
+
+ are the ordered sequence of right singular vectors of the matrix 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+, and the variances of the component are 
+\begin_inset Formula $\frac{1}{n}$
+\end_inset
+
+ times the squares of the singular values.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color red
+Need to fill in the details either from my own notes previously, or there
+ is a good document from DataTau
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Another Interpretation of the principal components
+\end_layout
+
+\begin_layout Standard
+In the previous section, we describe the principal component loading vectors
+ as the directions in feature space along which the data vary the most,
+ and the principal component scores as projections along these directions.
+ However, an alternative interpretation for principal components can also
+ be useful: principal components provide low-dimensional linear surfaces
+ that are closest to the observations.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/pca_interpretation_2.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Using this interpretation, together the first 
+\begin_inset Formula $M$
+\end_inset
+
+ principal component score vectors and the first 
+\begin_inset Formula $M$
+\end_inset
+
+ principal component loadings vectors provide best 
+\begin_inset Formula $M$
+\end_inset
+
+-dimensional approximation to the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ observation 
+\begin_inset Formula $x_{ij}.$
+\end_inset
+
+ This representation can be written as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+x_{ij} & \approx & \sum_{m=1}^{M}z_{im}\phi_{jm}\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color red
+How does this related to the SVD decomposition, why are we missing the singular
+ values, or is it already incorporated into 
+\begin_inset Formula $\phi$
+\end_inset
+
+'s?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In other words, together the 
+\begin_inset Formula $M$
+\end_inset
+
+ principal component score vectors and laoding vectors can give a good approxima
+tion to the data when 
+\begin_inset Formula $M$
+\end_inset
+
+ is sufficiently large.
+ When 
+\begin_inset Formula $M=min\left(n-1,p\right)$
+\end_inset
+
+, then the representation is exactl: 
+\begin_inset Formula $x_{ij}=\sum_{m=1}^{M}z_{im}\phi_{jm}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+Example
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \end_body
