@@ -14055,8 +14055,8 @@ Principal Component Analysis: details
 
 \color blue
 PCA involves finding a sequence of linear combinations of the original variables
-, called principal components, that have maximal variance, and are mutually
- uncorrelated.
+, called principal components, that have maximal variance (of the data),
+ and are mutually uncorrelated.
  What does this mean?
 \color inherit
  
@@ -14121,7 +14121,11 @@ that has the largest variance.
  We constrain the loadings so that the norm is 1, since otherwise setting
  these elements to be arbitrarily large in absolute value could result in
  an arbitrarily large variance.
- But what does it mean that 
+ But what does it mean to find 
+\begin_inset Formula $\phi$
+\end_inset
+
+ so that 
 \begin_inset Formula $Z_{1}$
 \end_inset
 
@@ -14205,7 +14209,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/pca_projection.png
+	filename graphs/pca_projection.png
 	scale 50
 	rotateOrigin center
 
@@ -14260,11 +14264,27 @@ scores
 
 \begin_layout Standard
 With this geometric intuition in mind, we have a clearer picture what PCA
- does -- Once we have identified 
+ does -- It is successively finding the projection direction in which the
+ data variance is maximized along that direction, and making sure those
+ subsequent projection directions are orthogonal to the previous ones (and
+ all are mutually orthogonal).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Once we have identified 
 \begin_inset Formula $\phi_{1}$
 \end_inset
 
-, we will find the second principal component 
+ (the very first direction where data variance is maximized), we will find
+ the second principal component 
 \begin_inset Formula $Z_{2}$
 \end_inset
 
@@ -14309,7 +14329,9 @@ With this geometric intuition in mind, we have a clearer picture what PCA
 \end_inset
 
  dimensions, we now very a new view of the data set, using a very special
- set of 'basis' directions!
+ set of 'basis' directions! In other word, we are viewing the original data
+ with these new basis, where the data variation is presented in the most
+ obvious way!
 \end_layout
 
 \begin_layout Standard
@@ -14320,8 +14342,8 @@ With this geometric intuition in mind, we have a clearer picture what PCA
 \end_layout
 
 \begin_layout Standard
-Now that we have an idea of what the algorithm is trying to achieve, given
- a 
+Now that we understand the geometric intuition of what the algorithm mechanics,
+ given a 
 \begin_inset Formula $n\times p$
 \end_inset
 
@@ -14338,18 +14360,8 @@ Now that we have an idea of what the algorithm is trying to achieve, given
  variance).
 
 \color red
- The above problem
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Optimization problem for subsequent PCs can be defined similarly, except
- we require the new PC to be orthogonal to the previous ones
-\end_layout
-
-\end_inset
-
- turns out can be solved using singular value decomposition (SVD).
+ The above problem turns out can be solved, in one shot (getting all directions)
+, using singular value decomposition (SVD).
  In fact, it can be shown that the PC directions 
 \begin_inset Formula $\phi_{1},\phi_{2},\dots\phi_{p}$
 \end_inset
@@ -14407,8 +14419,8 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/pca_interpretation_2.png
-	scale 50
+	filename graphs/pca_interpretation_2.png
+	scale 40
 	rotateOrigin center
 
 \end_inset
@@ -14461,6 +14473,59 @@ x_{ij} & \approx & \sum_{m=1}^{M}z_{im}\phi_{jm}\end{eqnarray*}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+In other words, together the 
+\begin_inset Formula $M$
+\end_inset
+
+ principal component score vectors and loading vectors can give a good approxima
+tion to the data when 
+\begin_inset Formula $M$
+\end_inset
+
+ is sufficiently large.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This is different from minimizing RSS in the context of regression.
+ In here, we are not minimizing the distance of predicted 
+\begin_inset Formula $Y$
+\end_inset
+
+ to the actual 
+\begin_inset Formula $Y$
+\end_inset
+
+, there is no 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ We are simply minimizing the distance of 
+\begin_inset Formula $X$
+\end_inset
+
+ (no 
+\begin_inset Formula $Y$
+\end_inset
+
+) to it's projection onto the plane.
+\end_layout
+
+\end_inset
+
+ When 
+\begin_inset Formula $M=min\left(n-1,p\right)$
+\end_inset
+
+, then the representation is exact: 
+\begin_inset Formula $x_{ij}=\sum_{m=1}^{M}z_{im}\phi_{jm}$
+\end_inset
+
+.
 \begin_inset Foot
 status open
 
@@ -14480,30 +14545,799 @@ How does this related to the SVD decomposition, why are we missing the singular
 
 \end_layout
 
+\begin_layout Subsubsection*
+Example (presented here so I know how to interpret 
+\end_layout
+
 \begin_layout Standard
-In other words, together the 
-\begin_inset Formula $M$
+We illustrate the use of PCA on the USArrests data set.
+ For each of the 50 states in the United States, the data set contains the
+ number of arrests per 100, 000 residents for each of three crimes: Assault,
+ Murder, and Rape.
+ We also record UrbanPop (the percent of the population in each state living
+ in urban areas).
+ The principal component score vectors have length 
+\begin_inset Formula $n$
 \end_inset
 
- principal component score vectors and laoding vectors can give a good approxima
-tion to the data when 
-\begin_inset Formula $M$
+ = 50, and the principal component loading vectors have length 
+\begin_inset Formula $p$
 \end_inset
 
- is sufficiently large.
- When 
+ = 4.
+ PCA was performed after standardizing each variable to have mean zero and
+ standard deviation one.
+ The figure represents both the principal component scores and the loading
+ vectors in a single biplot display.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/pca_example.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The blue state names represent the (projected) scores for each of the 
+\begin_inset Formula $n$
+\end_inset
+
+ observations in the 2-dimensional space span by 
+\begin_inset Formula $PC1$
+\end_inset
+
+ and 
+\begin_inset Formula $PC2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The orange arrows indicate the first two principal component loading vectors.
+\end_layout
+
+\begin_layout Itemize
+This figure is known as the bi-plot, because it displays both the principal
+ component loadings and principal component scores.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+[Getting the physical meaning of the PCs]
+\series default
+ By observing the loading elements in each of the loading vector 
+\begin_inset Formula $\phi$
+\end_inset
+
+, we can 'backward engineer' to understand what is the physical meaning
+ of each of the principal components.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+In this example, we see that, in 
+\begin_inset Formula $PC1$
+\end_inset
+
+, loadings for crime variables (
+\begin_inset Formula $\phi_{1}=\left(\text{Rape, Assault, Murder, UrbanPop}\right)=\left(\text{high, high, high, low}\right))$
+\end_inset
+
+ are high, which indicates that 
+\begin_inset Formula $PC1$
+\end_inset
+
+ is a dimension about crime (because states with high/low crime variables
+ would have high/low 
+\begin_inset Formula $PC1$
+\end_inset
+
+ score).
+ Similarly, we see that the only loading that is high in 
+\begin_inset Formula $PC2$
+\end_inset
+
+ is population, (i.e.
+ 
+\begin_inset Formula $\phi_{2}=\left(\text{Rape, Assault, Murder, UrbanPop}\right)=\left(\text{low, low, low, high}\right))$
+\end_inset
+
+, which indicates that 
+\begin_inset Formula $PC2$
+\end_inset
+
+ is capturing population as a dimension.
+\end_layout
+
+\begin_layout Itemize
+More generally, imagine the case for 
+\begin_inset Formula $p=2$
+\end_inset
+
+, and the loading for 
+\begin_inset Formula $PC1$
+\end_inset
+
+ and 
+\begin_inset Formula $PC2$
+\end_inset
+
+ are:
+\begin_inset Formula \begin{eqnarray*}
+ & \text{crime} & \text{population}\\
+\phi_{1}= & [1, & 0]\\
+\phi_{2}= & [0, & 1]\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+This means that in 
+\begin_inset Formula $PC1$
+\end_inset
+
+, only crime matters for calculating the score.
+ Similarly, only population matters in calculating the score in 
+\begin_inset Formula $PC2$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Visually, we will see two vectors 
+\begin_inset Formula $\phi_{1}=(1,0)$
+\end_inset
+
+ and 
+\begin_inset Formula $\phi_{2}=(0,1)$
+\end_inset
+
+, orthogonal in each other, and capturing one varaible in each of the dimension.
+ This is probably going to be rare, since in reality most of the data set
+ would have 
+\begin_inset Formula $PC$
+\end_inset
+
+'s that captures information from several variables.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\series bold
+Reminder
+\series default
+: Consider the layout above, PC as rows, and varaibles as columns.
+ The rows from each 
+\begin_inset Formula $\phi$
+\end_inset
+
+ allow us to compare the loadings of different variables, which allow us
+ to determine the physical meaning of the dimension.
+ The columns of the matrix gives us the coordinate of each of the variable
+ in which we will plot on the biplot.
+ 
+\series bold
+The arrows for each predictor variables are important because the arrows
+ which has the longest length along that dimension are the most relevant
+ predictors in that 
+\begin_inset Formula $PC$
+\end_inset
+
+ direction.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Once we have the physical meaning of the 
+\begin_inset Formula $PC$
+\end_inset
+
+s, we know that for scores that are on the far right/left, top/down of the
+ PC means that particular observations have exhibit a strong signal in the
+ physical meaning characterized by that PC.
+ Mathematically, the projection on that direction is big/small because the
+ corresponding predictor value is also big/small 
+\series bold
+on those big loading weights
+\series default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+What is the physical meaning of the actual orientation of the yellow loading
+ vectors?
+\end_layout
+
+\begin_layout Itemize
+
+\color red
+Why is it that yellow loading vectors that are close to each other are more
+ correlated to each other?
+\end_layout
+
+\begin_layout Subsubsection*
+More on PCAs
+\end_layout
+
+\begin_layout Paragraph*
+Scaling the variables: 
+\end_layout
+
+\begin_layout Standard
+We have already mentioned that before PCA is performed, the variables should
+ be centered to have mean zero.
+ Furthermore, the results obtained when we perform PCA will also depend
+ on whether the variables have been individually scaled (each multiplied
+ by a different constant).
+ This is in contrast to some other supervised and unsupervised learning
+ techniques, such as linear regression, in which scaling the variables has
+ no effect.
+ (In linear regression, multiplying a variable by a factor of c will simply
+ lead to multiplication of the corresponding coefficient estimate by a factor
+ of 1/c, and thus will have no substantive effect on the model obtained.)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Imagine a situation where the dataset above is not scaled, then Assault
+ will have the highest variance.
+ When PCA is trying to determine the PCs, it is very easy to choose assault,
+ and assault alone as the variance maximizing direction.
+ This is generally undesirable, since if we change the units of Assault,
+ this statistical pattern would no longer persist.
+ Therefore, in order not for the units to change the statistical interpretation,
+ we should standardize if the predictors are in different units!
+\end_layout
+
+\begin_layout Paragraph*
+Uniqueness of Principal Components: 
+\end_layout
+
+\begin_layout Standard
+Each principal component loading vector is unique, up to a sign flip.
+ This means that two different software packages will yield the same principal
+ component loading vectors, although the signs of those loading vectors
+ may differ.
+ The signs may differ because each principal component loading vector specifies
+ a direction in 
+\begin_inset Formula $p$
+\end_inset
+
+-dimensional space: flipping the sign has no effect as the direction does
+ not change.
+ Similarly, the score vectors are unique up to a sign flip, since the variance
+ of 
+\begin_inset Formula $Z$
+\end_inset
+
+ is the same as the variance of 
+\begin_inset Formula $-Z$
+\end_inset
+
+.
+ It is worth noting that when we use 
+\begin_inset Formula $\sum_{m=1}^{M}z_{im}\phi_{jm}$
+\end_inset
+
+ to approximate 
+\begin_inset Formula $x_{ij}$
+\end_inset
+
+, we multiply 
+\begin_inset Formula $z_{im}$
+\end_inset
+
+ by 
+\begin_inset Formula $\phi_{jm}$
+\end_inset
+
+.
+ Hence, if the sign is flipped on both the loading and score vectors, the
+ final product of the two quantities is unchanged.
+\end_layout
+
+\begin_layout Paragraph*
+Proportion of Variance Explained (PVE)
+\end_layout
+
+\begin_layout Standard
+To understand the strength of each component, we are interested in knowing
+ the proportion of variance explained (PVE) by each one.
+ The total variance present in a data set (assuming the dataset has been
+ centered to have mean 0) is defined as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+\sum_{j=1}^{p}Var\left(X_{j}\right) & = & \sum_{j=1}^{p}\frac{1}{n}\sum_{i=1}^{n}x_{ij}^{2}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and the variance explained by the 
+\begin_inset Formula $m^{th}$
+\end_inset
+
+ PC is 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+Var\left(Z_{m}\right) & = & \frac{1}{n}\sum_{i=1}^{n}z_{im}^{2}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It can be shown that 
+\begin_inset Formula $\text{Total Variance}=\sum_{j=1}^{p}Var(X_{j})=\sum_{m=1}^{M}Var\left(Z_{m}\right)$
+\end_inset
+
+ with 
 \begin_inset Formula $M=min\left(n-1,p\right)$
 \end_inset
 
-, then the representation is exactl: 
-\begin_inset Formula $x_{ij}=\sum_{m=1}^{M}z_{im}\phi_{jm}$
+.
+ Therefore, the PVE of the 
+\begin_inset Formula $m^{th}$
+\end_inset
+
+ principal component is given by the positive quantity between 0 and 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{eqnarray*}
+PVE\left(PC_{m}\right) & = & \frac{\sum_{i=1}^{n}z_{im}^{2}}{\sum_{j=1}^{p}\sum_{i=1}^{n}x_{ij}^{2}}\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The PVEs sum to 1, and we often use cumulative PVE to determine how many
+ PCs we should choose to explain the data (Typically, we pick the smallest
+ number so that 
+\begin_inset Formula $95\%$
+\end_inset
+
+ of the variance is explained).
+ Note that, the number of principal components to use here is not a tuning
+ parameters that we can optimize by cross-validaiton, this is because there
+ is no 
+\begin_inset Formula $Y$
+\end_inset
+
+ in this setting.
+ The only place we can tune the number of principal component to use is
+ when we are using PCA as a pre-processing step, where the PCs will be used
+ as predictors for the supervised learning problems.
+ In those cases, since we have 
+\begin_inset Formula $Y$
+\end_inset
+
+, we can tune 
+\begin_inset Formula $m$
+\end_inset
+
+ using cross-validations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Clustering
+\end_layout
+
+\begin_layout Standard
+Both clustering and PCA seek to simplify the data via a small number of
+ summaries, but their mechanisms are different:
+\end_layout
+
+\begin_layout Itemize
+PCA looks to find a low-dimensional representation of the observations that
+ explain a good fraction of the variance
+\end_layout
+
+\begin_layout Itemize
+Clustering looks to find homogeneous subgroups among the observations
+\end_layout
+
+\begin_layout Standard
+To make clustering concrete, we must define what it means for two or more
+ observations to be 
+\shape italic
+\color black
+similar
+\shape default
+\color inherit
+ or 
+\shape italic
+\color black
+different
+\shape default
+\color inherit
+.
+ Indeed, this is often a domain-specific consideration that must be made
+ based on knowledge of the data being studied.
+ We will introduce two methods of clustering here:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+K-means clustering
+\series default
+: we seek to partition the observations into a pre-specied number of clusters
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Hiearchical clustering
+\series default
+: we do not know in advance how many clusters we want; in fact, we end up
+ with a tree-like visual representation of the observations, called a 
+\shape italic
+\color black
+dendrogram
+\shape default
+\color inherit
+, that allows us to view at once the clusterings obtained for each possible
+ number of clusters, from 
+\begin_inset Formula $1$
+\end_inset
+
+ to 
+\begin_inset Formula $n$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Subsubsection*
-Example
+K means clustering
+\end_layout
+
+\begin_layout Standard
+K-means clustering is a simple and elegant approach for partitioning a data
+ set into 
+\begin_inset Formula $K$
+\end_inset
+
+ distinct, non-overlapping clusters.
+ To perform K-means clustering, we must first specify the desired number
+ of clusters 
+\begin_inset Formula $K$
+\end_inset
+
+; then the K-means algorithm will assign each observation to exactly one
+ of the 
+\begin_inset Formula $K$
+\end_inset
+
+ clusters using an iterative approach that alternates between cluster assignment
+s and centroid updates.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Formally, let 
+\begin_inset Formula $C_{1},\dots C_{K}$
+\end_inset
+
+ denote sets containing the indices of observations in each cluster.
+ These sets are mutually exclusive and collectively exhaustive (i.e.
+ 
+\begin_inset Formula $\cup_{i=1}^{K}C_{i}=\left\{ 1,\cdots,n\right\} $
+\end_inset
+
+ and 
+\begin_inset Formula $C_{i}\cap C_{j}=\emptyset$
+\end_inset
+
+ for any pairs of 
+\begin_inset Formula $i,j$
+\end_inset
+
+).
+ The idea behind K-means clustering is that a good clustering is one for
+ which the within-cluster variation is as small as possible.
+ The within cluster variation for cluster 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+ is a measure of 
+\begin_inset Formula $W\left(C_{k}\right)$
+\end_inset
+
+ that characterize the amount by which the observations in a cluster differ
+ from each other.
+ Hence we solve the problem 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\min_{C_{1}\dots C_{K}}\left\{ \sum_{k=1}^{K}W\left(C_{k}\right)\right\} =\min_{C_{1}\dots C_{K}}\left\{ \sum_{k=1}^{K}\left\{ \frac{1}{\vert C_{k}\vert}\sum_{i,i'\in C_{k}}\sum_{j=1}^{p}\left(x_{ij}-x_{i'j}\right)^{2}\right\} \right\} \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $W\left(C_{k}\right)$
+\end_inset
+
+ is often measured using the sum of pair-wise eculidean distances, divided
+ by the total number of observations in the 
+\begin_inset Formula $k^{th}$
+\end_inset
+
+ cluster.
+ This is in fact a very difficult problem to solve since there are almost
+ 
+\begin_inset Formula $K^{n}$
+\end_inset
+
+ ways to parition 
+\begin_inset Formula $n$
+\end_inset
+
+ observations into 
+\begin_inset Formula $K$
+\end_inset
+
+ clusters.
+ Fortunately, a very simple solution can be shown to provide good 
+\shape italic
+\color black
+local
+\shape default
+\color inherit
+ minimum:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/k_means_algorithm.png
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Algorithm 10.1 is gaurantee to decrease the objective function because 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\frac{1}{\vert C_{k}\vert}\sum_{i,i'\in C_{k}}\sum_{j=1}^{p}\left(x_{ij}-x_{i'j}\right)^{2}=2\times\sum_{i\in C_{k}}\sum_{j=1}^{p}\left(x_{ij}-\bar{x}_{kj}\right)^{2}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+so the objective function becomes
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\min_{C_{1}\dots C_{K}}\left\{ \sum_{k=1}^{K}W\left(C_{k}\right)\right\} =\min_{C_{1}\dots C_{K}}\left\{ \sum_{k=1}^{K}\left\{ 2\times\sum_{i\in C_{k}}\sum_{j=1}^{p}\left(x_{ij}-\bar{x}_{kj}\right)^{2}\right\} \right\} \]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\bar{x}_{kj}=\frac{1}{\vert C_{k}\vert}\sum_{i\in C_{k}}x_{ij}$
+\end_inset
+
+ is the mean for feature 
+\begin_inset Formula $j$
+\end_inset
+
+ in cluster 
+\begin_inset Formula $C_{k}$
+\end_inset
+
+.
+ In step 2(a), the cluster means for each feature are the constants that
+ minimize the sum-of-squared deviations, and in Step 2(b), reallocating
+ the observations can only improve the objective function.
+ This means that as the algorithm is run, the clustering obtained will continual
+ly improve until the result no longer changes, in which we reach a 
+\shape italic
+\color black
+local
+\shape default
+\color inherit
+ minimum.
+ K-means clustering derives its name from the fact that in Step 2(a), the
+ cluster centroids are computed as the mean of the observations assigned
+ to each cluster.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This alternating optimization, optimizing one decision variable at a time,
+ turns out to be a powerful way of solving optimization problems.
+ We cover a lot of those in Stat 306B!
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because the K-means algorithm finds a local rather than a global optimum,
+ it is important to run the algorithm multiple times from different random
+ initial configurations.
+ Then one selects the best solution.
+ 
+\end_layout
+
+\begin_layout Subsubsection*
+Issues of K-means Algorithm:
+\end_layout
+
+\begin_layout Itemize
+Sensitive to scale
+\end_layout
+
+\begin_layout Itemize
+Need to define closeness (default is eculidean distance)
+\end_layout
+
+\begin_layout Itemize
+Need to figure out what feature to use
+\end_layout
+
+\begin_layout Itemize
+High dimensional makes it hard
+\end_layout
+
+\begin_layout Itemize
+Initial randomization of cluster assignment might lead to different solution
+\end_layout
+
+\begin_layout Itemize
+Need to choose 
+\begin_inset Formula $K$
+\end_inset
+
+ (sometimes arbitrarily)
+\end_layout
+
+\begin_layout Standard
+In particular, choosing 
+\begin_inset Formula $K$
+\end_inset
+
+ can be no simple task, this motiviates us to study Hierarchical clustering,
+ where the decision of 
+\begin_inset Formula $K$
+\end_inset
+
+ does not have to be made a prior, since it creates a solution in the form
+ of dendrogram that allow us to pick any arbitrary 
+\begin_inset Formula $K$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Hierarchical Clustering
 \end_layout
 
 \begin_layout Standard
