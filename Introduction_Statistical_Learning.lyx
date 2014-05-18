@@ -14586,7 +14586,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/pca_example.png
+	filename /Users/rc8138/Desktop/ISL/graphs/pca_example.png
 	scale 40
 	rotateOrigin center
 
@@ -15179,7 +15179,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/k_means_algorithm.png
+	filename /Users/rc8138/Desktop/ISL/graphs/k_means_algorithm.png
 	scale 50
 	rotateOrigin center
 
@@ -15338,10 +15338,668 @@ In particular, choosing
 
 \begin_layout Subsection*
 Hierarchical Clustering
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+A lot of the summary here are directly copied from the textbook
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
+One potential disadvantage of K-means clustering is that it requires us
+ to pre-specify the number of clusters K.
+ Hierarchical clustering is an alter- native approach which does not require
+ that we commit to a particular choice of K.
+ Hierarchical clustering has an added advantage over K-means clustering
+ in that it results in an attractive tree-based representation of the observatio
+ns, called a dendrogram.
+\end_layout
 
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this textbook, we only discuss bottom-up, or agglomerative clustering
+ approach.
+ This is the most common type of hierarchical clustering, and refers to
+ the fact that a dendrogram is built starting from the leaves and combining
+ clusters up to the trunk.
+ Algorithm in words:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/hierarchical_clustering_algorithm.png
+	scale 30
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/hierarchical_clustering_more_formal.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+How do we interpret a dendrogram:
+\end_layout
+
+\begin_layout Standard
+Each leaf of the dendrogram rep- resents one of the 45 observations in Figure
+ 10.8.
+ However, as we move up the tree, some leaves begin to fuse into branches.
+ These correspond to observations that are similar to each other.
+ As we move higher up the tree, branches themselves fuse, either with leaves
+ or other branches.
+ The earlier (lower in the tree) fusions occur, the more similar the groups
+ of observations are to each other.
+ On the other hand, observations that fuse later (near the top of the tree)
+ can be quite different.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In fact, this statement can be made precise: for any two observations, we
+ can look for the point in the tree where branches containing those two
+ observations are first fused.
+ The height of this fusion, as measured on the vertical axis, indicates
+ how different the two observations are.
+ Thus, observations that fuse at the very bottom of the tree are quite similar
+ to each other, whereas observations that fuse close to the top of the tree
+ will tend to be quite different.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+we cannot draw conclusions about the similarity of two observations based
+ on their proximity along the horizontal axis (more details are explained
+ in the textbook).
+ Rather, we draw conclusions about the similarity of two observations based
+ on the location on the vertical axis where branches containing those two
+ observations first are fused.
+\end_layout
+
+\begin_layout Paragraph*
+Number of clusters:
+\end_layout
+
+\begin_layout Standard
+The height of the cut to the dendrogram serves the same role as the 
+\begin_inset Formula $K$
+\end_inset
+
+ in K-means clustering: it controls the number of clusters obtained.
+ This highlights a very attractive aspect of hierarchical clustering: one
+ single dendrogram can be used to obtain any number of clusters.
+ In practice, people often look at the dendrogram and select by eye a sensible
+ number of clusters, based on the heights of the fusion and the number of
+ clusters desired.
+ In the case of Figure 10.9, one might choose to select either two or three
+ clusters.
+ However, often the choice of where to cut the dendrogram is not so clear.
+\end_layout
+
+\begin_layout Paragraph*
+Hierarchical Nature:
+\end_layout
+
+\begin_layout Standard
+The term hierarchical refers to the fact that clusters obtained by cutting
+ the dendrogram at a given height are necessarily nested within the clusters
+ obtained by cutting the dendrogram at any greater height.
+ However, on an arbitrary data set, this assumption of hierarchical structure
+ might be unrealistic.
+ For instance, suppose that our observations correspond to a group of people
+ with a 50–50 split of males and females, evenly split among Americans,
+ Japanese, and French.
+ We can imagine a scenario in which the best division into two groups might
+ split these people by gender, and the best division into three groups might
+ split them by nationality.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this case, the true clusters are not nested, in the sense that the best
+ division into three groups does not result from taking the best division
+ into two groups and splitting up one of those groups.
+ Consequently, this situation could not be well-represented by hierarchical
+ clustering.
+ Due to situations such as this one, hierarchical clustering can sometimes
+ yield worse (i.e.
+ less accurate) results than K-means clustering for a given number of clusters.
+\end_layout
+
+\begin_layout Paragraph*
+Type of Linkage:
+\end_layout
+
+\begin_layout Standard
+In the above (non-formal) description of the hierarchical clustering algorithm,
+ we need to identify the two closest cluster and merge them.
+ How would we determine the two clusters are close to each other? This is
+ where the concept of linkage comes in.
+ In fact, there are different choices of how we can measure close-ness of
+ two set of clusters:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/linkage.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Average and complete linkage are often preferred over single linkage, since
+ they yield more balanced dendrogram.
+ Centroid linkage is often used in genomics, but suffers from a major drawback
+ in that 
+\color red
+an 
+\shape italic
+inversion
+\shape default
+ can occur, whereby two clusters are fused at a height below either of the
+ individual clusters in the dendrogram.
+
+\color inherit
+ 
+\end_layout
+
+\begin_layout Subsection*
+Other Concerns about Running a Clustering Algorithm
+\end_layout
+
+\begin_layout Paragraph*
+Choice of dissimilarity:
+\end_layout
+
+\begin_layout Standard
+Thus far, the examples in this chapter have used Euclidean distance as the
+ dissimilarity measure.
+ But sometimes other dissimilarity measures might be preferred.
+ For example, correlation-based distance considers two observations to be
+ similar if their features are highly correlated, even though the observed
+ values may be far apart in terms of Euclidean distance.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This is an unusual use of correlation, which is normally computed between
+ variables; here it is computed between the observation profiles for each
+ pair of observations.
+ Figure below illustrates the difference between Euclidean and correlation-based
+ distance.
+ Correlation-based distance focuses on the shapes of observation profiles
+ rather than their magnitudes.
+ The shopper example is great! Consider three shoppers:
+\end_layout
+
+\begin_layout Itemize
+Shopper 1: who rarely makes a purchase, but when purchase, will buy A &
+ B, and never C or D
+\end_layout
+
+\begin_layout Itemize
+Shopper 2: who makes a lot of purchase, but when purchase, will buy A &
+ B, and never C or D
+\end_layout
+
+\begin_layout Itemize
+Shopper 3: who rarely makes a purchase, but when purchase, tend to buy a
+ little bit of everything
+\end_layout
+
+\begin_layout Standard
+If we use euclidean dissimilarity, then shopper 1 and 3 will be close to
+ each other (because they both rarely make purchases, and the magnitude
+ of the purchase volume will be close).
+ However, if we use correlation between observation profiles, shopper 1
+ and 2 will be closer to each other (despite the volume of purchase is hugely
+ different).
+ If our goal is to identify similar buying patterns, then correlation dissimilar
+ity might be much better!
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/clustering_dissimilarity_choice.png
+	scale 30
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+How standardization of variables can affect dissimilarity calculation:
+\end_layout
+
+\begin_layout Standard
+In addition to carefully selecting the dissimilarity measure used, one must
+ also consider whether or not the variables should be scaled to have standard
+ deviation one before the dissimilarity between the observations is computed.
+ To illustrate this point, we continue with the online shopping example
+ just described.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Some items may be purchased more frequently than others; for instance, a
+ shopper might buy ten pairs of socks a year, but a computer very rarely.
+ High-frequency purchases like socks therefore tend to have a much larger
+ effect on the inter-shopper dissimilarities, and hence on the clustering
+ ultimately obtained, than rare purchases like computers.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\:$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This may not be desirable.
+ If the variables are scaled to have standard deviation one before the inter-obs
+ervation dissimilarities are computed, then each variable will in effect
+ be given equal importance in the hierarchical clustering performed.
+ We might also want to scale the variables to have standard deviation one
+ if they are measured on different scales; otherwise, the choice of units
+ (e.g.
+ centimeters versus kilometers) for a particular variable will greatly affect
+ the dissimilarity measure obtained.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/clustering_standardization.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Concerns of running a hierarchical clustering algorithm:
+\end_layout
+
+\begin_layout Itemize
+Should we standardize the varaibles before-hand.
+\end_layout
+
+\begin_layout Itemize
+What dissimilarity measure should we use? (euclidean or correlation based)?
+\end_layout
+
+\begin_layout Itemize
+What type of linkage should be used?
+\end_layout
+
+\begin_layout Itemize
+Where should we cut the dendrogram in order to obtain clusters?
+\end_layout
+
+\begin_layout Paragraph*
+Other Considerations in Clustering:
+\end_layout
+
+\begin_layout Standard
+Both K-means and hierarchical clustering will assign each observation to
+ a cluster.
+ However, sometimes this might not be appropriate.
+ For instance, suppose that most of the observations truly belong to a small
+ number of (unknown) subgroups, and a small subset of the observations are
+ quite different from each other and from all other observations.
+ Then since K- means and hierarchical clustering force every observation
+ into a cluster, the clusters found may be heavily distorted due to the
+ presence of outliers that do not belong to any cluster.
+ 
+\shape italic
+\color black
+Mixture models
+\shape default
+\color inherit
+ are an attractive approach for accommodating the presence of such outliers.
+ These amount to a soft version of K-means clustering, and are described
+ in ESL (not in this textbook).
+\end_layout
+
+\begin_layout Paragraph*
+A Tempered Approach to Interpreting the Results of Clustering:
+\end_layout
+
+\begin_layout Standard
+The authors recommend performing clustering with different choices of these
+ parameters, and looking at the full set of results in order to see what
+ patterns consistently emerge.
+ Since clustering can be non-robust, the authors recommend clustering subsets
+ of the data in order to get a sense of the robustness of the clusters obtained.
+ Most importantly, we must be careful about how the results of a clustering
+ analysis are reported.
+ These results should not be taken as the absolute truth about a data set.
+ Rather, they should constitute a starting point for the development of
+ a scientific hypothesis and further study, preferably on an independent
+ data set.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Lingering Questions:
+\end_layout
+
+\begin_layout Itemize
+The whole PCA formulation has a close connection to SVD (i.e.
+ the solutions, or the principal components can be found using SVD on the
+ data matrix).
+ How? I think I have same ideas (described below), but you need to have
+ a crystal clear understanding!
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+I think the reason is because the right singular vectors is exactly the
+ eigenvectors of 
+\begin_inset Formula $X^{T}X$
+\end_inset
+
+, and 
+\begin_inset Formula $\frac{1}{n}X^{T}X$
+\end_inset
+
+ is simply the covariance matrix, and solving the PCA problem amounts to
+ finding the eigen-vector of the covariance matrix.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+\max_{\mathbf{w}}Var\left(\mathbf{w^{T}X}\right)s.t.\:\Vert\mathbf{w}\Vert=1\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+or equivalently
+\begin_inset Formula \[
+\max_{\mathbf{w}}\frac{1}{n}\sum_{i}\left(\mathbf{w}^{T}\mathbf{x}_{i}\right)^{2}=\frac{1}{n}\left(\mathbf{Xw}\right)^{T}\left(\mathbf{Xw}\right)=\mathbf{w^{T}\left(\frac{1}{n}X^{T}X\right)w=w^{T}Vw}\:.s.t.\:\mathbf{w}^{T}\mathbf{w}=1\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Where 
+\begin_inset Formula $\mathbf{V}$
+\end_inset
+
+ is the covariance data matrix.
+ The lagrangian is simply
+\begin_inset Formula \begin{eqnarray*}
+\mathcal{L}\left(\mathbf{w},\lambda\right) & = & \mathbf{w^{T}Vw+\lambda\left(w^{T}w-1\right)}\\
+\frac{\partial\mathcal{L}}{\partial\mathbf{w}} & = & \mathbf{2Vw-\lambda2w=0}\\
+\mathbf{Vw} & = & \lambda\mathbf{w}\end{eqnarray*}
+
+\end_inset
+
+This means that 
+\begin_inset Formula $\mathbf{w}$
+\end_inset
+
+, the variance maximizing projection direction must be an eigen-vector of
+ 
+\begin_inset Formula $V$
+\end_inset
+
+, and since the eigenvector of 
+\begin_inset Formula $V=\frac{1}{n}X^{T}X$
+\end_inset
+
+ can be found easily by the right singular vectors of SVD on 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+.
+ The solution for the PCA problems can be found by looking at the SVD of
+ 
+\series bold
+
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+
+\series default
+! 
+\begin_inset Formula \[
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+How do we use SVD of 
+\begin_inset Formula $\mathbf{X}$
+\end_inset
+
+ to reconstruct the data matrix.
+ What is the right formula? Why does ISLR not talk about singular values
+ at all?
+\end_layout
+
+\begin_layout Itemize
+[PCA Biplot] What is the physical meaning of the actual orientation of the
+ yellow loading vectors?
+\end_layout
+
+\begin_layout Itemize
+[PCA Biplot] Why is it that yellow loading vectors that are close to each
+ other are more correlated to each other?
+\end_layout
+
+\begin_layout Itemize
+What is an inversion in hierarchical clustering?
 \end_layout
 
 \end_body
