@@ -48,3 +48,8 @@
 * Support Vector Machines
 * SVM with more than two classes
 * Relationship to Logistic Regression
+
+### Chapter 10: Unsupervised Learning
+* Principal Component Analysis
+* K-means Clustering
+* Hierarchical Clustering
