@@ -2637,1225 +2637,6 @@ where
 \end_layout
 
 \begin_layout Subsection*
-
-\color blue
-Woes of (Interpreting) Linear/Logistic Regression
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-\color blue
-Scenario
-\series default
-: Even though the coefficient for 
-\begin_inset Formula $X_{1}$
-\end_inset
-
- is positive (and statistically significant) when fitting 
-\begin_inset Formula $Y$
-\end_inset
-
- on 
-\begin_inset Formula $X_{1}$
-\end_inset
-
- alone, when 
-\begin_inset Formula $Y$
-\end_inset
-
- is fitted against 
-\begin_inset Formula $X_{1},X_{2}$
-\end_inset
-
-, then 
-\begin_inset Formula $X_{1}$
-\end_inset
-
-'s coefficient became very close to 0, and the result is not statistically
- significant.
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\series bold
-\color blue
-Why?: 
-\begin_inset Formula $X_{1}$
-\end_inset
-
- 
-\series default
-actually doesn't affect 
-\begin_inset Formula $Y$
-\end_inset
-
-, but 
-\begin_inset Formula $X_{2}$
-\end_inset
-
- does.
- When 
-\begin_inset Formula $X_{1}$
-\end_inset
-
- is highly correlated with 
-\begin_inset Formula $Y$
-\end_inset
-
-, when we increase 
-\begin_inset Formula $X_{2}$
-\end_inset
-
-, 
-\begin_inset Formula $Y$
-\end_inset
-
- would increase, but 
-\begin_inset Formula $X_{1}$
-\end_inset
-
- would also increase.
- Hence, it would appear as if 
-\begin_inset Formula $X_{1}$
-\end_inset
-
- has an impact on 
-\begin_inset Formula $Y$
-\end_inset
-
- when in reality it is just masking the effect of 
-\begin_inset Formula $X_{2}$
-\end_inset
-
- variable that truly matters.
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-
-\color blue
-See textbook 73 & 74.
- Ice cream (
-\begin_inset Formula $X_{1}$
-\end_inset
-
-), Temperature (
-\begin_inset Formula $X_{2}$
-\end_inset
-
-), and shark attacks 
-\begin_inset Formula $(Y)$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-
-\series bold
-\color blue
-Scenario
-\series default
-: When 
-\begin_inset Formula $p$
-\end_inset
-
--values for each of individual predictors (from 
-\begin_inset Formula $t$
-\end_inset
-
--test) is small, then it must be the case that at least one variable is
- related to the response.
- Why do we need to look at 
-\begin_inset Formula $F$
-\end_inset
-
--statistic at all?
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\series bold
-\color blue
-Why?
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-
-\color blue
-see page 77 for the full explanation
-\end_layout
-
-\end_inset
-
-: 
-\series default
-Suppose we have
-\series bold
- 
-\begin_inset Formula $p=100$
-\end_inset
-
-
-\series default
- and 
-\begin_inset Formula $\beta_{1}=\dots=\beta_{100}=0$
-\end_inset
-
-, then there still will be about 
-\begin_inset Formula $5\%$
-\end_inset
-
- of the predictors that will have small 
-\begin_inset Formula $p$
-\end_inset
-
--values (i.e.
- 
-\begin_inset Formula $p<0.05$
-\end_inset
-
-) just by chance, due to type I error.
- This means that when we look at however many replica of the training set,
- 
-\begin_inset Formula $5\%$
-\end_inset
-
- of the predictors would appeared to be important when there is no relationship
- between 
-\begin_inset Formula $X$
-\end_inset
-
- and 
-\begin_inset Formula $Y$
-\end_inset
-
-.
- In fact, the chance of having at least 
-\begin_inset Formula $1$
-\end_inset
-
- predictor to have small 
-\begin_inset Formula $p$
-\end_inset
-
--value is almost 1.
- So if we say, if at least 1, or a few predictors are significant, then
- we say the 
-\begin_inset Formula $X$
-\end_inset
-
-'s altogether are related to 
-\begin_inset Formula $Y$
-\end_inset
-
-, that would have been wrong.
- The advantage of 
-\begin_inset Formula $F$
-\end_inset
-
--test is that it adjust for the number of predictors (i.e.
- regardless of the number of the predictors, the chance of making a mistake
- is bounded at 
-\begin_inset Formula $5$
-\end_inset
-
-% when 
-\begin_inset Formula $\alpha=5\%$
-\end_inset
-
-).
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-
-\series bold
-\color blue
-Scenario
-\series default
-: [Credit example] How is it possible for student status to be associated
- with an increase in probability (i.e.
- 
-\begin_inset Formula $\beta$
-\end_inset
-
- fitted from logistic regression 
-\begin_inset Formula $>0$
-\end_inset
-
-) of credit default when student status is fitted alone, and a drecrease
- in probability of default (i.e.
- 
-\begin_inset Formula $\beta$
-\end_inset
-
- fitted from logistic regression 
-\begin_inset Formula $<0$
-\end_inset
-
-) when the predictor BALANCE is also included?
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\series bold
-\color blue
-Why? 
-\series default
-In the multiple logistic regression case, it is clear that increase in balance
- cause higher probability of default.
- More so, for a fixed balance, students are less likely to default (hence
- 
-\begin_inset Formula $\beta_{\text{balance}}>0$
-\end_inset
-
- and 
-\begin_inset Formula $\beta_{student}<0$
-\end_inset
-
- when both variables are fitted).
- So why would 
-\begin_inset Formula $\beta_{\text{student alone}}>0$
-\end_inset
-
-.
- The reason is correlation/con-founding.
- When we average over all incomes, we see that students, on average, have
- higher balance compared to non-student, and higher balance associated with
- high default rate.
- Therefore, when we are only looking at student status (and everything else
- is average out), it appears if student are more likely to default.
- In other words, student status is not really causing higher default rate,
- it was after all BALANCE, but the correlation with student status made
- it appear that students are more likely to default.
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-
-\color blue
-This is very similar to the 
-\begin_inset Formula $W$
-\end_inset
-
-= weight and 
-\begin_inset Formula $H$
-\end_inset
-
- = height example from lecture slides.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\color blue
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\color blue
-\begin_inset Caption
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename graphs/regression_confounding.png
-	scale 40
-	rotateOrigin center
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Again, be very careful when interpreting the coefficients.
- It might very well be the case that when you fit the univariate logistic
- regression, the coefficient is positive.
- But when you fit a multivariate logistic regression, the coefficient becomes
- negative.
- Scenarios like these are often caused by:
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-The variable DOES have a true association with 
-\begin_inset Formula $Y$
-\end_inset
-
-, but when put together with other highly colinear predictors, it appeared
- to be redundant 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Football tackels = 
-\begin_inset Formula $0.4\times$
-\end_inset
-
-H v.s.
- Football tackles = 
-\begin_inset Formula $0.8W-0.1H$
-\end_inset
-
- falls under this category.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-The variable DOES NOT have a true association with 
-\begin_inset Formula $Y$
-\end_inset
-
-, and is significant only because it is correlated with another much relevant
- variable 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Stduent credit default example above
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\end_deeper
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-When to use what model? Linear Regression V.S.
- 
-\begin_inset Formula $K$
-\end_inset
-
--nearest neighbors
-\end_layout
-
-\begin_layout Standard
-Even though this section compares linear regression with 
-\begin_inset Formula $K$
-\end_inset
-
--nearest neighbors method, the comparison is really between 
-\shape italic
-\color blue
-parametric 
-\shape default
-\color black
-and
-\shape italic
-\color blue
- non-parametric 
-\shape default
-\color black
-methods.
-\end_layout
-
-\begin_layout Itemize
-Parametric methods assume a functional form of the underlying 
-\begin_inset Formula $f$
-\end_inset
-
-, thus are more restrictive.
- But it often have less number of parameters to estimate (tend to have higher
- bias)
-\end_layout
-
-\begin_layout Itemize
-Non-parametric methods often do not assume a form for 
-\begin_inset Formula $f$
-\end_inset
-
-, and are more flexible.
- But there are more number of parameters to estimate (tend to have higher
- variance)
-\end_layout
-
-\begin_layout Standard
-When does linear regression (a parametric method) outperforms 
-\begin_inset Formula $k$
-\end_inset
-
--nearest neighbors (a non-parametric method)? 
-\shape italic
-The parametric approach will outperform the non- parametric approach if
- the parametric form that has been selected is close to the true form of
- 
-\begin_inset Formula $f$
-\end_inset
-
-.
- 
-\shape default
-More details below:
-\end_layout
-
-\begin_layout Itemize
-When the underlying 
-\begin_inset Formula $f(X)$
-\end_inset
-
- is truly linear, then LR will do better than 
-\begin_inset Formula $k$
-\end_inset
-
--nearest neighbor, and 
-\begin_inset Formula $k$
-\end_inset
-
--NN method would do worse for smaller 
-\begin_inset Formula $k$
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename graphs/LR_KNN_comparison_1.png
-	scale 40
-	rotateOrigin center
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-When the underlying 
-\begin_inset Formula $f(X)$
-\end_inset
-
- is somewhat nonlinear, then LR can started to lose for a slightly more
- complex (moderate 
-\begin_inset Formula $k$
-\end_inset
-
-) 
-\begin_inset Formula $k$
-\end_inset
-
--NN method.
- But when the underlying 
-\begin_inset Formula $f(X)$
-\end_inset
-
- is highly non-linear, then 
-\begin_inset Formula $k$
-\end_inset
-
--NN can be significantly better
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename graphs/LR_KNN_comparison_2.png
-	scale 40
-	rotateOrigin center
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-When we add more irrelevant predictors (and 
-\begin_inset Formula $p$
-\end_inset
-
- increases), 
-\begin_inset Formula $k$
-\end_inset
-
--NN can really start to suffer from the 
-\begin_inset Quotes eld
-\end_inset
-
-curse of dimensionality
-\begin_inset Quotes erd
-\end_inset
-
-.
- LR also deteroriate, but at a much lower rate.
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename graphs/LR_KNN_comparison_3.png
-	scale 40
-	rotateOrigin center
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Subsection*
-When to use what model? A comparison of classification methods
-\end_layout
-
-\begin_layout Standard
-These six examples
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Textbook pg.153
-\end_layout
-
-\end_inset
-
- illustrate that no one method will dominate the oth- ers in every situation.
- When the true decision boundaries are linear, then the LDA and logistic
- regression approaches will tend to perform well.
- When the boundaries are moderately non-linear, QDA may give better results.
- Finally, for much more complicated decision boundaries, a non-parametric
- approach such as KNN can be superior.
- But the level of smoothness for a non-parametric approach must be chosen
- carefully.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename graphs/classification_comparison.png
-	scale 40
-	rotateOrigin center
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
-When to use what model? Ridge Regression V.S.
- LASSO
-\end_layout
-
-\begin_layout Paragraph*
-Bias-Variance-Trade-Off of Regularization Technique:
-\end_layout
-
-\begin_layout Standard
-In general, in situations where the relationship between the response and
- the predictors is close to linear, the least squares estimates will have
- low bias but may have high variance.
- This means that a small change in the training data can cause a large change
- in the least squares coefficient estimates.
- In particular, when the number of variables 
-\begin_inset Formula $p$
-\end_inset
-
- is almost as large as the number of observations 
-\begin_inset Formula $n$
-\end_inset
-
-, the least squares estimates will be extremely variable.
- And if 
-\begin_inset Formula $p>n$
-\end_inset
-
-, then the least squares estimates do not even have a unique solution, whereas
- ridge regression or LASSO can still perform well by trading off a small
- increase in bias for a large decrease in variance.
- Hence, ridge regression and LASSO works best in situations where the least
- squares estimates have high variance.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Ridge regression also has substantial computational advantages over best
- subset selection, which requires searching through 
-\begin_inset Formula $2^{p}$
-\end_inset
-
- models.
- As we discussed previously, even for moderate values of 
-\begin_inset Formula $p$
-\end_inset
-
-, such a search can be computationally infeasible.
- In contrast, for any fixed value of 
-\begin_inset Formula $\lambda$
-\end_inset
-
-, ridge regression only fitrs a single model, and the model-fitting procedure
- can be performed quite quickly.
- It can be shown that the computations for ridge regression, simultaneously
- for all values of 
-\begin_inset Formula $\lambda$
-\end_inset
-
-, are almost identical to those for fitting a model using least squares.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Paragraph*
-Comparing the LASSO and Ridge Regression:
-\end_layout
-
-\begin_layout Standard
-It is clear that the lasso has a major advantage over ridge regression,
- in that it produces simpler and more interpretable models that involve
- only a subset of the predictors.
- However, which method leads to better prediction accuracy? Here is the
- take-away:
-\end_layout
-
-\begin_layout Itemize
-If the response is a function of many of the predictors, then ridge regression
- will generally perform better
-\end_layout
-
-\begin_layout Itemize
-If the response is a function of only a handful of predictors, then LASSO
- will generally perform better
-\end_layout
-
-\begin_layout Standard
-This very much has to do with the fact that these two methods shrink the
- coefficients different.
- Ridge regression will shrink all the coefficient estimates for ALL the
- predictors towards 0, but not necessarily exactly to 0.
- On the other hand, LASSO will drive certain coefficient estimates to exactly
- 0! Here is a simulated example from the textbook:
-\end_layout
-
-\begin_layout Itemize
-A comparison of Ridge & LASSO based on a simulated data set where all 45
- predictors were related to the response -- that is, none of the true coefficien
-ts 
-\begin_inset Formula $\beta_{1}\dots\beta_{45}$
-\end_inset
-
- equaled zero.
- The LASSO implicitly assumes that a number of the coefficients truly equal
- 0.
- Consequently, it is not surprising that ridge regression outperforms the
- LASSO.
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Notice here we plot both model against their 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- on the training data as a useful way to index models, and is a popular
- way to compare models with different types of regularization.
- It might not be fair to compare different regularization based on absolute
- magnitude of 
-\begin_inset Formula $\lambda$
-\end_inset
-
-, because different 
-\begin_inset Formula $\lambda$
-\end_inset
-
- in different regularization might have different trade-off between RSS
- and model complexity.
- Using 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- or RSS directly give us fair playing field (we know how hard both methods
- have worked to fit the model).
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename graphs/ridge_lasso_comparison_1.png
-	scale 40
-	rotateOrigin center
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-A comparison of Ridge & LASSO based on a simulated data set where only 2
- of the 45 predictors were related to the response -- in this case, since
- the true model is sparse to start with, LASSO does a better job at capturing
- the right relationship
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename graphs/ridge_lasso_comparison_2.png
-	scale 40
-	rotateOrigin center
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-These two examples illustrate that neither ridge regression nor the LASSO
- will universally dominate the other.
- In general, one might expect the LASSO to perform better when the responde
- is a function of only a relatively small number of predictors.
- However, the number of predictors that is related to the response is never
- known a prior for real data sets.
- A technique such as cross validation can be used in order to determin which
- approach is better on a particular data set!
-\end_layout
-
-\begin_layout Paragraph*
-Bayesian Interpretation for Ridge Regression and the LASSO:
-\end_layout
-
-\begin_layout Standard
-One can view ridge regression and LASSO through a Bayesian lens.
- The goal here is to find the posterior distribution 
-\begin_inset Formula $P(\beta|X,Y)$
-\end_inset
-
-, based on likelihood 
-\begin_inset Formula $f(Y|X,\beta)$
-\end_inset
-
- and prior distribution 
-\begin_inset Formula $p(\beta)$
-\end_inset
-
-.
- If we assume the usual linear model,
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula \[
-Y=\beta_{0}+X_{1}\beta_{1}+\dots+X_{p}\beta_{p}+\epsilon\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-and suppose that the errors are independent and drawn from a normal distribution.
- Furthermore, assume that 
-\begin_inset Formula $p(\beta)=\prod_{j=1}^{p}g(\beta_{j})$
-\end_inset
-
-, for some density function g.
- It turns out that:
-\end_layout
-
-\begin_layout Itemize
-If 
-\begin_inset Formula $g$
-\end_inset
-
- is a gaussian distribution with mean zero and standard deviation a function
- of 
-\begin_inset Formula $\lambda$
-\end_inset
-
-, then it follows that the posterior mode for 
-\begin_inset Formula $\beta$
-\end_inset
-
-—that is, the most likely value for 
-\begin_inset Formula $\beta$
-\end_inset
-
-, given the data—is given by the ridge regression solution.
- (In fact, the ridge regression solution is also the posterior mean.)
-\end_layout
-
-\begin_layout Itemize
-If 
-\begin_inset Formula $g$
-\end_inset
-
- is a Laplace distribution with mean zero and scale parameter a function
- of 
-\begin_inset Formula $\lambda$
-\end_inset
-
-, then it follows that the posterior mode for 
-\begin_inset Formula $\beta$
-\end_inset
-
- is the LASSO solution.
- However, the LASSO solution is not the posterior mean.
-\end_layout
-
-\begin_layout Subsection*
-When to use what model? Linear Models V.S.
- Tree-based models
-\end_layout
-
-\begin_layout Standard
-Regression and classification trees have a very different flavor from linear
- models.
- In particular, linear models assume
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula \[
-f(X)=\beta_{0}+\sum_{j=1}^{p}\beta_{j}X_{j}\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-whereas regression trees assume a model of the form 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula \[
-f(X)=\sum_{m=1}^{M}c_{m}1(X\in R_{m})\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-When the relationship between response and predictors are well approximated
- linearly, then linear model is likely to do better.
- When there is a more complex relationship between response and predictors,
- then a tree-based better might give better test error.
- Of course, when selecting a model, test error is not the only consideration,
- implementation, interpretability and visualization are very well important
- factors to consider.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename graphs/linear_model_vs_tree_based_model.png
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection*
-Advantages of Tree-based methods:
-\end_layout
-
-\begin_layout Itemize
-Trees are very easy to explain to people.
- In fact, they are even easier to explain than linear regression!
-\end_layout
-
-\begin_layout Itemize
-Some people believe that decision tree more closely mirror human decision
- making.
-\end_layout
-
-\begin_layout Itemize
-Trees can be displayed graphically, and are easily interpreted even by a
- non-expert.
-\end_layout
-
-\begin_layout Itemize
-Trees can easily handle qualitative predictors without the need to create
- dummy variables.
-\end_layout
-
-\begin_layout Subsubsection*
-Disadvantages of Tree-based methods:
-\end_layout
-
-\begin_layout Itemize
-Trees generally do not have the same level of predictive accuracy as some
- of the other regression and classification approachesseen in thebook.
-\end_layout
-
-\begin_layout Standard
-We can improve this by using ensemble methods, where we combine weak learners
- like trees into strong learners.
- 
-\end_layout
-
-\begin_layout Subsection*
-Comparing SVM, Logistic Regression, and LDA for Classification Problems
-\end_layout
-
-\begin_layout Standard
-As we have seen, in the 
-\begin_inset Quotes eld
-\end_inset
-
-relationship to logistic regression
-\begin_inset Quotes erd
-\end_inset
-
- section in Chapter 9 notes, SVM and logistic regression (with regularization)
- have very similar LOSS+Penalty formulation, and their loss functions always
- behave very similarly.
- So when do we use which?
-\end_layout
-
-\begin_layout Itemize
-When classes are completely (linearly) separable, logistic regression breaks
- down.
- In such cases, SVM & LDA is preferred
-\end_layout
-
-\begin_layout Itemize
-Similarly, when classes are (nearly) separable, SVM does better than logistic
- regression.
- So does LDA (does better than logistic regression)
-\end_layout
-
-\begin_layout Itemize
-If you wish to estimate probabilities, logistic regression is the choice.
- Logistic regression with regularization not only has the benefits of returning
- probabilities, but it also does feature selection.
-\end_layout
-
-\begin_layout Itemize
-SVM does not return probabilities, and does not perform feature selection
- (the sparsity is in the few number of data points that determines the decision
- boundaries, not in the number of predictors we used [i.e.
- in row, not column]).
- However, for nonlinear boundaries, kernel SVMs are popular.
- We can use kernel tricks on LR and LDA as well, but computations are more
- expensive.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsection*
 Lingering Questions:
 \end_layout
 
@@ -15391,7 +14172,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/hierarchical_clustering_algorithm.png
+	filename graphs/hierarchical_clustering_algorithm.png
 	scale 30
 	rotateOrigin center
 
@@ -15429,7 +14210,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/hierarchical_clustering_more_formal.png
+	filename graphs/hierarchical_clustering_more_formal.png
 	scale 40
 	rotateOrigin center
 
@@ -15589,7 +14370,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/linkage.png
+	filename graphs/linkage.png
 	scale 40
 	rotateOrigin center
 
@@ -15702,7 +14483,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/clustering_dissimilarity_choice.png
+	filename graphs/clustering_dissimilarity_choice.png
 	scale 30
 	rotateOrigin center
 
@@ -15788,7 +14569,7 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename /Users/rc8138/Desktop/clustering_standardization.png
+	filename graphs/clustering_standardization.png
 	scale 40
 	rotateOrigin center
 
@@ -16000,6 +14781,1193 @@ How do we use SVD of
 
 \begin_layout Itemize
 What is an inversion in hierarchical clustering?
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+
+\color blue
+Woes of (Interpreting) Linear/Logistic Regression
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+\color blue
+Scenario
+\series default
+: Even though the coefficient for 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ is positive (and statistically significant) when fitting 
+\begin_inset Formula $Y$
+\end_inset
+
+ on 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ alone, when 
+\begin_inset Formula $Y$
+\end_inset
+
+ is fitted against 
+\begin_inset Formula $X_{1},X_{2}$
+\end_inset
+
+, then 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+'s coefficient became very close to 0, and the result is not statistically
+ significant.
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Why?: 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ 
+\series default
+actually doesn't affect 
+\begin_inset Formula $Y$
+\end_inset
+
+, but 
+\begin_inset Formula $X_{2}$
+\end_inset
+
+ does.
+ When 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ is highly correlated with 
+\begin_inset Formula $Y$
+\end_inset
+
+, when we increase 
+\begin_inset Formula $X_{2}$
+\end_inset
+
+, 
+\begin_inset Formula $Y$
+\end_inset
+
+ would increase, but 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ would also increase.
+ Hence, it would appear as if 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ has an impact on 
+\begin_inset Formula $Y$
+\end_inset
+
+ when in reality it is just masking the effect of 
+\begin_inset Formula $X_{2}$
+\end_inset
+
+ variable that truly matters.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+See textbook 73 & 74.
+ Ice cream (
+\begin_inset Formula $X_{1}$
+\end_inset
+
+), Temperature (
+\begin_inset Formula $X_{2}$
+\end_inset
+
+), and shark attacks 
+\begin_inset Formula $(Y)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Scenario
+\series default
+: When 
+\begin_inset Formula $p$
+\end_inset
+
+-values for each of individual predictors (from 
+\begin_inset Formula $t$
+\end_inset
+
+-test) is small, then it must be the case that at least one variable is
+ related to the response.
+ Why do we need to look at 
+\begin_inset Formula $F$
+\end_inset
+
+-statistic at all?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Why?
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+see page 77 for the full explanation
+\end_layout
+
+\end_inset
+
+: 
+\series default
+Suppose we have
+\series bold
+ 
+\begin_inset Formula $p=100$
+\end_inset
+
+
+\series default
+ and 
+\begin_inset Formula $\beta_{1}=\dots=\beta_{100}=0$
+\end_inset
+
+, then there still will be about 
+\begin_inset Formula $5\%$
+\end_inset
+
+ of the predictors that will have small 
+\begin_inset Formula $p$
+\end_inset
+
+-values (i.e.
+ 
+\begin_inset Formula $p<0.05$
+\end_inset
+
+) just by chance, due to type I error.
+ This means that when we look at however many replica of the training set,
+ 
+\begin_inset Formula $5\%$
+\end_inset
+
+ of the predictors would appeared to be important when there is no relationship
+ between 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+ In fact, the chance of having at least 
+\begin_inset Formula $1$
+\end_inset
+
+ predictor to have small 
+\begin_inset Formula $p$
+\end_inset
+
+-value is almost 1.
+ So if we say, if at least 1, or a few predictors are significant, then
+ we say the 
+\begin_inset Formula $X$
+\end_inset
+
+'s altogether are related to 
+\begin_inset Formula $Y$
+\end_inset
+
+, that would have been wrong.
+ The advantage of 
+\begin_inset Formula $F$
+\end_inset
+
+-test is that it adjust for the number of predictors (i.e.
+ regardless of the number of the predictors, the chance of making a mistake
+ is bounded at 
+\begin_inset Formula $5$
+\end_inset
+
+% when 
+\begin_inset Formula $\alpha=5\%$
+\end_inset
+
+).
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Scenario
+\series default
+: [Credit example] How is it possible for student status to be associated
+ with an increase in probability (i.e.
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+ fitted from logistic regression 
+\begin_inset Formula $>0$
+\end_inset
+
+) of credit default when student status is fitted alone, and a drecrease
+ in probability of default (i.e.
+ 
+\begin_inset Formula $\beta$
+\end_inset
+
+ fitted from logistic regression 
+\begin_inset Formula $<0$
+\end_inset
+
+) when the predictor BALANCE is also included?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+\color blue
+Why? 
+\series default
+In the multiple logistic regression case, it is clear that increase in balance
+ cause higher probability of default.
+ More so, for a fixed balance, students are less likely to default (hence
+ 
+\begin_inset Formula $\beta_{\text{balance}}>0$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta_{student}<0$
+\end_inset
+
+ when both variables are fitted).
+ So why would 
+\begin_inset Formula $\beta_{\text{student alone}}>0$
+\end_inset
+
+.
+ The reason is correlation/con-founding.
+ When we average over all incomes, we see that students, on average, have
+ higher balance compared to non-student, and higher balance associated with
+ high default rate.
+ Therefore, when we are only looking at student status (and everything else
+ is average out), it appears if student are more likely to default.
+ In other words, student status is not really causing higher default rate,
+ it was after all BALANCE, but the correlation with student status made
+ it appear that students are more likely to default.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+This is very similar to the 
+\begin_inset Formula $W$
+\end_inset
+
+= weight and 
+\begin_inset Formula $H$
+\end_inset
+
+ = height example from lecture slides.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\color blue
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\color blue
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/ISL/graphs/regression_confounding.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Again, be very careful when interpreting the coefficients.
+ It might very well be the case that when you fit the univariate logistic
+ regression, the coefficient is positive.
+ But when you fit a multivariate logistic regression, the coefficient becomes
+ negative.
+ Scenarios like these are often caused by:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+The variable DOES have a true association with 
+\begin_inset Formula $Y$
+\end_inset
+
+, but when put together with other highly colinear predictors, it appeared
+ to be redundant 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Football tackels = 
+\begin_inset Formula $0.4\times$
+\end_inset
+
+H v.s.
+ Football tackles = 
+\begin_inset Formula $0.8W-0.1H$
+\end_inset
+
+ falls under this category.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+The variable DOES NOT have a true association with 
+\begin_inset Formula $Y$
+\end_inset
+
+, and is significant only because it is correlated with another much relevant
+ variable 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Stduent credit default example above
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+When to use what model?
+\end_layout
+
+\begin_layout Subsection*
+Linear Regression V.S.
+ 
+\begin_inset Formula $K$
+\end_inset
+
+-nearest neighbors
+\end_layout
+
+\begin_layout Standard
+Even though this section compares linear regression with 
+\begin_inset Formula $K$
+\end_inset
+
+-nearest neighbors method, the comparison is really between 
+\shape italic
+\color blue
+parametric 
+\shape default
+\color black
+and
+\shape italic
+\color blue
+ non-parametric 
+\shape default
+\color black
+methods.
+\end_layout
+
+\begin_layout Itemize
+Parametric methods assume a functional form of the underlying 
+\begin_inset Formula $f$
+\end_inset
+
+, thus are more restrictive.
+ But it often have less number of parameters to estimate (tend to have higher
+ bias)
+\end_layout
+
+\begin_layout Itemize
+Non-parametric methods often do not assume a form for 
+\begin_inset Formula $f$
+\end_inset
+
+, and are more flexible.
+ But there are more number of parameters to estimate (tend to have higher
+ variance)
+\end_layout
+
+\begin_layout Standard
+When does linear regression (a parametric method) outperforms 
+\begin_inset Formula $k$
+\end_inset
+
+-nearest neighbors (a non-parametric method)? 
+\shape italic
+The parametric approach will outperform the non- parametric approach if
+ the parametric form that has been selected is close to the true form of
+ 
+\begin_inset Formula $f$
+\end_inset
+
+.
+ 
+\shape default
+More details below:
+\end_layout
+
+\begin_layout Itemize
+When the underlying 
+\begin_inset Formula $f(X)$
+\end_inset
+
+ is truly linear, then LR will do better than 
+\begin_inset Formula $k$
+\end_inset
+
+-nearest neighbor, and 
+\begin_inset Formula $k$
+\end_inset
+
+-NN method would do worse for smaller 
+\begin_inset Formula $k$
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/ISL/graphs/LR_KNN_comparison_1.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+When the underlying 
+\begin_inset Formula $f(X)$
+\end_inset
+
+ is somewhat nonlinear, then LR can started to lose for a slightly more
+ complex (moderate 
+\begin_inset Formula $k$
+\end_inset
+
+) 
+\begin_inset Formula $k$
+\end_inset
+
+-NN method.
+ But when the underlying 
+\begin_inset Formula $f(X)$
+\end_inset
+
+ is highly non-linear, then 
+\begin_inset Formula $k$
+\end_inset
+
+-NN can be significantly better
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/ISL/graphs/LR_KNN_comparison_2.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+When we add more irrelevant predictors (and 
+\begin_inset Formula $p$
+\end_inset
+
+ increases), 
+\begin_inset Formula $k$
+\end_inset
+
+-NN can really start to suffer from the 
+\begin_inset Quotes eld
+\end_inset
+
+curse of dimensionality
+\begin_inset Quotes erd
+\end_inset
+
+.
+ LR also deteroriate, but at a much lower rate.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/ISL/graphs/LR_KNN_comparison_3.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Subsection*
+When to use what model? A comparison of classification methods
+\end_layout
+
+\begin_layout Standard
+These six examples
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Textbook pg.153
+\end_layout
+
+\end_inset
+
+ illustrate that no one method will dominate the oth- ers in every situation.
+ When the true decision boundaries are linear, then the LDA and logistic
+ regression approaches will tend to perform well.
+ When the boundaries are moderately non-linear, QDA may give better results.
+ Finally, for much more complicated decision boundaries, a non-parametric
+ approach such as KNN can be superior.
+ But the level of smoothness for a non-parametric approach must be chosen
+ carefully.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/ISL/graphs/classification_comparison.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+When to use what model? Ridge Regression V.S.
+ LASSO
+\end_layout
+
+\begin_layout Paragraph*
+Bias-Variance-Trade-Off of Regularization Technique:
+\end_layout
+
+\begin_layout Standard
+In general, in situations where the relationship between the response and
+ the predictors is close to linear, the least squares estimates will have
+ low bias but may have high variance.
+ This means that a small change in the training data can cause a large change
+ in the least squares coefficient estimates.
+ In particular, when the number of variables 
+\begin_inset Formula $p$
+\end_inset
+
+ is almost as large as the number of observations 
+\begin_inset Formula $n$
+\end_inset
+
+, the least squares estimates will be extremely variable.
+ And if 
+\begin_inset Formula $p>n$
+\end_inset
+
+, then the least squares estimates do not even have a unique solution, whereas
+ ridge regression or LASSO can still perform well by trading off a small
+ increase in bias for a large decrease in variance.
+ Hence, ridge regression and LASSO works best in situations where the least
+ squares estimates have high variance.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Ridge regression also has substantial computational advantages over best
+ subset selection, which requires searching through 
+\begin_inset Formula $2^{p}$
+\end_inset
+
+ models.
+ As we discussed previously, even for moderate values of 
+\begin_inset Formula $p$
+\end_inset
+
+, such a search can be computationally infeasible.
+ In contrast, for any fixed value of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, ridge regression only fitrs a single model, and the model-fitting procedure
+ can be performed quite quickly.
+ It can be shown that the computations for ridge regression, simultaneously
+ for all values of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, are almost identical to those for fitting a model using least squares.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Comparing the LASSO and Ridge Regression:
+\end_layout
+
+\begin_layout Standard
+It is clear that the lasso has a major advantage over ridge regression,
+ in that it produces simpler and more interpretable models that involve
+ only a subset of the predictors.
+ However, which method leads to better prediction accuracy? Here is the
+ take-away:
+\end_layout
+
+\begin_layout Itemize
+If the response is a function of many of the predictors, then ridge regression
+ will generally perform better
+\end_layout
+
+\begin_layout Itemize
+If the response is a function of only a handful of predictors, then LASSO
+ will generally perform better
+\end_layout
+
+\begin_layout Standard
+This very much has to do with the fact that these two methods shrink the
+ coefficients different.
+ Ridge regression will shrink all the coefficient estimates for ALL the
+ predictors towards 0, but not necessarily exactly to 0.
+ On the other hand, LASSO will drive certain coefficient estimates to exactly
+ 0! Here is a simulated example from the textbook:
+\end_layout
+
+\begin_layout Itemize
+A comparison of Ridge & LASSO based on a simulated data set where all 45
+ predictors were related to the response -- that is, none of the true coefficien
+ts 
+\begin_inset Formula $\beta_{1}\dots\beta_{45}$
+\end_inset
+
+ equaled zero.
+ The LASSO implicitly assumes that a number of the coefficients truly equal
+ 0.
+ Consequently, it is not surprising that ridge regression outperforms the
+ LASSO.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Notice here we plot both model against their 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ on the training data as a useful way to index models, and is a popular
+ way to compare models with different types of regularization.
+ It might not be fair to compare different regularization based on absolute
+ magnitude of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, because different 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ in different regularization might have different trade-off between RSS
+ and model complexity.
+ Using 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ or RSS directly give us fair playing field (we know how hard both methods
+ have worked to fit the model).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/ISL/graphs/ridge_lasso_comparison_1.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+A comparison of Ridge & LASSO based on a simulated data set where only 2
+ of the 45 predictors were related to the response -- in this case, since
+ the true model is sparse to start with, LASSO does a better job at capturing
+ the right relationship
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/ISL/graphs/ridge_lasso_comparison_2.png
+	scale 40
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+These two examples illustrate that neither ridge regression nor the LASSO
+ will universally dominate the other.
+ In general, one might expect the LASSO to perform better when the responde
+ is a function of only a relatively small number of predictors.
+ However, the number of predictors that is related to the response is never
+ known a prior for real data sets.
+ A technique such as cross validation can be used in order to determin which
+ approach is better on a particular data set!
+\end_layout
+
+\begin_layout Paragraph*
+Bayesian Interpretation for Ridge Regression and the LASSO:
+\end_layout
+
+\begin_layout Standard
+One can view ridge regression and LASSO through a Bayesian lens.
+ The goal here is to find the posterior distribution 
+\begin_inset Formula $P(\beta|X,Y)$
+\end_inset
+
+, based on likelihood 
+\begin_inset Formula $f(Y|X,\beta)$
+\end_inset
+
+ and prior distribution 
+\begin_inset Formula $p(\beta)$
+\end_inset
+
+.
+ If we assume the usual linear model,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+Y=\beta_{0}+X_{1}\beta_{1}+\dots+X_{p}\beta_{p}+\epsilon\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+and suppose that the errors are independent and drawn from a normal distribution.
+ Furthermore, assume that 
+\begin_inset Formula $p(\beta)=\prod_{j=1}^{p}g(\beta_{j})$
+\end_inset
+
+, for some density function g.
+ It turns out that:
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $g$
+\end_inset
+
+ is a gaussian distribution with mean zero and standard deviation a function
+ of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, then it follows that the posterior mode for 
+\begin_inset Formula $\beta$
+\end_inset
+
+—that is, the most likely value for 
+\begin_inset Formula $\beta$
+\end_inset
+
+, given the data—is given by the ridge regression solution.
+ (In fact, the ridge regression solution is also the posterior mean.)
+\end_layout
+
+\begin_layout Itemize
+If 
+\begin_inset Formula $g$
+\end_inset
+
+ is a Laplace distribution with mean zero and scale parameter a function
+ of 
+\begin_inset Formula $\lambda$
+\end_inset
+
+, then it follows that the posterior mode for 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is the LASSO solution.
+ However, the LASSO solution is not the posterior mean.
+\end_layout
+
+\begin_layout Subsection*
+When to use what model? Linear Models V.S.
+ Tree-based models
+\end_layout
+
+\begin_layout Standard
+Regression and classification trees have a very different flavor from linear
+ models.
+ In particular, linear models assume
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+f(X)=\beta_{0}+\sum_{j=1}^{p}\beta_{j}X_{j}\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+whereas regression trees assume a model of the form 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \[
+f(X)=\sum_{m=1}^{M}c_{m}1(X\in R_{m})\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+When the relationship between response and predictors are well approximated
+ linearly, then linear model is likely to do better.
+ When there is a more complex relationship between response and predictors,
+ then a tree-based better might give better test error.
+ Of course, when selecting a model, test error is not the only consideration,
+ implementation, interpretability and visualization are very well important
+ factors to consider.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename /Users/rc8138/Desktop/ISL/graphs/linear_model_vs_tree_based_model.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Advantages of Tree-based methods:
+\end_layout
+
+\begin_layout Itemize
+Trees are very easy to explain to people.
+ In fact, they are even easier to explain than linear regression!
+\end_layout
+
+\begin_layout Itemize
+Some people believe that decision tree more closely mirror human decision
+ making.
+\end_layout
+
+\begin_layout Itemize
+Trees can be displayed graphically, and are easily interpreted even by a
+ non-expert.
+\end_layout
+
+\begin_layout Itemize
+Trees can easily handle qualitative predictors without the need to create
+ dummy variables.
+\end_layout
+
+\begin_layout Subsubsection*
+Disadvantages of Tree-based methods:
+\end_layout
+
+\begin_layout Itemize
+Trees generally do not have the same level of predictive accuracy as some
+ of the other regression and classification approachesseen in thebook.
+\end_layout
+
+\begin_layout Standard
+We can improve this by using ensemble methods, where we combine weak learners
+ like trees into strong learners.
+ 
+\end_layout
+
+\begin_layout Subsection*
+Comparing SVM, Logistic Regression, and LDA for Classification Problems
+\end_layout
+
+\begin_layout Standard
+As we have seen, in the 
+\begin_inset Quotes eld
+\end_inset
+
+relationship to logistic regression
+\begin_inset Quotes erd
+\end_inset
+
+ section in Chapter 9 notes, SVM and logistic regression (with regularization)
+ have very similar LOSS+Penalty formulation, and their loss functions always
+ behave very similarly.
+ So when do we use which?
+\end_layout
+
+\begin_layout Itemize
+When classes are completely (linearly) separable, logistic regression breaks
+ down.
+ In such cases, SVM & LDA is preferred
+\end_layout
+
+\begin_layout Itemize
+Similarly, when classes are (nearly) separable, SVM does better than logistic
+ regression.
+ So does LDA (does better than logistic regression)
+\end_layout
+
+\begin_layout Itemize
+If you wish to estimate probabilities, logistic regression is the choice.
+ Logistic regression with regularization not only has the benefits of returning
+ probabilities, but it also does feature selection.
+\end_layout
+
+\begin_layout Itemize
+SVM does not return probabilities, and does not perform feature selection
+ (the sparsity is in the few number of data points that determines the decision
+ boundaries, not in the number of predictors we used [i.e.
+ in row, not column]).
+ However, for nonlinear boundaries, kernel SVMs are popular.
+ We can use kernel tricks on LR and LDA as well, but computations are more
+ expensive.
 \end_layout
 
 \end_body
